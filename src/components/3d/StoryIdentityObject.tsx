@@ -21,32 +21,32 @@ export function StoryIdentityObject({ progress }: StoryIdentityObjectProps) {
   useFrame(({ pointer }, delta) => {
     if (!groupRef.current) return;
 
-    // Section range for identity visibility: [0.15, 0.50]
-    // Peak focus: [0.26, 0.38]
+    // Section range for identity visibility: [0.08, 0.27]
+    // Peak focus: [0.14, 0.22]
     let targetZ = -8.0;
     let targetX = 0.85;
     let targetY = 0.8;
     let targetScale = 0.5;
     let opacity = 0.0;
 
-    if (progress >= 0.12 && progress < 0.28) {
+    if (progress >= 0.08 && progress < 0.14) {
       // Approach phase: Object enters from depth toward camera
-      const t = smoothStep((progress - 0.12) / (0.28 - 0.12));
+      const t = smoothStep((progress - 0.08) / (0.14 - 0.08));
       targetZ = -8.0 + (0.1 - -8.0) * t;
       targetX = 0.85;
       targetY = 0.8;
       targetScale = 0.6 + 0.4 * t;
       opacity = t;
-    } else if (progress >= 0.28 && progress <= 0.40) {
+    } else if (progress >= 0.14 && progress <= 0.22) {
       // Focused inspection phase: Anchored prominently on right side
       targetZ = 0.1;
       targetX = 0.85;
       targetY = 0.8;
       targetScale = 1.0;
       opacity = 1.0;
-    } else if (progress > 0.40 && progress <= 0.52) {
+    } else if (progress > 0.22 && progress <= 0.27) {
       // Exit phase: Object passes forward past the camera
-      const t = smoothStep((progress - 0.40) / (0.52 - 0.40));
+      const t = smoothStep((progress - 0.22) / (0.27 - 0.22));
       targetZ = 0.1 + (4.2 - 0.1) * t;
       targetX = 0.85 + 0.6 * t;
       targetY = 0.8 + 0.2 * t;
@@ -55,7 +55,7 @@ export function StoryIdentityObject({ progress }: StoryIdentityObjectProps) {
     } else {
       // Outside visibility range
       opacity = 0;
-      targetZ = progress < 0.12 ? -10 : 8;
+      targetZ = progress < 0.08 ? -10 : 8;
     }
 
     // Subtle pointer parallax tilt

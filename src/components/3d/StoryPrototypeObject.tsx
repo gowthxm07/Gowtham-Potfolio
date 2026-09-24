@@ -23,7 +23,9 @@ export function StoryPrototypeObject({
   const coreRef = useRef<THREE.Mesh>(null);
 
   const [startP, endP] = range;
-  const midP = startP + (endP - startP) * 0.45;
+  const dur = endP - startP;
+  const approachEnd = startP + dur * 0.3;
+  const dwellEnd = startP + dur * 0.7;
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
@@ -34,26 +36,26 @@ export function StoryPrototypeObject({
     let targetScale = 0.3;
     let opacity = 0.0;
 
-    if (progress >= startP && progress < midP) {
+    if (progress >= startP && progress < approachEnd) {
       // Approach phase: Object enters from deep background towards camera
-      const t = smoothStep((progress - startP) / (midP - startP));
+      const t = smoothStep((progress - startP) / (approachEnd - startP));
       targetZ = -14.0 + (0.6 - -14.0) * t;
       targetX = anchorX;
       targetY = 0.85;
       targetScale = 0.4 + 0.7 * t;
       opacity = t;
-    } else if (progress >= midP && progress <= midP + 0.12) {
+    } else if (progress >= approachEnd && progress <= dwellEnd) {
       // Primary focus phase: Closest to camera and fully legible
-      const t = smoothStep((progress - midP) / 0.12);
-      targetZ = 0.6 + 0.3 * t;
+      const t = smoothStep((progress - approachEnd) / (dwellEnd - approachEnd));
+      targetZ = 0.6 + 0.2 * t;
       targetX = anchorX;
       targetY = 0.85;
       targetScale = 1.1;
       opacity = 1.0;
-    } else if (progress > midP + 0.12 && progress <= endP) {
+    } else if (progress > dwellEnd && progress <= endP) {
       // Exit phase: Object passes forward past the viewer
-      const t = smoothStep((progress - (midP + 0.12)) / (endP - (midP + 0.12)));
-      targetZ = 0.9 + (5.0 - 0.9) * t;
+      const t = smoothStep((progress - dwellEnd) / (endP - dwellEnd));
+      targetZ = 0.8 + (5.0 - 0.8) * t;
       targetX = anchorX + (anchorX > 0 ? 0.8 : -0.8) * t;
       targetY = 0.85 + 0.3 * t;
       targetScale = 1.1 + 0.4 * t;

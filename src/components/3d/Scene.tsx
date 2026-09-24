@@ -6,6 +6,11 @@ import * as THREE from "three";
 import { StoryEnvironment } from "./StoryEnvironment";
 import { StoryIdentityObject } from "./StoryIdentityObject";
 import { StoryPrototypeObject } from "./StoryPrototypeObject";
+import { StoryAcademicsObject } from "./StoryAcademicsObject";
+import { StorySkillsConstellation } from "./StorySkillsConstellation";
+import { StoryAchievementsObject } from "./StoryAchievementsObject";
+import { StoryResumeObject } from "./StoryResumeObject";
+import { StoryContactObject } from "./StoryContactObject";
 import { StoryCameraController } from "./StoryCameraController";
 
 interface SceneProps {
@@ -35,21 +40,40 @@ export function Scene({ progress, isMobile = false, dpr = 1.5 }: SceneProps) {
       >
         <Suspense fallback={null}>
           <StoryEnvironment />
+
+          {/* 02. Identity & Verified Portrait Monolith */}
           <StoryIdentityObject progress={progress} />
-          {/* Section 03 Prototype 3D Object: AI Receptionist Conversational Core */}
+
+          {/* 03. Featured Engineering Systems (AI Voice Core & Traffic CV Radar) */}
           <StoryPrototypeObject
             progress={progress}
             type="receptionist"
-            range={[0.42, 0.72]}
+            range={[0.24, 0.33]}
             anchorX={-0.85}
           />
-          {/* Section 04 Prototype 3D Object: Traffic Computer Vision Spatial Node */}
           <StoryPrototypeObject
             progress={progress}
             type="traffic"
-            range={[0.68, 0.96]}
-            anchorX={0.85}
+            range={[0.32, 0.41]}
+            anchorX={-0.85}
           />
+
+          {/* 04. Academic Progression Timeline Spine */}
+          <StoryAcademicsObject progress={progress} />
+
+          {/* 05. Technology & Tools Constellation */}
+          <StorySkillsConstellation progress={progress} />
+
+          {/* 06. Competitive Problem Solving & Leadership Trophy */}
+          <StoryAchievementsObject progress={progress} />
+
+          {/* 07. Holographic Resume Document Artifact */}
+          <StoryResumeObject progress={progress} />
+
+          {/* 08. Direct Communication & Signal Array */}
+          <StoryContactObject progress={progress} />
+
+          {/* Continuous Camera Controller along Spline */}
           <StoryCameraController progress={progress} isMobile={isMobile} />
         </Suspense>
       </Canvas>

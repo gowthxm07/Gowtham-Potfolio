@@ -21,10 +21,10 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     badge: "INITIALIZE // CORE",
     title: "Gowtham Hari S",
     subtitle: "AI, Systems & Software Engineering Portfolio",
-    range: [0.0, 0.2],
+    range: [0.0, 0.12],
     camera: {
       startPos: [0, 1.4, 7.2],
-      endPos: [0, 1.1, 5.6],
+      endPos: [0, 1.1, 5.8],
       startTarget: [0, 0.6, 0],
       endTarget: [0, 0.6, 0],
       fov: 42,
@@ -34,9 +34,9 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     id: "identity",
     index: "02",
     badge: "02 // IDENTITY",
-    title: "Identity & Core Credentials",
-    subtitle: "B.Tech Computer Science • Amrita Vishwa Vidhyapeetham",
-    range: [0.2, 0.45],
+    title: "Identity & Profile",
+    subtitle: "B.Tech Computer Science • Systems & AI Engineer",
+    range: [0.12, 0.25],
     camera: {
       startPos: [-0.6, 1.0, 5.4],
       endPos: [-0.85, 0.9, 3.6],
@@ -46,12 +46,12 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     },
   },
   {
-    id: "receptionist",
+    id: "projects",
     index: "03",
     badge: "03 // FEATURED WORK",
-    title: "AI-Powered Smart Receptionist",
-    subtitle: "Autonomous Speech & Intent Voice Middleware",
-    range: [0.45, 0.7],
+    title: "Engineering Systems",
+    subtitle: "AI Voice Middleware & Computer Vision Telemetry",
+    range: [0.25, 0.4],
     camera: {
       startPos: [0.7, 0.95, 4.8],
       endPos: [0.85, 0.9, 3.2],
@@ -61,32 +61,77 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     },
   },
   {
-    id: "traffic",
+    id: "academics",
     index: "04",
-    badge: "04 // COMPUTER VISION",
-    title: "Real-Time Traffic Monitoring",
-    subtitle: "YOLO Vehicle Detection & Streaming Telemetry",
-    range: [0.7, 0.95],
+    badge: "04 // ACADEMIC JOURNEY",
+    title: "Education & Progression",
+    subtitle: "Amrita Vishwa Vidhyapeetham • GPA 8.12",
+    range: [0.4, 0.54],
     camera: {
-      startPos: [-0.65, 0.95, 4.8],
-      endPos: [-0.85, 0.9, 3.2],
+      startPos: [-0.65, 1.0, 4.8],
+      endPos: [-0.8, 0.9, 3.4],
       startTarget: [0.7, 0.85, 0],
       endTarget: [0.7, 0.85, 0],
       fov: 38,
     },
   },
   {
-    id: "horizon",
+    id: "skills",
     index: "05",
-    badge: "05 // SPATIAL HORIZON",
-    title: "The Engineering Continuum",
-    subtitle: "Ready for Phase 4 Project Environments",
-    range: [0.95, 1.0],
+    badge: "05 // SKILLS MATRIX",
+    title: "Technology & Tools",
+    subtitle: "Full-Stack, AI/ML, Testing & Engineering Constellation",
+    range: [0.54, 0.68],
     camera: {
-      startPos: [0, 1.2, 5.2],
-      endPos: [0, 1.1, 4.2],
-      startTarget: [0, 0.7, 0],
-      endTarget: [0, 0.7, -3],
+      startPos: [0.75, 1.0, 4.8],
+      endPos: [0.85, 0.9, 3.4],
+      startTarget: [-0.7, 0.85, 0],
+      endTarget: [-0.7, 0.85, 0],
+      fov: 38,
+    },
+  },
+  {
+    id: "achievements",
+    index: "06",
+    badge: "06 // ACHIEVEMENTS",
+    title: "Competitive Standing",
+    subtitle: "LeetCode Knight [1868] & Hackathon Accolades",
+    range: [0.68, 0.8],
+    camera: {
+      startPos: [-0.6, 1.0, 4.6],
+      endPos: [-0.8, 0.9, 3.2],
+      startTarget: [0.7, 0.85, 0],
+      endTarget: [0.7, 0.85, 0],
+      fov: 38,
+    },
+  },
+  {
+    id: "resume",
+    index: "07",
+    badge: "07 // DOCUMENT ARTIFACT",
+    title: "Official Resume",
+    subtitle: "Verified Technical Credentials & Direct PDF Access",
+    range: [0.8, 0.9],
+    camera: {
+      startPos: [0.65, 0.95, 4.4],
+      endPos: [0.75, 0.9, 3.2],
+      startTarget: [-0.65, 0.85, 0],
+      endTarget: [-0.65, 0.85, 0],
+      fov: 38,
+    },
+  },
+  {
+    id: "contact",
+    index: "08",
+    badge: "08 // CONNECT",
+    title: "Direct Transmission",
+    subtitle: "Initiate Communication & Inquiries",
+    range: [0.9, 1.0],
+    camera: {
+      startPos: [0, 1.2, 5.0],
+      endPos: [0, 1.0, 4.2],
+      startTarget: [0, 0.75, 0],
+      endTarget: [0, 0.75, 0],
       fov: 40,
     },
   },
@@ -108,7 +153,6 @@ export function evaluateCameraAtProgress(progress: number): {
   target: [number, number, number];
   fov: number;
 } {
-  // Find matching section or extrapolate
   let currentSection = STORY_SECTIONS[0];
   for (let i = 0; i < STORY_SECTIONS.length; i++) {
     const sec = STORY_SECTIONS[i];
@@ -118,7 +162,6 @@ export function evaluateCameraAtProgress(progress: number): {
     }
   }
 
-  // Calculate local progress inside the section
   const [start, end] = currentSection.range;
   const localRaw = (progress - start) / (end - start);
   const localT = smoothStep(localRaw);
