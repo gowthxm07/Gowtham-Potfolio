@@ -3,29 +3,20 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
-import { Lighting } from "./Lighting";
-import { Atmosphere } from "./Atmosphere";
-import { IdentityObject } from "./IdentityObject";
-import { CameraController } from "./CameraController";
-import { CAMERA_ZONES, ZoneId } from "@/lib/cameraConfig";
+import { StoryEnvironment } from "./StoryEnvironment";
+import { StoryIdentityObject } from "./StoryIdentityObject";
+import { StoryPrototypeObject } from "./StoryPrototypeObject";
+import { StoryCameraController } from "./StoryCameraController";
 
 interface SceneProps {
-  activeZone: ZoneId;
-  onSelectZone: (zone: ZoneId) => void;
+  progress: number;
   isMobile?: boolean;
   dpr?: number;
 }
 
-export function Scene({
-  activeZone,
-  onSelectZone,
-  isMobile = false,
-  dpr = 1.5,
-}: SceneProps) {
-  const initialCam = CAMERA_ZONES.overview;
-
+export function Scene({ progress, isMobile = false, dpr = 1.5 }: SceneProps) {
   return (
-    <div className="absolute inset-0 w-full h-full bg-[#040711] overflow-hidden">
+    <div className="absolute inset-0 w-full h-full bg-[#030705] overflow-hidden">
       <Canvas
         shadows
         dpr={dpr}
@@ -36,20 +27,30 @@ export function Scene({
           toneMappingExposure: 1.15,
         }}
         camera={{
-          position: initialCam.position,
-          fov: initialCam.fov,
+          position: [0, 1.4, 7.2],
+          fov: 42,
           near: 0.1,
           far: 60,
         }}
       >
         <Suspense fallback={null}>
-          <Lighting />
-          <Atmosphere />
-          <IdentityObject
-            isFocused={activeZone === "identity"}
-            onSelect={() => onSelectZone("identity")}
+          <StoryEnvironment />
+          <StoryIdentityObject progress={progress} />
+          {/* Section 03 Prototype 3D Object: AI Receptionist Conversational Core */}
+          <StoryPrototypeObject
+            progress={progress}
+            type="receptionist"
+            range={[0.42, 0.72]}
+            anchorX={-0.85}
           />
-          <CameraController activeZone={activeZone} isMobile={isMobile} />
+          {/* Section 04 Prototype 3D Object: Traffic Computer Vision Spatial Node */}
+          <StoryPrototypeObject
+            progress={progress}
+            type="traffic"
+            range={[0.68, 0.96]}
+            anchorX={0.85}
+          />
+          <StoryCameraController progress={progress} isMobile={isMobile} />
         </Suspense>
       </Canvas>
     </div>
