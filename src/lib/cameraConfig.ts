@@ -19,18 +19,18 @@ export const CAMERA_ZONES: Record<ZoneId, CameraZoneConfig> = {
   overview: {
     id: "overview",
     label: "Central World",
-    position: [0, 2.6, 7.8],
-    target: [0, 1.2, 0],
-    fov: 46,
-    description: "Atmospheric perspective of the technical core and architectural space.",
+    position: [0, 1.85, 5.4],
+    target: [0, 1.45, 0],
+    fov: 40,
+    description: "Atmospheric perspective framing the central architectural chamber and identity monolith.",
   },
   identity: {
     id: "identity",
     label: "01 // Identity",
-    position: [0, 1.55, 3.8],
+    position: [0, 1.5, 3.1],
     target: [0, 1.45, 0],
-    fov: 38,
-    description: "Architectural monolith presenting verified identity and credentials.",
+    fov: 34,
+    description: "Close inspection dock highlighting verified credentials and authentic portrait.",
   },
   projects: {
     id: "projects",
@@ -38,7 +38,7 @@ export const CAMERA_ZONES: Record<ZoneId, CameraZoneConfig> = {
     position: [-3.8, 1.8, 3.2],
     target: [-3.0, 1.2, -0.5],
     fov: 42,
-    description: "Interactive project pods and live software systems (Phase 4).",
+    description: "Spatial foundation for featured engineering systems (Phase 4).",
   },
   skills: {
     id: "skills",
@@ -46,7 +46,7 @@ export const CAMERA_ZONES: Record<ZoneId, CameraZoneConfig> = {
     position: [3.8, 1.8, 3.2],
     target: [3.0, 1.2, -0.5],
     fov: 42,
-    description: "Categorized technical proficiencies and testing matrix (Phase 5).",
+    description: "Spatial foundation for categorized technical stack (Phase 5).",
   },
   achievements: {
     id: "achievements",
@@ -54,7 +54,7 @@ export const CAMERA_ZONES: Record<ZoneId, CameraZoneConfig> = {
     position: [2.5, 1.6, -3.2],
     target: [1.8, 1.1, -2.5],
     fov: 42,
-    description: "Competitive programming standing, Knight rank, and awards (Phase 5).",
+    description: "Spatial foundation for LeetCode Knight standing and hackathons (Phase 5).",
   },
   contact: {
     id: "contact",
@@ -62,6 +62,6 @@ export const CAMERA_ZONES: Record<ZoneId, CameraZoneConfig> = {
     position: [-2.5, 1.6, -3.2],
     target: [-1.8, 1.1, -2.5],
     fov: 42,
-    description: "Communication terminal and transmission console (Phase 6).",
+    description: "Spatial foundation for contact transmission console (Phase 6).",
   },
 };

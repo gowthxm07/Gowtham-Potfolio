@@ -9,46 +9,67 @@ export function Lighting() {
   const rimLightRef = useRef<THREE.PointLight>(null);
 
   return (
-    <group name="LightingSystem">
-      {/* Soft dark-navy ambient baseline */}
-      <ambientLight color="#0c162d" intensity={0.6} />
+    <group name="LightingHierarchy">
+      {/* Baseline Ambient: Rich deep-navy to preserve velvety shadow gradients */}
+      <ambientLight color="#091226" intensity={0.52} />
 
-      {/* Main Key Light: Illuminates front-right quadrant of the Identity Monolith */}
+      {/* ======================================================== */}
+      {/* TIER 1 (PRIMARY FOCAL FOCUS): The Identity Monolith      */}
+      {/* ======================================================== */}
+
+      {/* Main Key Light: Angled from upper-right front to model portrait & chamfers */}
       <directionalLight
         ref={keyLightRef}
-        position={[3.5, 4.5, 4.5]}
-        intensity={1.4}
-        color="#f1f5f9"
+        position={[2.8, 4.2, 4.2]}
+        intensity={1.7}
+        color="#f8fafc"
         castShadow
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
         shadow-bias={-0.0001}
       />
 
-      {/* Cool Deep Blue Fill Light: Softens left-hand shadows */}
-      <directionalLight
-        ref={fillLightRef}
-        position={[-4.5, 2.5, 2]}
-        intensity={0.7}
-        color="#1e3a8a"
-      />
-
-      {/* Cyan Rim Accent: Placed behind to define physical silhouette edges */}
+      {/* Cyan Rim Accent Light: Rakes the left-hand silhouette and outer frame */}
       <pointLight
         ref={rimLightRef}
-        position={[-1.2, 2.4, -2.2]}
-        intensity={1.1}
+        position={[-1.6, 2.8, -1.8]}
+        intensity={1.3}
         color="#00f0ff"
-        distance={7}
+        distance={7.5}
         decay={2}
       />
 
-      {/* Floor / Pedestal Soft Accent: Highlights step bevels */}
+      {/* ======================================================== */}
+      {/* TIER 2 (SECONDARY FOCUS): Midground Architectural Space   */}
+      {/* ======================================================== */}
+
+      {/* Cool Deep-Blue Lateral Fill Light (Left wing) */}
+      <directionalLight
+        ref={fillLightRef}
+        position={[-4.2, 2.8, 2.2]}
+        intensity={0.65}
+        color="#1e3a8a"
+      />
+
+      {/* Soft Pedestal & Floor Runway Pool Light */}
       <pointLight
-        position={[0, 0.35, 1.4]}
-        intensity={0.5}
+        position={[0, 0.35, 1.8]}
+        intensity={0.55}
         color="#38bdf8"
-        distance={5}
+        distance={6}
+        decay={2}
+      />
+
+      {/* ======================================================== */}
+      {/* TIER 3 (TERTIARY DEPTH): Background Colonnade Illumination*/}
+      {/* ======================================================== */}
+
+      {/* Distant Low-Level Horizon Wash */}
+      <pointLight
+        position={[0, 1.2, -4.5]}
+        intensity={0.35}
+        color="#0f224a"
+        distance={10}
         decay={2}
       />
     </group>

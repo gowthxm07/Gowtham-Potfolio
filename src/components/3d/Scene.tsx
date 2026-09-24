@@ -7,7 +7,7 @@ import { Lighting } from "./Lighting";
 import { Atmosphere } from "./Atmosphere";
 import { IdentityObject } from "./IdentityObject";
 import { CameraController } from "./CameraController";
-import { ZoneId } from "@/lib/cameraConfig";
+import { CAMERA_ZONES, ZoneId } from "@/lib/cameraConfig";
 
 interface SceneProps {
   activeZone: ZoneId;
@@ -22,6 +22,8 @@ export function Scene({
   isMobile = false,
   dpr = 1.5,
 }: SceneProps) {
+  const initialCam = CAMERA_ZONES.overview;
+
   return (
     <div className="absolute inset-0 w-full h-full bg-[#040711] overflow-hidden">
       <Canvas
@@ -31,11 +33,11 @@ export function Scene({
           antialias: true,
           powerPreference: "high-performance",
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.1,
+          toneMappingExposure: 1.15,
         }}
         camera={{
-          position: [0, 2.6, 7.8],
-          fov: 46,
+          position: initialCam.position,
+          fov: initialCam.fov,
           near: 0.1,
           far: 60,
         }}
