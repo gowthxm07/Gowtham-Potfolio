@@ -44,14 +44,14 @@ export function StoryIdentityObject({ progress }: StoryIdentityObjectProps) {
       targetY = 0.8;
       targetScale = 1.0;
       opacity = 1.0;
-    } else if (progress > 0.18 && progress <= 0.22) {
+    } else if (progress > 0.17 && progress <= 0.20) {
       // Exit phase: Object passes forward past the camera
-      const t = smoothStep((progress - 0.18) / (0.22 - 0.18));
+      const t = smoothStep((progress - 0.17) / (0.20 - 0.17));
       targetZ = 0.1 + (4.2 - 0.1) * t;
       targetX = 0.85 + 0.6 * t;
       targetY = 0.8 + 0.2 * t;
       targetScale = 1.0 + 0.3 * t;
-      opacity = Math.max(0, 1.0 - t * 1.2);
+      opacity = Math.max(0, 1.0 - t * 1.3);
     } else {
       // Outside visibility range
       opacity = 0;

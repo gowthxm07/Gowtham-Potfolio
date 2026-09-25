@@ -45,38 +45,50 @@ export function StoryShreeLabelsObject({
       return;
     }
 
-    let targetZ = -2.5;
+    // Normalized chapter sub-progress [0..1]
+    const s = Math.max(0, Math.min(1, (progress - startP) / dur));
+
+    let targetZ = -10.0;
     let targetX = anchorX;
     let targetY = 0.85;
-    let targetScale = 0.88;
+    let targetScale = 0.35;
     let opacity = 0.0;
 
-    if (progress >= startP && progress < approachEnd) {
-      // 01. Calm approach from restrained depth (-2.0 -> 0.15)
-      const t = smoothStep((progress - startP) / (approachEnd - startP));
-      targetZ = -2.0 + (0.15 - -2.0) * t;
+    if (progress >= startP && s < 0.20) {
+      // 01. ENTRY / FAR EMERGENCE: Materializes deep in background (-10.0 -> -4.5)
+      const t = smoothStep(s / 0.20);
+      targetZ = -10.0 + (-4.5 - -10.0) * t;
       targetX = anchorX;
       targetY = 0.85;
-      targetScale = 0.88 + 0.12 * t;
-      opacity = t;
-    } else if (progress >= approachEnd && progress <= dwellEnd) {
-      // 02. Dominant, rock-solid focal dwell phase (72% of chapter duration)
+      targetScale = 0.35 + (0.65 - 0.35) * t;
+      opacity = t * 0.70;
+    } else if (s >= 0.20 && s < 0.40) {
+      // 02. CINEMATIC APPROACH: Glides forward from mid-depth into hero plane (-4.5 -> 0.15)
+      const t = smoothStep((s - 0.20) / (0.40 - 0.20));
+      targetZ = -4.5 + (0.15 - -4.5) * t;
+      targetX = anchorX;
+      targetY = 0.85;
+      targetScale = 0.65 + (1.0 - 0.65) * t;
+      opacity = 0.70 + (1.0 - 0.70) * t;
+    } else if (s >= 0.40 && s <= 0.70) {
+      // 03. HERO / PROMINENT DWELL: Rock-solid focal station at Z=0.15 (30% of chapter)
       targetZ = 0.15;
       targetX = anchorX;
       targetY = 0.85;
       targetScale = 1.0;
       opacity = 1.0;
-    } else if (progress > dwellEnd && progress <= endP) {
-      // 03. Gentle forward dissolve (0.15 -> 0.55) - no shooting past camera
-      const t = smoothStep((progress - dwellEnd) / (endP - dwellEnd));
-      targetZ = 0.15 + (0.55 - 0.15) * t;
-      targetX = anchorX - 0.15 * t;
-      targetY = 0.85 + 0.05 * t;
-      targetScale = 1.0 - 0.08 * t;
-      opacity = Math.max(0, 1.0 - t);
+    } else if (s > 0.70 && s <= 0.92) {
+      // 04. EXIT / PASS CAMERA: Moves forward past camera (0.15 -> 5.2), sweeping out of viewport
+      const t = smoothStep((s - 0.70) / (0.92 - 0.70));
+      targetZ = 0.15 + (5.2 - 0.15) * t;
+      targetX = anchorX - 0.45 * t;
+      targetY = 0.85 + 0.10 * t;
+      targetScale = 1.0 + 0.35 * t;
+      opacity = Math.max(0, 1.0 - t * 1.3);
     } else {
-      opacity = 0;
-      targetZ = progress < startP ? -3.0 : 1.2;
+      // 05. GAP / OUT OF RANGE: Stage clear, invisible before next project begins
+      opacity = 0.0;
+      targetZ = s < 0.0 ? -12.0 : 7.0;
     }
 
     // Subtle restrained mouse parallax (only when active)
@@ -110,7 +122,7 @@ export function StoryShreeLabelsObject({
   });
 
   return (
-    <group ref={groupRef} position={[anchorX, 0.85, -2.5]} visible={false}>
+    <group ref={groupRef} position={[anchorX, 0.85, -10.0]} visible={false}>
       {/* Studio Lighting in Shree Labels Clean Blue/White Aesthetic */}
       <spotLight
         position={[0, 4.2, 2.5]}
