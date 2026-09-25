@@ -8,9 +8,10 @@ import { smoothStep } from "@/lib/storyTimeline";
 
 interface StoryResumeObjectProps {
   progress: number;
+  isMobile?: boolean;
 }
 
-export function StoryResumeObject({ progress }: StoryResumeObjectProps) {
+export function StoryResumeObject({ progress, isMobile = false }: StoryResumeObjectProps) {
   const groupRef = useRef<THREE.Group>(null);
   const scanLineRef = useRef<THREE.Mesh>(null);
 
@@ -23,27 +24,32 @@ export function StoryResumeObject({ progress }: StoryResumeObjectProps) {
   useFrame((state, delta) => {
     if (!groupRef.current) return;
 
+    const scaleBase = isMobile ? 0.65 : 1.0;
+    const targetAnchorX = isMobile ? 0.0 : -0.75;
+
     let targetZ = -14.0;
-    let targetX = -0.75;
-    let targetY = 0.85;
-    let targetScale = 0.35;
+    let targetX = targetAnchorX;
+    let targetY = isMobile ? 0.90 : 0.85;
+    let targetScale = 0.35 * scaleBase;
     let opacity = 0.0;
 
     if (progress >= startP && progress < peakStart) {
       const t = smoothStep((progress - startP) / (peakStart - startP));
       targetZ = -14.0 + (0.4 - -14.0) * t;
-      targetScale = 0.5 + 0.5 * t;
+      targetX = targetAnchorX;
+      targetScale = (0.5 + 0.5 * t) * scaleBase;
       opacity = t;
     } else if (progress >= peakStart && progress <= peakEnd) {
       const t = smoothStep((progress - peakStart) / (peakEnd - peakStart));
       targetZ = 0.4 + 0.25 * t;
-      targetScale = 1.0;
+      targetX = targetAnchorX;
+      targetScale = 1.0 * scaleBase;
       opacity = 1.0;
     } else if (progress > peakEnd && progress <= endP) {
       const t = smoothStep((progress - peakEnd) / (endP - peakEnd));
       targetZ = 0.65 + (5.0 - 0.65) * t;
-      targetX = -0.75 - 0.7 * t;
-      targetScale = 1.0 + 0.35 * t;
+      targetX = targetAnchorX - (isMobile ? 0.2 : 0.7) * t;
+      targetScale = (1.0 + 0.35 * t) * scaleBase;
       opacity = Math.max(0, 1.0 - t);
     } else {
       opacity = 0;

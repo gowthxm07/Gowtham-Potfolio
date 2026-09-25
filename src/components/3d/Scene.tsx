@@ -49,60 +49,66 @@ export function Scene({ progress, isMobile = false, dpr = 1.5 }: SceneProps) {
 
         <Suspense fallback={null}>
           {/* 02. Identity & Verified Portrait Monolith */}
-          <StoryIdentityObject progress={progress} />
+          <StoryIdentityObject progress={progress} isMobile={isMobile} />
 
           {/* 03. Featured Engineering Systems: Section 03 Project Sextet */}
           {/* Chapter 01: AI Smart Receptionist Platform */}
           <StoryReceptionistObject
             progress={progress}
             range={[0.198, 0.254]}
-            anchorX={isMobile ? -0.15 : -0.85}
+            anchorX={isMobile ? 0.0 : -0.85}
+            isMobile={isMobile}
           />
           {/* Chapter 02: Real-Time Traffic Computer Vision Experience */}
           <StoryTrafficObject
             progress={progress}
             range={[0.244, 0.304]}
-            anchorX={isMobile ? -0.15 : -0.85}
+            anchorX={isMobile ? 0.0 : -0.85}
+            isMobile={isMobile}
           />
           {/* Chapter 03: Privacy-Preserving Edge Video Cartoonifier */}
           <StoryCartoonifierObject
             progress={progress}
             range={[0.294, 0.354]}
-            anchorX={isMobile ? -0.15 : -0.85}
+            anchorX={isMobile ? 0.0 : -0.85}
+            isMobile={isMobile}
           />
           {/* Chapter 04: LaborLink Two-Sided Industrial Labor Marketplace */}
           <StoryLaborLinkObject
             progress={progress}
             range={[0.344, 0.404]}
-            anchorX={isMobile ? -0.15 : -0.85}
+            anchorX={isMobile ? 0.0 : -0.85}
+            isMobile={isMobile}
           />
           {/* Chapter 05: Shree Labels Corporate Manufacturing & Specimen Showcase */}
           <StoryShreeLabelsObject
             progress={progress}
             range={[0.394, 0.454]}
-            anchorX={isMobile ? -0.15 : -0.85}
+            anchorX={isMobile ? 0.0 : -0.85}
+            isMobile={isMobile}
           />
           {/* Chapter 06: HomeMind Virtual Smart Home Decision Engine */}
           <StoryJevObject
             progress={progress}
             range={[0.444, 0.502]}
-            anchorX={isMobile ? -0.15 : -0.85}
+            anchorX={isMobile ? 0.0 : -0.85}
+            isMobile={isMobile}
           />
 
           {/* 04. Academic Progression Timeline Spine */}
-          <StoryAcademicsObject progress={progress} />
+          <StoryAcademicsObject progress={progress} isMobile={isMobile} />
 
           {/* 05. Technology & Tools Constellation */}
-          <StorySkillsConstellation progress={progress} />
+          <StorySkillsConstellation progress={progress} isMobile={isMobile} />
 
           {/* 06. Competitive Problem Solving & Leadership Trophy */}
-          <StoryAchievementsObject progress={progress} />
+          <StoryAchievementsObject progress={progress} isMobile={isMobile} />
 
           {/* 07. Holographic Resume Document Artifact */}
-          <StoryResumeObject progress={progress} />
+          <StoryResumeObject progress={progress} isMobile={isMobile} />
 
           {/* 08. Direct Communication & Signal Array */}
-          <StoryContactObject progress={progress} />
+          <StoryContactObject progress={progress} isMobile={isMobile} />
         </Suspense>
       </Canvas>
     </div>

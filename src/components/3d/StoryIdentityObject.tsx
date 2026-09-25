@@ -8,9 +8,10 @@ import { smoothStep } from "@/lib/storyTimeline";
 
 interface StoryIdentityObjectProps {
   progress: number;
+  isMobile?: boolean;
 }
 
-export function StoryIdentityObject({ progress }: StoryIdentityObjectProps) {
+export function StoryIdentityObject({ progress, isMobile = false }: StoryIdentityObjectProps) {
   const groupRef = useRef<THREE.Group>(null);
 
   // Load authentic portrait photograph
@@ -23,34 +24,38 @@ export function StoryIdentityObject({ progress }: StoryIdentityObjectProps) {
 
     // Section range for identity visibility: [0.07, 0.22]
     // Peak focus: [0.12, 0.18]
+    const scaleBase = isMobile ? 0.68 : 1.0;
+    const targetAnchorX = isMobile ? 0.0 : 0.85;
+    const anchorY = isMobile ? 0.90 : 0.8;
+
     let targetZ = -8.0;
-    let targetX = 0.85;
-    let targetY = 0.8;
-    let targetScale = 0.5;
+    let targetX = targetAnchorX;
+    let targetY = anchorY;
+    let targetScale = 0.5 * scaleBase;
     let opacity = 0.0;
 
     if (progress >= 0.065 && progress < 0.120) {
       // Approach phase: Object enters smoothly from depth toward camera
       const t = smoothStep((progress - 0.065) / (0.120 - 0.065));
       targetZ = -8.0 + (0.1 - -8.0) * t;
-      targetX = 0.85;
-      targetY = 0.8;
-      targetScale = 0.6 + 0.4 * t;
+      targetX = targetAnchorX;
+      targetY = anchorY;
+      targetScale = (0.6 + 0.4 * t) * scaleBase;
       opacity = t;
     } else if (progress >= 0.120 && progress <= 0.170) {
       // Focused inspection phase: Anchored prominently on right side
       targetZ = 0.1;
-      targetX = 0.85;
-      targetY = 0.8;
-      targetScale = 1.0;
+      targetX = targetAnchorX;
+      targetY = anchorY;
+      targetScale = 1.0 * scaleBase;
       opacity = 1.0;
     } else if (progress > 0.170 && progress <= 0.210) {
       // Exit phase: Object passes forward past the camera over an expanded 0.040 window
       const t = smoothStep((progress - 0.170) / (0.210 - 0.170));
       targetZ = 0.1 + (4.5 - 0.1) * t;
-      targetX = 0.85 + 0.6 * t;
-      targetY = 0.8 + 0.2 * t;
-      targetScale = 1.0 + 0.3 * t;
+      targetX = targetAnchorX + (isMobile ? 0.2 : 0.6) * t;
+      targetY = anchorY + 0.2 * t;
+      targetScale = (1.0 + 0.3 * t) * scaleBase;
       opacity = Math.max(0, 1.0 - t);
     } else {
       // Outside visibility range

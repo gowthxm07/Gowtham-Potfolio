@@ -18,27 +18,27 @@ export function MinimalHUD({
   onScrollToSection,
 }: MinimalHUDProps) {
   return (
-    <div className="pointer-events-none fixed inset-0 z-30 flex flex-col justify-between p-6 md:p-8 select-none">
+    <div className="pointer-events-none fixed inset-0 z-30 flex flex-col justify-between p-3.5 sm:p-6 md:p-8 pt-[max(0.875rem,env(safe-area-inset-top))] pb-[max(0.875rem,env(safe-area-inset-bottom))] px-[max(0.875rem,env(safe-area-inset-left))] select-none">
       {/* TOP STATUS BAR */}
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between gap-2">
         {/* Top-Left: Brand & Title */}
-        <div className="pointer-events-auto">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] font-mono tracking-widest text-emerald-400 uppercase">
+        <div className="pointer-events-auto shrink min-w-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+            <span className="text-[9px] sm:text-[10px] font-mono tracking-widest text-emerald-400 uppercase truncate">
               PORTFOLIO // SCROLL STORY
             </span>
           </div>
-          <h1 className="text-base md:text-lg font-bold tracking-tight text-white font-mono uppercase">
+          <h1 className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-white font-mono uppercase truncate leading-tight">
             {profileData.name}
           </h1>
-          <p className="text-[11px] font-mono text-slate-400">
+          <p className="hidden sm:block text-[11px] font-mono text-slate-400">
             AI • SYSTEMS • COMPUTER SCIENCE • AMRITA
           </p>
         </div>
 
         {/* Top-Right: Active Section Telemetry & Actions */}
-        <div className="pointer-events-auto flex items-center gap-2 md:gap-3">
+        <div className="pointer-events-auto flex items-center gap-1.5 sm:gap-2 md:gap-3 shrink-0">
           {/* Recruiter Quick-Jump Section Navigation */}
           <nav className="hidden xl:flex items-center gap-1 bg-surface/80 border border-surface-border/70 rounded-md p-0.5 backdrop-blur-md text-[11px] font-mono">
             {[
@@ -73,7 +73,7 @@ export function MinimalHUD({
             href="/assets/Gowtham_resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-surface/80 hover:bg-slate-800 border border-surface-border text-[11px] font-mono text-emerald-400 transition-colors backdrop-blur-md"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md bg-surface/80 hover:bg-slate-800 border border-surface-border text-[10px] sm:text-[11px] font-mono text-emerald-400 transition-colors backdrop-blur-md"
             title="Download Official Resume PDF"
           >
             <FileText className="w-3.5 h-3.5" />

@@ -8,9 +8,10 @@ import { smoothStep } from "@/lib/storyTimeline";
 
 interface StoryContactObjectProps {
   progress: number;
+  isMobile?: boolean;
 }
 
-export function StoryContactObject({ progress }: StoryContactObjectProps) {
+export function StoryContactObject({ progress, isMobile = false }: StoryContactObjectProps) {
   const groupRef = useRef<THREE.Group>(null);
   const ring1Ref = useRef<THREE.Mesh>(null);
   const ring2Ref = useRef<THREE.Mesh>(null);
@@ -24,21 +25,26 @@ export function StoryContactObject({ progress }: StoryContactObjectProps) {
   useFrame((state, delta) => {
     if (!groupRef.current) return;
 
+    const scaleBase = isMobile ? 0.65 : 1.0;
+    const targetAnchorX = isMobile ? 0.0 : -0.75;
+
     let targetZ = -14.0;
-    let targetX = -0.75;
-    let targetY = 0.8;
-    let targetScale = 0.35;
+    let targetX = targetAnchorX;
+    let targetY = isMobile ? 0.90 : 0.8;
+    let targetScale = 0.35 * scaleBase;
     let opacity = 0.0;
 
     if (progress >= startP && progress < peakStart) {
       const t = smoothStep((progress - startP) / (peakStart - startP));
       targetZ = -14.0 + (0.5 - -14.0) * t;
-      targetScale = 0.5 + 0.5 * t;
+      targetX = targetAnchorX;
+      targetScale = (0.5 + 0.5 * t) * scaleBase;
       opacity = t;
     } else if (progress >= peakStart) {
       const t = smoothStep((progress - peakStart) / (1.0 - peakStart));
       targetZ = 0.5 + 0.2 * t;
-      targetScale = 1.0;
+      targetX = targetAnchorX;
+      targetScale = 1.0 * scaleBase;
       opacity = 1.0;
     } else {
       opacity = 0;
