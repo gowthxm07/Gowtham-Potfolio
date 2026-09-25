@@ -32,19 +32,19 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
   const [activeProjectIdx, setActiveProjectIdx] = useState(0);
   const [activeSkillCategory, setActiveSkillCategory] = useState("Programming Languages");
 
-  // Automatically sync active project tab with scroll progress when in projects section
+  // Automatically sync active project tab with scroll progress using handoff midpoints
   useEffect(() => {
-    if (progress >= 0.20 && progress < 0.25) {
+    if (progress < 0.2475) {
       setActiveProjectIdx(0);
-    } else if (progress >= 0.25 && progress < 0.30) {
+    } else if (progress < 0.2975) {
       setActiveProjectIdx(1);
-    } else if (progress >= 0.30 && progress < 0.35) {
+    } else if (progress < 0.3475) {
       setActiveProjectIdx(2);
-    } else if (progress >= 0.35 && progress < 0.40) {
+    } else if (progress < 0.3975) {
       setActiveProjectIdx(3);
-    } else if (progress >= 0.40 && progress < 0.45) {
+    } else if (progress < 0.4475) {
       setActiveProjectIdx(4);
-    } else if (progress >= 0.45 && progress <= 0.50) {
+    } else {
       setActiveProjectIdx(5);
     }
   }, [progress]);
@@ -75,6 +75,54 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
     };
   };
 
+  // Helper to calculate individual project content style with sequential eased dissolve
+  const getProjectContentStyle = (idx: number) => {
+    // 6 projects across [0.20, 0.50] with clean sequential dissolve:
+    // Old content fades out (1 -> 0), brief 3D transit pause, new content fades in (0 -> 1)
+    const ranges = [
+      { start: 0.1900, peakStart: 0.2100, peakEnd: 0.2440, end: 0.2475 },
+      { start: 0.2485, peakStart: 0.2520, peakEnd: 0.2940, end: 0.2975 },
+      { start: 0.2985, peakStart: 0.3020, peakEnd: 0.3440, end: 0.3475 },
+      { start: 0.3485, peakStart: 0.3520, peakEnd: 0.3940, end: 0.3975 },
+      { start: 0.3985, peakStart: 0.4020, peakEnd: 0.4440, end: 0.4475 },
+      { start: 0.4485, peakStart: 0.4520, peakEnd: 0.4900, end: 0.5100 },
+    ];
+    const r = ranges[idx];
+    let opacity = 0;
+    let translateY = 12;
+
+    if (progress >= r.start && progress < r.peakStart) {
+      const t = smoothStep((progress - r.start) / (r.peakStart - r.start));
+      opacity = t;
+      translateY = (1 - t) * 12;
+    } else if (progress >= r.peakStart && progress <= r.peakEnd) {
+      opacity = 1;
+      translateY = 0;
+    } else if (progress > r.peakEnd && progress <= r.end) {
+      const t = smoothStep((progress - r.peakEnd) / (r.end - r.peakEnd));
+      opacity = 1 - t;
+      translateY = -t * 12;
+    }
+
+    return {
+      opacity,
+      transform: `translateY(${translateY}px)`,
+      pointerEvents: opacity > 0.4 ? ("auto" as const) : ("none" as const),
+      visibility: opacity > 0.01 ? ("visible" as const) : ("hidden" as const),
+    };
+  };
+
+  const scrollToProject = (idx: number) => {
+    setActiveProjectIdx(idx);
+    const centers = [0.225, 0.275, 0.325, 0.375, 0.425, 0.470];
+    const targetProgress = centers[idx];
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    window.scrollTo({
+      top: targetProgress * maxScroll,
+      behavior: "smooth",
+    });
+  };
+
   // 8 Continuous Section Interpolation Ranges
   const introStyle = getSectionStyle(-0.05, 0.0, 0.08, 0.11);
   const identityStyle = getSectionStyle(0.09, 0.12, 0.18, 0.21);
@@ -84,8 +132,6 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
   const achievementsStyle = getSectionStyle(0.71, 0.74, 0.80, 0.83);
   const resumeStyle = getSectionStyle(0.81, 0.84, 0.89, 0.92);
   const contactStyle = getSectionStyle(0.90, 0.93, 1.0, 1.05);
-
-  const selectedProject = projectsData[activeProjectIdx] || projectsData[0];
   const competitiveAch = achievementsData.find((a) => a.category === "Competitive Programming");
   const leadershipAch = achievementsData.find((a) => a.category === "Leadership");
   const hackathonsAch = achievementsData.find((a) => a.category === "Hackathons");
@@ -211,285 +257,306 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
       {/* ============================================================ */}
       <section
         style={projectsStyle}
-        className="absolute inset-y-0 right-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pr-16 ml-auto transition-all duration-300"
+        className="absolute inset-y-0 right-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pr-16 ml-auto transition-all duration-300 pointer-events-auto"
       >
-        <div className="bg-surface/85 border border-surface-border backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-lg shadow-2xl">
+        <div className="bg-surface/85 border border-surface-border backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-lg shadow-2xl w-full max-h-[88vh] overflow-y-auto">
+          {/* Unified Stable Header with Switcher Tabs */}
           <div className="flex items-center justify-between mb-2">
             <div
-              className={`text-[11px] font-mono tracking-widest uppercase flex items-center gap-2 ${
-                selectedProject.id === "smart-home-automation-jev"
+              className={`text-[11px] font-mono tracking-widest uppercase flex items-center gap-2 transition-colors duration-200 ${
+                activeProjectIdx === 5
                   ? "text-purple-400"
-                  : selectedProject.id === "shree-labels-corporate"
+                  : activeProjectIdx === 4
                   ? "text-blue-400"
                   : "text-emerald-400"
               }`}
             >
               <Code2 className="w-3.5 h-3.5" />
-              {selectedProject.id === "ai-smart-receptionist"
+              {activeProjectIdx === 0
                 ? "01 // AI & REAL-TIME SYSTEMS"
-                : selectedProject.id === "real-time-traffic-monitoring"
+                : activeProjectIdx === 1
                 ? "02 // COMPUTER VISION & EDGE"
-                : selectedProject.id === "edge-video-cartoonifier"
+                : activeProjectIdx === 2
                 ? "03 // PRIVACY-PRESERVING EDGE VIDEO CARTOONIFIER"
-                : selectedProject.id === "laborlink"
+                : activeProjectIdx === 3
                 ? "04 // TWO-SIDED INDUSTRIAL LABOR MARKETPLACE"
-                : selectedProject.id === "shree-labels-corporate"
+                : activeProjectIdx === 4
                 ? "05 // CORPORATE MANUFACTURING & PRINTING"
                 : "06 // SIMULATED SMART HOME DECISION ENGINE"}
             </div>
             {/* Project Switcher Tabs */}
             <div className="flex gap-1.5 bg-surface-card p-1 rounded-lg border border-surface-border">
-              {projectsData.slice(0, 6).map((p, idx) => (
+              {projectsData.slice(0, 6).map((p, pIdx) => (
                 <button
                   key={p.id}
-                  onClick={() => setActiveProjectIdx(idx)}
+                  onClick={() => scrollToProject(pIdx)}
                   className={`text-[10px] font-mono px-2 py-0.5 rounded transition-colors ${
-                    activeProjectIdx === idx
-                      ? idx === 5
+                    activeProjectIdx === pIdx
+                      ? pIdx === 5
                         ? "bg-purple-500/20 text-purple-300 font-bold border border-purple-500/40"
-                        : idx === 4
+                        : pIdx === 4
                         ? "bg-blue-500/20 text-blue-300 font-bold border border-blue-500/40"
                         : "bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40"
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  0{idx + 1}
+                  0{pIdx + 1}
                 </button>
               ))}
             </div>
           </div>
 
-          <h2 className="text-xl md:text-2xl font-bold font-mono text-white mb-2">
-            {selectedProject.title}
-          </h2>
-
-          <p className="text-xs md:text-sm text-slate-300 mb-3.5 leading-relaxed font-sans">
-            {selectedProject.id === "ai-smart-receptionist"
-              ? "Autonomous multi-tenant conversational receptionist platform automating appointment bookings with local Whisper.cpp and Piper speech runtimes, deterministic dialogue state management (< 2ms), and PostgreSQL persistence."
-              : selectedProject.shortDescription}
-          </p>
-
-          {/* Architecture Pipeline Indicator for AI Receptionist */}
-          {selectedProject.id === "ai-smart-receptionist" && (
-            <div className="mb-3.5 p-2 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
-              <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                SYSTEM ARCHITECTURE PIPELINE
-              </div>
-              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">PHONE</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">VOICE</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">AI CORE</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">DATABASE</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">APPOINTMENT</span>
-              </div>
-            </div>
-          )}
-
-          {/* Architecture Pipeline Indicator for Traffic CV Monitoring */}
-          {selectedProject.id === "real-time-traffic-monitoring" && (
-            <div className="mb-3.5 p-2 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
-              <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                EDGE COMPUTER VISION PIPELINE
-              </div>
-              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">640x480 VIDEO</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">OPENCV</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">YOLOV8 NANO</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">YOLOV8 TRACKING</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FIRESTORE SYNC</span>
-              </div>
-            </div>
-          )}
-
-          {/* Architecture Pipeline Indicator for Edge Video Cartoonifier */}
-          {selectedProject.id === "edge-video-cartoonifier" && (
-            <div className="mb-3.5 p-2 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
-              <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                DETERMINISTIC COMPUTER VISION PIPELINE
-              </div>
-              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">WEBCAM / MP4</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">OPENCV</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FACE PRIVACY + MOG2</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">DUAL-PATH CARTOON</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">BITWISE FUSION</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">MJPEG STREAM</span>
-              </div>
-            </div>
-          )}
-
-          {/* Architecture Pipeline Indicator for LaborLink */}
-          {selectedProject.id === "laborlink" && (
-            <div className="mb-3.5 p-2 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
-              <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                INDUSTRIAL MATCHING & HIRING PIPELINE
-              </div>
-              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">WORKER / FACTORY</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FIREBASE AUTH</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FIRESTORE</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">MATCH ENGINE</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FAIRNESS FILTER</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">GEMINI REASONING</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">MUTUAL ACCEPTANCE</span>
-                <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">CONTACT UNLOCK</span>
-              </div>
-            </div>
-          )}
-
-          {/* Architecture Pipeline Indicator for Shree Labels */}
-          {selectedProject.id === "shree-labels-corporate" && (
-            <div className="mb-3.5 p-2 rounded-lg bg-blue-950/20 border border-blue-800/40">
-              <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-                MANUFACTURING & SPECIMEN PIPELINE
-              </div>
-              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
-                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">BRAND</span>
-                <span className="text-blue-400">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">MATERIAL</span>
-                <span className="text-blue-400">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">PRINT</span>
-                <span className="text-blue-400">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">FINISH</span>
-                <span className="text-blue-400">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">SUSTAINABILITY</span>
-                <span className="text-blue-400">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">CERTIFICATION</span>
-                <span className="text-blue-400">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">TRUST</span>
-                <span className="text-blue-400">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">QUOTE</span>
-              </div>
-            </div>
-          )}
-
-          {/* Architecture Pipeline Indicator for HomeMind / Jev */}
-          {selectedProject.id === "smart-home-automation-jev" && (
-            <div className="mb-3.5 p-2 rounded-lg bg-purple-950/20 border border-purple-800/40">
-              <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-                STRUCTURED DECISION ENGINE PIPELINE
-              </div>
-              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
-                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">HOME STATE</span>
-                <span className="text-purple-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">USER INTENT</span>
-                <span className="text-purple-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">CONTEXT</span>
-                <span className="text-purple-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">JEV SYSTEM ONE</span>
-                <span className="text-purple-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">POLICY DISPATCH</span>
-                <span className="text-purple-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">REDUNDANCY FILTER</span>
-                <span className="text-purple-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">SIM VALIDATION</span>
-                <span className="text-purple-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">UPDATED STATE</span>
-              </div>
-            </div>
-          )}
-
-          {/* Spatial Concept Tag */}
-          <div
-            className={`p-2.5 rounded-lg bg-surface-card border border-surface-border text-[11px] font-mono mb-3.5 ${
-              selectedProject.id === "smart-home-automation-jev"
+          {/* Project Content Area with Eased Sequential Dissolve in CSS Grid */}
+          <div data-project-grid className="grid grid-cols-1 grid-rows-1">
+            {projectsData.slice(0, 6).map((project, idx) => {
+              const contentStyle = getProjectContentStyle(idx);
+              const isJev = project.id === "smart-home-automation-jev";
+              const isShree = project.id === "shree-labels-corporate";
+              const accentTextColor = isJev
+                ? "text-purple-400"
+                : isShree
+                ? "text-blue-400"
+                : "text-emerald-400";
+              const anchorTextColor = isJev
                 ? "text-purple-300"
-                : selectedProject.id === "shree-labels-corporate"
+                : isShree
                 ? "text-blue-300"
-                : "text-emerald-300"
-            }`}
-          >
-            <span className="text-slate-400 block text-[9px] uppercase tracking-wider mb-0.5">
-              3D Spatial Anchor:
-            </span>
-            {selectedProject.visualConcept}
-          </div>
+                : "text-emerald-300";
+              const repoBtnColor = isJev
+                ? "bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/40 text-purple-300"
+                : isShree
+                ? "bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/40 text-blue-300"
+                : "bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300";
 
-          {/* Key Metrics / Highlights */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3.5">
-            {selectedProject.metrics.slice(0, 4).map((m: string, i: number) => (
-              <div key={i} className="p-2 rounded bg-surface-card border border-surface-border text-[11px] text-slate-300 font-sans">
-                <span
-                  className={`font-mono block text-[9px] uppercase ${
-                    selectedProject.id === "smart-home-automation-jev"
-                      ? "text-purple-400"
-                      : selectedProject.id === "shree-labels-corporate"
-                      ? "text-blue-400"
-                      : "text-emerald-400"
-                  }`}
+              return (
+                <div
+                  key={project.id}
+                  data-project-index={idx}
+                  style={{
+                    gridArea: "1 / 1 / 2 / 2",
+                    opacity: contentStyle.opacity,
+                    transform: contentStyle.transform,
+                    pointerEvents: contentStyle.pointerEvents,
+                    visibility: contentStyle.visibility,
+                  }}
                 >
-                  Telemetry 0{i + 1}
-                </span>
-                {m}
-              </div>
-            ))}
-          </div>
+                  <h2 className="text-xl md:text-2xl font-bold font-mono text-white mb-2">
+                    {project.title}
+                  </h2>
 
-          {/* Tech Badges */}
-          <div className="flex flex-wrap gap-1.5 mb-5">
-            {selectedProject.technologies.map((t) => (
-              <span
-                key={t}
-                className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-card text-slate-300 border border-surface-border"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
+                  <p className="text-xs md:text-sm text-slate-300 mb-3.5 leading-relaxed font-sans">
+                    {project.id === "ai-smart-receptionist"
+                      ? "Autonomous multi-tenant conversational receptionist platform automating appointment bookings with local Whisper.cpp and Piper speech runtimes, deterministic dialogue state management (< 2ms), and PostgreSQL persistence."
+                      : project.shortDescription}
+                  </p>
 
-          <div className="flex items-center gap-3">
-            <a
-              href={selectedProject.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono transition-colors ${
-                selectedProject.id === "smart-home-automation-jev"
-                  ? "bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/40 text-purple-300"
-                  : selectedProject.id === "shree-labels-corporate"
-                  ? "bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/40 text-blue-300"
-                  : "bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300"
-              }`}
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              Inspect Repository
-            </a>
-            {selectedProject.liveUrl && (
-              <a
-                href={selectedProject.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/40 text-blue-300 transition-colors"
-              >
-                <Globe className="w-3.5 h-3.5" />
-                Live Production
-              </a>
-            )}
+                  {/* Architecture Pipeline Indicator for AI Receptionist */}
+                  {project.id === "ai-smart-receptionist" && (
+                    <div className="mb-3.5 p-2 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
+                      <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        SYSTEM ARCHITECTURE PIPELINE
+                      </div>
+                      <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">PHONE</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">VOICE</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">AI CORE</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">DATABASE</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">APPOINTMENT</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Architecture Pipeline Indicator for Traffic CV Monitoring */}
+                  {project.id === "real-time-traffic-monitoring" && (
+                    <div className="mb-3.5 p-2 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
+                      <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        EDGE COMPUTER VISION PIPELINE
+                      </div>
+                      <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">640x480 VIDEO</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">OPENCV</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">YOLOV8 NANO</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">YOLOV8 TRACKING</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FIRESTORE SYNC</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Architecture Pipeline Indicator for Edge Video Cartoonifier */}
+                  {project.id === "edge-video-cartoonifier" && (
+                    <div className="mb-3.5 p-2 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
+                      <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        DETERMINISTIC COMPUTER VISION PIPELINE
+                      </div>
+                      <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">WEBCAM / MP4</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">OPENCV</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FACE PRIVACY + MOG2</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">DUAL-PATH CARTOON</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">BITWISE FUSION</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">MJPEG STREAM</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Architecture Pipeline Indicator for LaborLink */}
+                  {project.id === "laborlink" && (
+                    <div className="mb-3.5 p-2 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
+                      <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        INDUSTRIAL MATCHING & HIRING PIPELINE
+                      </div>
+                      <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">WORKER / FACTORY</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FIREBASE AUTH</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FIRESTORE</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">MATCH ENGINE</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FAIRNESS FILTER</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">GEMINI REASONING</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">MUTUAL ACCEPTANCE</span>
+                        <span className="text-emerald-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">CONTACT UNLOCK</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Architecture Pipeline Indicator for Shree Labels */}
+                  {project.id === "shree-labels-corporate" && (
+                    <div className="mb-3.5 p-2 rounded-lg bg-blue-950/20 border border-blue-800/40">
+                      <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+                        MANUFACTURING & SPECIMEN PIPELINE
+                      </div>
+                      <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
+                        <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">BRAND</span>
+                        <span className="text-blue-400">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">MATERIAL</span>
+                        <span className="text-blue-400">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">PRINT</span>
+                        <span className="text-blue-400">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">FINISH</span>
+                        <span className="text-blue-400">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">SUSTAINABILITY</span>
+                        <span className="text-blue-400">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">CERTIFICATION</span>
+                        <span className="text-blue-400">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">TRUST</span>
+                        <span className="text-blue-400">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">QUOTE</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Architecture Pipeline Indicator for HomeMind / Jev */}
+                  {project.id === "smart-home-automation-jev" && (
+                    <div className="mb-3.5 p-2 rounded-lg bg-purple-950/20 border border-purple-800/40">
+                      <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+                        STRUCTURED DECISION ENGINE PIPELINE
+                      </div>
+                      <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
+                        <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">HOME STATE</span>
+                        <span className="text-purple-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">USER INTENT</span>
+                        <span className="text-purple-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">CONTEXT</span>
+                        <span className="text-purple-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">JEV SYSTEM ONE</span>
+                        <span className="text-purple-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">POLICY DISPATCH</span>
+                        <span className="text-purple-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">REDUNDANCY FILTER</span>
+                        <span className="text-purple-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">SIM VALIDATION</span>
+                        <span className="text-purple-500">→</span>
+                        <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">UPDATED STATE</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Spatial Concept Tag */}
+                  <div
+                    className={`p-2.5 rounded-lg bg-surface-card border border-surface-border text-[11px] font-mono mb-3.5 ${anchorTextColor}`}
+                  >
+                    <span className="text-slate-400 block text-[9px] uppercase tracking-wider mb-0.5">
+                      3D Spatial Anchor:
+                    </span>
+                    {project.visualConcept}
+                  </div>
+
+                  {/* Key Metrics / Highlights */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3.5">
+                    {project.metrics.slice(0, 4).map((m: string, i: number) => (
+                      <div key={i} className="p-2 rounded bg-surface-card border border-surface-border text-[11px] text-slate-300 font-sans">
+                        <span
+                          className={`font-mono block text-[9px] uppercase ${accentTextColor}`}
+                        >
+                          Telemetry 0{i + 1}
+                        </span>
+                        {m}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Tech Badges */}
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {project.technologies.map((t) => (
+                      <span
+                        key={t}
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-card text-slate-300 border border-surface-border"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono transition-colors ${repoBtnColor}`}
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      Inspect Repository
+                    </a>
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/40 text-blue-300 transition-colors"
+                      >
+                        <Globe className="w-3.5 h-3.5" />
+                        Live Production
+                      </a>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

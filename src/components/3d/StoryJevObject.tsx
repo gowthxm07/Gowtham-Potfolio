@@ -78,16 +78,16 @@ export function StoryJevObject({
       targetY = 0.85;
       targetScale = 1.0;
       opacity = 1.0;
-    } else if (s > 0.70 && s <= 0.92) {
+    } else if (s > 0.70 && s <= 1.00) {
       // 04. EXIT / PASS CAMERA: Moves forward past camera (0.15 -> 5.2), sweeping out of viewport
-      const t = smoothStep((s - 0.70) / (0.92 - 0.70));
+      const t = smoothStep((s - 0.70) / (1.00 - 0.70));
       targetZ = 0.15 + (5.2 - 0.15) * t;
       targetX = anchorX - 0.45 * t;
       targetY = 0.85 + 0.10 * t;
       targetScale = 1.0 + 0.35 * t;
-      opacity = Math.max(0, 1.0 - t * 1.3);
+      opacity = 1.0 - t;
     } else {
-      // 05. GAP / OUT OF RANGE: Stage clear, invisible before next project begins
+      // 05. OUT OF RANGE: Stage clear
       opacity = 0.0;
       targetZ = s < 0.0 ? -12.0 : 7.0;
     }
