@@ -108,7 +108,7 @@ export const STORY_SECTIONS: StorySectionDef[] = [
   {
     id: "resume",
     index: "07",
-    badge: "07 // DOCUMENT ARTIFACT",
+    badge: "07 // OFFICIAL RESUME",
     title: "Official Resume",
     subtitle: "Verified Technical Credentials & Direct PDF Access",
     range: [0.8, 0.9],
@@ -123,9 +123,9 @@ export const STORY_SECTIONS: StorySectionDef[] = [
   {
     id: "contact",
     index: "08",
-    badge: "08 // CONNECT",
-    title: "Direct Transmission",
-    subtitle: "Initiate Communication & Inquiries",
+    badge: "08 // CONNECT WITH ME",
+    title: "Connect With Me",
+    subtitle: "Initiate Communication & Technical Collaboration",
     range: [0.9, 1.0],
     camera: {
       startPos: [0, 1.2, 5.0],

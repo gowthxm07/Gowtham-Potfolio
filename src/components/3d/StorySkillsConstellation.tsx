@@ -91,7 +91,7 @@ export function StorySkillsConstellation({ progress }: StorySkillsConstellationP
     { title: "AI / ML & CV", subtitle: "PyTorch • YOLOv8", pos: [0.95, 0.65, 0] as [number, number, number], color: "#4ade80" },
     { title: "LANGUAGES", subtitle: "C++ • Python • TS", pos: [-0.95, 0.55, 0] as [number, number, number], color: "#22c55e" },
     { title: "FULL-STACK", subtitle: "React • Next • Node", pos: [-0.85, -0.65, 0] as [number, number, number], color: "#86efac" },
-    { title: "EDGE TOOLS", subtitle: "Whisper • Docker", pos: [0.9, -0.6, 0] as [number, number, number], color: "#10b981" },
+    { title: "ENGINEERING", subtitle: "Docker • Vitest", pos: [0.9, -0.6, 0] as [number, number, number], color: "#10b981" },
   ];
 
   return (

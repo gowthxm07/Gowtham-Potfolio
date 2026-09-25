@@ -30,7 +30,7 @@ interface StoryOverlayProps {
 
 export function StoryOverlay({ progress }: StoryOverlayProps) {
   const [activeProjectIdx, setActiveProjectIdx] = useState(0);
-  const [activeSkillCategory, setActiveSkillCategory] = useState("AI / ML / GenAI");
+  const [activeSkillCategory, setActiveSkillCategory] = useState("Programming Languages");
 
   // Automatically sync active project tab with scroll progress when in projects section
   useEffect(() => {
@@ -574,15 +574,27 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
           </div>
 
           <h2 className="text-xl md:text-2xl font-bold font-mono text-white mb-2">
-            Engineering Constellation
+            Technical Capabilities & Stack
           </h2>
 
-          <p className="text-xs md:text-sm text-slate-300 mb-4 leading-relaxed font-sans">
-            Comprehensive technical repertoire spanning systems programming, deep learning models, full-stack web, and rigorous software verification.
+          <p className="text-xs md:text-sm text-slate-300 mb-3.5 leading-relaxed font-sans">
+            Recruiter-ready technical repertoire grounded in verified project systems, competitive algorithms, and full-stack software development.
           </p>
 
+          {/* Core Strengths Bar */}
+          <div className="flex flex-wrap gap-1.5 mb-3.5 pb-2.5 border-b border-surface-border">
+            {coreStrengths.map((strength) => (
+              <span
+                key={strength}
+                className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/40 text-emerald-300 border border-emerald-800/50"
+              >
+                ★ {strength}
+              </span>
+            ))}
+          </div>
+
           {/* Category Tabs */}
-          <div className="flex flex-wrap gap-1 mb-4 bg-surface-card/60 p-1 rounded-lg border border-surface-border">
+          <div className="flex flex-wrap gap-1 mb-3.5 bg-surface-card/60 p-1 rounded-lg border border-surface-border">
             {skillsData.map((cat) => (
               <button
                 key={cat.category}
@@ -603,7 +615,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
             const currentCat =
               skillsData.find((c) => c.category === activeSkillCategory) || skillsData[0];
             return (
-              <div className="space-y-3 mb-4">
+              <div className="space-y-2.5 mb-3.5">
                 <div className="text-xs text-slate-300 font-sans italic">
                   {currentCat.description}
                 </div>
@@ -626,10 +638,10 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
           <div className="border-t border-surface-border pt-3">
             <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
               <Layers className="w-3 h-3 text-emerald-400" />
-              Platforms & Infrastructure:
+              Verified Engineering Tools:
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {["Docker", "Git", "GitHub", "Vercel", "Firebase", "Whisper.cpp", "Piper TTS"].map(
+              {["Git", "GitHub", "Docker", "Vitest", "Jest", "Vercel", "Cloudinary", "Whisper.cpp", "Piper TTS"].map(
                 (tool) => (
                   <span
                     key={tool}
@@ -735,32 +747,33 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
             07 // OFFICIAL RESUME
           </div>
 
-          <h2 className="text-xl md:text-2xl font-bold font-mono text-white mb-2">
-            Verified Curriculum Vitae
+          <h2 className="text-xl md:text-2xl font-bold font-mono text-white mb-1">
+            Curriculum Vitae
           </h2>
+          <div className="text-xs font-mono text-emerald-400 mb-3">
+            {profileData.name} • Verified Technical Credentials
+          </div>
 
-          <p className="text-xs md:text-sm text-slate-300 mb-5 leading-relaxed font-sans">
-            Complete technical credential documentation detailing academic standing at Amrita, competitive programming accomplishments, production-grade AI projects, and systems engineering experience.
+          <p className="text-xs md:text-sm text-slate-300 mb-4 leading-relaxed font-sans">
+            Single-page ATS documentation detailing academic standing at Amrita Vishwa Vidhyapeetham (GPA 8.12), competitive programming achievements (LeetCode Knight, 1868 peak), hackathon accolades, and production software engineering projects.
           </p>
 
-          <div className="p-3.5 rounded-xl bg-surface-card border border-surface-border space-y-2 mb-6 text-xs font-mono">
+          <div className="p-3.5 rounded-xl bg-surface-card border border-surface-border space-y-2 mb-5 text-xs font-mono">
             <div className="flex items-center justify-between text-slate-300">
               <span className="text-slate-400">Candidate:</span>
               <span className="text-white font-bold">{profileData.name}</span>
             </div>
             <div className="flex items-center justify-between text-slate-300">
               <span className="text-slate-400">Education:</span>
-              <span className="text-emerald-400">B.Tech CS • GPA 8.12</span>
+              <span className="text-emerald-400">{profileData.degree} • GPA {profileData.gpa}</span>
             </div>
             <div className="flex items-center justify-between text-slate-300">
-              <span className="text-slate-400">Format:</span>
-              <span>Single-Page ATS Document (PDF)</span>
+              <span className="text-slate-400">Competitive:</span>
+              <span className="text-emerald-300">LeetCode Knight [1868] (Top 4.96%)</span>
             </div>
             <div className="flex items-center justify-between text-slate-300">
-              <span className="text-slate-400">Verification:</span>
-              <span className="text-emerald-300 flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5" /> Authenticated
-              </span>
+              <span className="text-slate-400">Source:</span>
+              <span className="text-slate-200">Single-Page ATS Document (PDF)</span>
             </div>
           </div>
 
@@ -770,6 +783,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
               href="/assets/Gowtham_resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="View official resume PDF in a new tab"
               className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-mono bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 text-emerald-300 font-bold transition-colors"
             >
               <FileText className="w-4 h-4" />
@@ -778,17 +792,18 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
             <a
               href="/assets/Gowtham_resume.pdf"
               download="Gowtham_resume.pdf"
+              aria-label="Download official resume PDF"
               className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-mono bg-surface hover:bg-slate-800 border border-slate-700 text-slate-300 transition-colors"
             >
               <Download className="w-4 h-4" />
-              DOWNLOAD PDF
+              DOWNLOAD RESUME
             </a>
           </div>
         </div>
       </section>
 
       {/* ============================================================ */}
-      {/* 08. DIRECT CONTACT & TRANSMISSION (Right Side Alignment)     */}
+      {/* 08. CONNECT WITH ME / CONTACT (Right Side Alignment)         */}
       {/* ============================================================ */}
       <section
         style={contactStyle}
@@ -797,15 +812,15 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
         <div className="bg-surface/85 border border-surface-border backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-xl w-full shadow-2xl">
           <div className="text-[11px] font-mono text-emerald-400 tracking-widest uppercase mb-2 flex items-center gap-2">
             <Sparkles className="w-3.5 h-3.5" />
-            08 // DIRECT TRANSMISSION
+            08 // CONNECT WITH ME
           </div>
 
           <h2 className="text-xl md:text-2xl font-bold font-mono text-white mb-1">
-            Initiate Connection
+            Connect With Me
           </h2>
 
-          <p className="text-xs text-slate-300 mb-4 font-sans">
-            Reach out regarding software engineering roles, AI/ML inquiries, or technical opportunities. Direct transmissions route to{" "}
+          <p className="text-xs text-slate-300 mb-4 font-sans leading-relaxed">
+            Have a project, opportunity, or idea? Let's build something meaningful. Direct inquiries route to{" "}
             <span className="text-emerald-400 font-mono">{profileData.email}</span>.
           </p>
 
