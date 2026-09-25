@@ -37,14 +37,15 @@ export function QuoteNode({ subProgress }: QuoteNodeProps) {
         anchorY="middle"
         letterSpacing={0.06}
       >
-        {"COMMERCIAL QUOTATION CONDUIT"}
+        {"EMAILJS QUOTE TRANSMISSION"}
       </Text>
       <Text
         position={[0, 0.23, 0]}
-        fontSize={0.02}
+        fontSize={0.022}
         color="#5b7d9e"
         anchorX="center"
         anchorY="middle"
+        letterSpacing={0.04}
       >
         {"DIRECT SPECIFICATION INQUIRY DISPATCH"}
       </Text>
@@ -63,13 +64,13 @@ export function QuoteNode({ subProgress }: QuoteNodeProps) {
       <group position={[0, 0.08, 0.015]}>
         <Text
           position={[-0.38, 0.03, 0]}
-          fontSize={0.017}
+          fontSize={0.016}
           color="#ffffff"
           anchorX="left"
           anchorY="middle"
           letterSpacing={0.03}
         >
-          {"FIELDS: NAME • EMAIL • SUBSTRATE • DIMENSIONS • QTY"}
+          {"NAME • EMAIL • SUBSTRATE • DIMENSIONS • QUANTITY"}
         </Text>
         <Text
           position={[-0.38, -0.005, 0]}
@@ -78,7 +79,7 @@ export function QuoteNode({ subProgress }: QuoteNodeProps) {
           anchorX="left"
           anchorY="middle"
         >
-          {"TECHNICAL CONSULTATION & BULK ORDER PRICING"}
+          {"TECHNICAL SPECIFICATIONS & ORDER REQUIREMENTS"}
         </Text>
       </group>
 
@@ -106,7 +107,7 @@ export function QuoteNode({ subProgress }: QuoteNodeProps) {
           anchorY="middle"
           letterSpacing={0.04}
         >
-          {"QUOTE REQUEST → EMAILJS → SHREE LABELS INBOX"}
+          {"EMAILJS QUOTE TRANSMISSION"}
         </Text>
         <Text
           position={[0, -0.014, 0.005]}
@@ -115,7 +116,7 @@ export function QuoteNode({ subProgress }: QuoteNodeProps) {
           anchorX="center"
           anchorY="middle"
         >
-          {"ZERO BACKEND OVERHEAD • DIRECT BROWSER DISPATCH"}
+          {"DIRECT BROWSER DISPATCH TO SHREE LABELS"}
         </Text>
       </group>
     </group>

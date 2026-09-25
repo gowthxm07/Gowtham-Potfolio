@@ -39,16 +39,17 @@ export function ReviewTrustNode({ subProgress }: ReviewTrustNodeProps) {
         anchorY="middle"
         letterSpacing={0.06}
       >
-        {"CLIENT FEEDBACK // LIVE REVIEWS"}
+        {"CLIENT FEEDBACK"}
       </Text>
       <Text
         position={[0, 0.23, 0]}
-        fontSize={0.02}
+        fontSize={0.022}
         color="#5b7d9e"
         anchorX="center"
         anchorY="middle"
+        letterSpacing={0.04}
       >
-        {"REAL-TIME FIRESTORE onSnapshot STREAM"}
+        {"REAL-TIME FIRESTORE REVIEWS"}
       </Text>
 
       {/* Main Chassis */}
@@ -108,7 +109,7 @@ export function ReviewTrustNode({ subProgress }: ReviewTrustNodeProps) {
           anchorY="middle"
           letterSpacing={0.04}
         >
-          {"AUTH: ANONYMOUS SESSION → FIRESTORE onSnapshot"}
+          {"ABSTRACT LIVE FIRESTORE SIGNAL"}
         </Text>
         <Text
           position={[0, -0.014, 0.005]}
@@ -117,7 +118,7 @@ export function ReviewTrustNode({ subProgress }: ReviewTrustNodeProps) {
           anchorX="center"
           anchorY="middle"
         >
-          {"LIVE UPDATES ORDERED BY TIMESTAMP • CAPPED LIMIT(6)"}
+          {"ANONYMOUS AUTH • REAL-TIME onSnapshot"}
         </Text>
       </group>
     </group>

@@ -70,7 +70,7 @@ export function BrandNode({ subProgress }: BrandNodeProps) {
           anchorY="middle"
           letterSpacing={0.04}
         >
-          {"KARUR • TAMIL NADU • TEXTILE HUB"}
+          {"KARUR • TAMIL NADU"}
         </Text>
       </group>
     </group>

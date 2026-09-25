@@ -55,23 +55,24 @@ export function KarurLocationNode({ subProgress }: KarurLocationNodeProps) {
       {/* Location Metadata */}
       <group position={[0.08, 0, 0.015]}>
         <Text
-          position={[0, 0.028, 0]}
+          position={[0, 0.024, 0]}
           fontSize={0.024}
           color="#ffffff"
           anchorX="center"
           anchorY="middle"
           letterSpacing={0.06}
         >
-          {"FACILITY LOCATION // KARUR, TAMIL NADU"}
+          {"KARUR • TAMIL NADU"}
         </Text>
         <Text
           position={[0, -0.022, 0]}
-          fontSize={0.017}
+          fontSize={0.018}
           color="#d3e6fa"
           anchorX="center"
           anchorY="middle"
+          letterSpacing={0.04}
         >
-          {"GOOGLE MAPS PIN: 10.964567, 78.063197 • TEXTILE HUB OF SOUTH INDIA"}
+          {"GOOGLE MAPS FACILITY LOCATION"}
         </Text>
       </group>
     </group>

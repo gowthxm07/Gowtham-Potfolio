@@ -26,7 +26,8 @@ export function PrintingPressNode({ subProgress }: PrintingPressNodeProps) {
   const verifiedFinishing = [
     "HOT CUT",
     "COLD CUT",
-    "ULTRASONIC",
+    "ULTRASONIC CUT",
+    "SOFT-EDGE CUT",
     "CENTER FOLD",
     "END FOLD",
     "MITER FOLD",
@@ -78,17 +79,17 @@ export function PrintingPressNode({ subProgress }: PrintingPressNodeProps) {
 
       {/* Verified Finishing Techniques Matrix */}
       <group position={[0, 0, 0]}>
-        <mesh position={[0, 0, -0.005]}>
-          <planeGeometry args={[1.65, 0.18]} />
+        <mesh position={[0, -0.01, -0.005]}>
+          <planeGeometry args={[1.65, 0.22]} />
           <meshStandardMaterial color="#f6fafe" roughness={0.8} />
         </mesh>
-        <lineSegments position={[0, 0, 0]}>
-          <edgesGeometry args={[new THREE.BoxGeometry(1.65, 0.18, 0.005)]} />
+        <lineSegments position={[0, -0.01, 0]}>
+          <edgesGeometry args={[new THREE.BoxGeometry(1.65, 0.22, 0.005)]} />
           <lineBasicMaterial color="#bdd8f4" />
         </lineSegments>
 
         <Text
-          position={[0, 0.06, 0.01]}
+          position={[0, 0.08, 0.01]}
           fontSize={0.02}
           color="#0b1f3a"
           anchorX="center"
@@ -98,25 +99,25 @@ export function PrintingPressNode({ subProgress }: PrintingPressNodeProps) {
           {"VERIFIED CUTTING & FOLD FINISH CAPABILITIES"}
         </Text>
 
-        {/* 8 Chips (4x2 grid) */}
+        {/* 9 Chips (3x3 grid) */}
         {verifiedFinishing.map((finish, idx) => {
-          const col = idx % 4;
-          const row = Math.floor(idx / 4);
-          const x = -0.58 + col * 0.38;
-          const y = 0.015 - row * 0.045;
+          const col = idx % 3;
+          const row = Math.floor(idx / 3);
+          const x = -0.48 + col * 0.48;
+          const y = 0.035 - row * 0.046;
 
           return (
             <group key={finish} position={[x, y, 0.01]}>
               <mesh position={[0, 0, 0]}>
-                <planeGeometry args={[0.34, 0.035]} />
+                <planeGeometry args={[0.44, 0.036]} />
                 <meshStandardMaterial color="#eaf4ff" />
               </mesh>
               <lineSegments position={[0, 0, 0]}>
-                <edgesGeometry args={[new THREE.BoxGeometry(0.34, 0.035, 0.001)]} />
+                <edgesGeometry args={[new THREE.BoxGeometry(0.44, 0.036, 0.001)]} />
                 <lineBasicMaterial color="#1e6fb9" opacity={0.6} />
               </lineSegments>
               <Text
-                fontSize={0.017}
+                fontSize={0.016}
                 color="#0f4c81"
                 anchorX="center"
                 anchorY="middle"

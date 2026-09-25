@@ -29,7 +29,7 @@ export function ShreeLabelsTelemetry({ subProgress }: ShreeLabelsTelemetryProps)
         anchorY="middle"
         letterSpacing={0.06}
       >
-        {"ARCHITECTURE // TECH SPECIFICATION"}
+        {"VERIFIED TECHNICAL STACK"}
       </Text>
       <Text
         position={[0, 0.38, 0]}
@@ -37,8 +37,9 @@ export function ShreeLabelsTelemetry({ subProgress }: ShreeLabelsTelemetryProps)
         color="#94b8df"
         anchorX="center"
         anchorY="middle"
+        letterSpacing={0.04}
       >
-        {"ZERO-BUILD RUNTIME & CLOUD INTEGRATIONS"}
+        {"VANILLA WEB & CLOUD SERVICES"}
       </Text>
 
       {/* Main Glass Chassis */}
@@ -61,30 +62,21 @@ export function ShreeLabelsTelemetry({ subProgress }: ShreeLabelsTelemetryProps)
           anchorY="middle"
           letterSpacing={0.04}
         >
-          {"CORE PLATFORM STACK"}
+          {"CORE FRONTEND"}
         </Text>
         <Text
           position={[-0.34, -0.015, 0]}
-          fontSize={0.028}
+          fontSize={0.024}
           color="#ffffff"
           anchorX="left"
           anchorY="middle"
         >
-          {"HTML5 / CSS3 / ES6"}
-        </Text>
-        <Text
-          position={[0.34, -0.015, 0]}
-          fontSize={0.016}
-          color="#94b8df"
-          anchorX="right"
-          anchorY="middle"
-        >
-          {"ZERO-BUILD"}
+          {"HTML5 • CSS3 • ES6 JAVASCRIPT"}
         </Text>
       </group>
 
       {/* Spec 02: Real-Time Database */}
-      <group position={[0, 0.09, 0.01]}>
+      <group position={[0, 0.08, 0.01]}>
         <Text
           position={[-0.34, 0.03, 0]}
           fontSize={0.018}
@@ -93,30 +85,30 @@ export function ShreeLabelsTelemetry({ subProgress }: ShreeLabelsTelemetryProps)
           anchorY="middle"
           letterSpacing={0.04}
         >
-          {"DATABASE & FEEDBACK"}
+          {"CLOUD DATABASE & AUTH"}
         </Text>
         <Text
           position={[-0.34, -0.015, 0]}
-          fontSize={0.026}
+          fontSize={0.022}
           color="#ffffff"
           anchorX="left"
           anchorY="middle"
         >
-          {"FIRESTORE onSnapshot"}
+          {"FIREBASE FIRESTORE • ANONYMOUS AUTH"}
         </Text>
         <Text
-          position={[0.34, -0.015, 0]}
-          fontSize={0.016}
+          position={[-0.34, -0.05, 0]}
+          fontSize={0.018}
           color="#94b8df"
-          anchorX="right"
+          anchorX="left"
           anchorY="middle"
         >
-          {"ANON AUTH"}
+          {"REAL-TIME onSnapshot"}
         </Text>
       </group>
 
       {/* Spec 03: Communication & Map */}
-      <group position={[0, -0.04, 0.01]}>
+      <group position={[0, -0.07, 0.01]}>
         <Text
           position={[-0.34, 0.03, 0]}
           fontSize={0.018}
@@ -125,47 +117,29 @@ export function ShreeLabelsTelemetry({ subProgress }: ShreeLabelsTelemetryProps)
           anchorY="middle"
           letterSpacing={0.04}
         >
-          {"DISPATCH & LOCATION"}
+          {"SERVICES & HOSTING"}
         </Text>
         <Text
           position={[-0.34, -0.015, 0]}
-          fontSize={0.026}
+          fontSize={0.022}
           color="#ffffff"
           anchorX="left"
           anchorY="middle"
         >
-          {"EMAILJS + MAPS"}
-        </Text>
-        <Text
-          position={[0.34, -0.015, 0]}
-          fontSize={0.016}
-          color="#94b8df"
-          anchorX="right"
-          anchorY="middle"
-        >
-          {"VERCEL HOST"}
+          {"EMAILJS • GOOGLE MAPS • VERCEL"}
         </Text>
       </group>
 
-      {/* Performance Audit Notice */}
-      <group position={[0, -0.16, 0.01]}>
+      {/* Verified Notice */}
+      <group position={[0, -0.17, 0.01]}>
         <Text
-          position={[0, 0.02, 0]}
-          fontSize={0.016}
+          position={[0, 0.01, 0]}
+          fontSize={0.015}
           color="#d3e6fa"
           anchorX="center"
           anchorY="middle"
         >
-          {"• OEKO-TEX 100 • SEDEX ETHICAL AUDIT"}
-        </Text>
-        <Text
-          position={[0, -0.02, 0]}
-          fontSize={0.014}
-          color="#64748b"
-          anchorX="center"
-          anchorY="middle"
-        >
-          {"NO VERIFIED SYNTHETIC BENCHMARK IN REPO"}
+          {"ZERO-BUILD ARCHITECTURE • ZERO CUSTOM BACKEND"}
         </Text>
       </group>
     </group>

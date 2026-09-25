@@ -26,12 +26,12 @@ export function ProductSpecimenNode({ subProgress }: ProductSpecimenNodeProps) {
   });
 
   const sampleTitles = [
-    "Garment Label Sample 01",
-    "Custom Print Specimen 02",
-    "Apparel Tag Solution 03",
-    "Smooth Finish Care Tag 04",
-    "Vibrant Ink Micro-Print 05",
-    "Industrial Adhesive Tag 06",
+    "Label Specimen 01",
+    "Label Specimen 02",
+    "Label Specimen 03",
+    "Label Specimen 04",
+    "Label Specimen 05",
+    "Label Specimen 06",
   ];
 
   useFrame((state) => {

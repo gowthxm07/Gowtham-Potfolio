@@ -21,19 +21,19 @@ export function SustainabilityNode({ subProgress }: SustainabilityNodeProps) {
   const verifiedPillars = [
     {
       title: "ORGANIC COTTON OPTIONS",
-      desc: "Dedicated organic tape varieties crafted for natural apparel lines.",
+      desc: "Pure organic cotton varieties for eco-conscious textile lines.",
     },
     {
       title: "NATURAL MATERIAL CHOICES",
-      desc: "Pure fiber options reducing reliance on synthetic polymers.",
+      desc: "Natural fiber selections supporting sustainable brand identity.",
     },
     {
       title: "RESPONSIBLE MANUFACTURING",
-      desc: "Structured cutting workflows engineered to minimize production waste.",
+      desc: "Precision cutting and folding reducing material waste.",
     },
     {
-      title: "BUILT FOR LONG-TERM USE",
-      desc: "Wash-durability & color-fastness outlasting garment lifecycle.",
+      title: "LONG-TERM USE",
+      desc: "Durable label construction engineered to endure garment lifespan.",
     },
   ];
 
@@ -57,7 +57,7 @@ export function SustainabilityNode({ subProgress }: SustainabilityNodeProps) {
         anchorX="center"
         anchorY="middle"
       >
-        {"RESPONSIBLE TEXTILE LABELING PRACTICES IN KARUR"}
+        {"RESPONSIBLE TEXTILE LABELING PRACTICES"}
       </Text>
 
       {/* Main Glass Chassis */}

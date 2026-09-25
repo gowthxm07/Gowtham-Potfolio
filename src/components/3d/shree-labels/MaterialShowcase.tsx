@@ -106,13 +106,13 @@ export function MaterialShowcase({ subProgress }: MaterialShowcaseProps) {
         <group position={[0, 0, 0.015]}>
           <Text
             position={[-0.6, 0.06, 0]}
-            fontSize={0.028}
+            fontSize={0.026}
             color="#0b1f3a"
             anchorX="left"
             anchorY="middle"
             letterSpacing={0.05}
           >
-            {"OFFSET PRINTED"}
+            {"OFFSET PRINTED LABELS"}
           </Text>
           <Text
             position={[-0.6, 0.005, 0]}
@@ -122,7 +122,7 @@ export function MaterialShowcase({ subProgress }: MaterialShowcaseProps) {
             anchorY="middle"
             letterSpacing={0.04}
           >
-            {"HIGH-PRECISION COMMERCIAL OFFSET"}
+            {"CUSTOM LABELS & APPAREL TAGS"}
           </Text>
           <Text
             position={[-0.6, -0.055, 0]}

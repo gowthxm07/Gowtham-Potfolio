@@ -43,7 +43,7 @@ export function CertificationNode({ subProgress }: CertificationNodeProps) {
         anchorY="middle"
         letterSpacing={0.06}
       >
-        {"VERIFIED COMPLIANCE & STANDARDS"}
+        {"VERIFIED CERTIFICATIONS"}
       </Text>
       <Text
         position={[0, 0.38, 0]}
@@ -51,8 +51,9 @@ export function CertificationNode({ subProgress }: CertificationNodeProps) {
         color="#5b7d9e"
         anchorX="center"
         anchorY="middle"
+        letterSpacing={0.04}
       >
-        {"INTERNATIONAL SAFETY & ETHICAL AUDIT CERTIFICATES"}
+        {"OEKO-TEX® STANDARD 100 & SEDEX"}
       </Text>
 
       {/* Main Glass Chassis */}
@@ -85,7 +86,7 @@ export function CertificationNode({ subProgress }: CertificationNodeProps) {
         {/* Textual Metadata */}
         <group position={[0.1, 0, 0.01]}>
           <Text
-            position={[0, 0.05, 0]}
+            position={[0, 0.025, 0]}
             fontSize={0.022}
             color="#ffffff"
             anchorX="left"
@@ -95,31 +96,13 @@ export function CertificationNode({ subProgress }: CertificationNodeProps) {
             {"OEKO-TEX® STANDARD 100"}
           </Text>
           <Text
-            position={[0, 0.01, 0]}
-            fontSize={0.016}
+            position={[0, -0.025, 0]}
+            fontSize={0.018}
             color="#2f80ed"
             anchorX="left"
             anchorY="middle"
           >
-            {"CERT: 19.HIN.97140 Hohenstein HTTI"}
-          </Text>
-          <Text
-            position={[0, -0.03, 0]}
-            fontSize={0.015}
-            color="#d3e6fa"
-            anchorX="left"
-            anchorY="middle"
-          >
-            {"SCOPE: SATIN, TAFFETA, TWILL TAPE"}
-          </Text>
-          <Text
-            position={[0, -0.06, 0]}
-            fontSize={0.014}
-            color="#94b8df"
-            anchorX="left"
-            anchorY="middle"
-          >
-            {"TESTED FOR HARMFUL SUBSTANCES"}
+            {"19.HIN.97140 Hohenstein HTTI"}
           </Text>
         </group>
       </group>
@@ -144,41 +127,23 @@ export function CertificationNode({ subProgress }: CertificationNodeProps) {
         {/* Textual Metadata */}
         <group position={[0.1, 0, 0.01]}>
           <Text
-            position={[0, 0.05, 0]}
-            fontSize={0.022}
+            position={[0, 0.025, 0]}
+            fontSize={0.024}
             color="#ffffff"
             anchorX="left"
             anchorY="middle"
             letterSpacing={0.04}
           >
-            {"SEDEX (ETHICAL TRADE)"}
+            {"SEDEX"}
           </Text>
           <Text
-            position={[0, 0.01, 0]}
-            fontSize={0.016}
+            position={[0, -0.025, 0]}
+            fontSize={0.018}
             color="#2f80ed"
             anchorX="left"
             anchorY="middle"
           >
-            {"SUPPLIER ETHICAL DATA EXCHANGE"}
-          </Text>
-          <Text
-            position={[0, -0.03, 0]}
-            fontSize={0.015}
-            color="#d3e6fa"
-            anchorX="left"
-            anchorY="middle"
-          >
-            {"STANDARDS: WORKER WELFARE & SAFETY"}
-          </Text>
-          <Text
-            position={[0, -0.06, 0]}
-            fontSize={0.014}
-            color="#94b8df"
-            anchorX="left"
-            anchorY="middle"
-          >
-            {"RESPONSIBLE SUPPLY CHAIN AUDIT"}
+            {"ETHICAL SUPPLY CHAIN"}
           </Text>
         </group>
       </group>
