@@ -73,7 +73,7 @@ export function ReceptionistTelemetry({ subProgress }: ReceptionistTelemetryProp
     <group ref={groupRef} position={[-1.2, 0.24, -8]}>
       {/* 01. TELEMETRY BADGE BACKPLATE */}
       <mesh position={[0, 0, -0.01]}>
-        <boxGeometry args={[0.72, 0.32, 0.015]} />
+        <boxGeometry args={[0.84, 0.46, 0.015]} />
         <meshStandardMaterial
           color="#06130a"
           roughness={0.3}
@@ -83,83 +83,126 @@ export function ReceptionistTelemetry({ subProgress }: ReceptionistTelemetryProp
 
       {/* Frame Border Seam */}
       <mesh position={[0, 0, -0.012]}>
-        <boxGeometry args={[0.74, 0.34, 0.004]} />
+        <boxGeometry args={[0.86, 0.48, 0.004]} />
         <meshBasicMaterial color="#22c55e" opacity={0.4} transparent />
       </mesh>
 
       {/* Header */}
       <Text
-        position={[-0.32, 0.11, 0.01]}
+        position={[-0.38, 0.18, 0.01]}
         fontSize={0.022}
         color="#86efac"
         anchorX="left"
         anchorY="middle"
         letterSpacing={0.06}
       >
-        {"SYSTEM TELEMETRY"}
+        {"SYSTEM LATENCY TELEMETRY"}
       </Text>
 
-      {/* Metric 1: Acoustic Turnaround */}
+      {/* Metric 1: Deterministic Engine Latency */}
       <Text
-        position={[-0.32, 0.05, 0.01]}
-        fontSize={0.019}
+        position={[-0.38, 0.11, 0.01]}
+        fontSize={0.018}
         color="#9ca3af"
         anchorX="left"
         anchorY="middle"
       >
-        {"ACOUSTIC TURNAROUND:"}
+        {"FAST INTENT ROUTER:"}
       </Text>
       <Text
-        position={[0.32, 0.05, 0.01]}
-        fontSize={0.02}
+        position={[0.38, 0.11, 0.01]}
+        fontSize={0.019}
         color="#4ade80"
         anchorX="right"
         anchorY="middle"
         letterSpacing={0.04}
       >
-        {"SUB-SECOND"}
+        {"< 2ms"}
       </Text>
 
-      {/* Metric 2: Runtime */}
+      {/* Metric 2: DB & Tool Latency */}
       <Text
-        position={[-0.32, -0.01, 0.01]}
-        fontSize={0.019}
+        position={[-0.38, 0.05, 0.01]}
+        fontSize={0.018}
         color="#9ca3af"
         anchorX="left"
         anchorY="middle"
       >
-        {"INFERENCE RUNTIME:"}
+        {"PRISMA DB TOOLS:"}
       </Text>
       <Text
-        position={[0.32, -0.01, 0.01]}
-        fontSize={0.02}
+        position={[0.38, 0.05, 0.01]}
+        fontSize={0.019}
+        color="#86efac"
+        anchorX="right"
+        anchorY="middle"
+        letterSpacing={0.04}
+      >
+        {"< 80ms"}
+      </Text>
+
+      {/* Metric 3: STT Latency */}
+      <Text
+        position={[-0.38, -0.01, 0.01]}
+        fontSize={0.018}
+        color="#9ca3af"
+        anchorX="left"
+        anchorY="middle"
+      >
+        {"WHISPER.CPP STT:"}
+      </Text>
+      <Text
+        position={[0.38, -0.01, 0.01]}
+        fontSize={0.019}
         color="#ffffff"
         anchorX="right"
         anchorY="middle"
         letterSpacing={0.04}
       >
-        {"LOCAL OLLAMA"}
+        {"~1.4s CPU"}
       </Text>
 
-      {/* Metric 3: Logging */}
+      {/* Metric 4: TTS Latency */}
       <Text
-        position={[-0.32, -0.07, 0.01]}
-        fontSize={0.019}
+        position={[-0.38, -0.07, 0.01]}
+        fontSize={0.018}
         color="#9ca3af"
         anchorX="left"
         anchorY="middle"
       >
-        {"SECURITY / LOGGING:"}
+        {"PIPER NEURAL TTS:"}
       </Text>
       <Text
-        position={[0.32, -0.07, 0.01]}
-        fontSize={0.02}
-        color="#22c55e"
+        position={[0.38, -0.07, 0.01]}
+        fontSize={0.019}
+        color="#ffffff"
         anchorX="right"
         anchorY="middle"
         letterSpacing={0.04}
       >
-        {"PRIVACY CONSCIOUS"}
+        {"~1.6s CPU"}
+      </Text>
+
+      {/* Metric 5: Total Voice Roundtrip */}
+      <Text
+        position={[-0.38, -0.15, 0.01]}
+        fontSize={0.017}
+        color="#22c55e"
+        anchorX="left"
+        anchorY="middle"
+        letterSpacing={0.03}
+      >
+        {"DETERMINISTIC VOICE ROUNDTRIP:"}
+      </Text>
+      <Text
+        position={[0.38, -0.15, 0.01]}
+        fontSize={0.018}
+        color="#4ade80"
+        anchorX="right"
+        anchorY="middle"
+        letterSpacing={0.03}
+      >
+        {"~2.4s – 4.5s"}
       </Text>
     </group>
   );

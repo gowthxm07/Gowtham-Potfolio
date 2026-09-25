@@ -5,9 +5,9 @@ export const projectsData: Project[] = [
     id: "ai-smart-receptionist",
     title: "AI-Powered Smart Receptionist Platform",
     shortDescription:
-      "Intelligent conversational front-desk platform automating reception workflows with low-latency voice synthesis and comprehension.",
+      "Autonomous conversational receptionist platform automating appointment bookings with local STT/TTS runtimes and deterministic dialogue routing.",
     fullDescription:
-      "A next-generation receptionist system designed to handle inbound visitor and call interactions autonomously. Features modular integration with real-time speech processing, AI intent routing, and dynamic response generation for seamless front-desk operations.",
+      "A multi-tenant receptionist platform designed to handle inbound visitor and call interactions autonomously. Features modular local speech processing (Whisper.cpp and Piper TTS), deterministic fast intent routing (< 2ms), local Ollama LLM fallback, session isolation, and transactional PostgreSQL appointment booking.",
     technologies: [
       "Next.js",
       "React",
@@ -27,9 +27,10 @@ export const projectsData: Project[] = [
     featured: true,
     visualConcept: "Phone Ingest → Voice Waveform → Ollama Core → PostgreSQL → Appointment Machine",
     metrics: [
-      "Sub-second acoustic-to-text turnaround",
+      "Deterministic engine latency: < 2ms (< 80ms DB tools)",
+      "Speech runtimes: Whisper STT ~1.4s | Piper TTS ~1.6s",
+      "Total deterministic voice roundtrip: ~2.4s – 4.5s",
       "Session isolation & multi-tenant architecture",
-      "Deterministic appointment state progression",
     ],
     role: "Full-Stack AI Developer",
   },

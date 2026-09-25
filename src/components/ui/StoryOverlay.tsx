@@ -237,7 +237,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
 
           <p className="text-xs md:text-sm text-slate-300 mb-3.5 leading-relaxed font-sans">
             {selectedProject.id === "ai-smart-receptionist"
-              ? "Full-stack AI receptionist platform designed around real-time conversational interaction, multi-tenant data isolation and low-latency AI responses."
+              ? "Autonomous multi-tenant conversational receptionist platform automating appointment bookings with local Whisper.cpp and Piper speech runtimes, deterministic dialogue state management (< 2ms), and PostgreSQL persistence."
               : selectedProject.shortDescription}
           </p>
 
@@ -272,7 +272,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
 
           {/* Key Metrics / Highlights */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3.5">
-            {selectedProject.metrics.slice(0, 2).map((m: string, i: number) => (
+            {selectedProject.metrics.slice(0, 4).map((m: string, i: number) => (
               <div key={i} className="p-2 rounded bg-surface-card border border-surface-border text-[11px] text-slate-300 font-sans">
                 <span className="text-emerald-400 font-mono block text-[9px] uppercase">
                   Telemetry 0{i + 1}
