@@ -22,7 +22,7 @@ interface StoryCartoonifierObjectProps {
 
 export function StoryCartoonifierObject({
   progress,
-  range = [0.36, 0.42],
+  range = [0.30, 0.35],
   anchorX = -0.85,
 }: StoryCartoonifierObjectProps) {
   const groupRef = useRef<THREE.Group>(null);

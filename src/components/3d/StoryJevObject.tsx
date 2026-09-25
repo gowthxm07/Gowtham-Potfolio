@@ -24,7 +24,7 @@ interface StoryJevObjectProps {
 
 export function StoryJevObject({
   progress,
-  range = [0.4067, 0.44],
+  range = [0.45, 0.50],
   anchorX = -0.85,
 }: StoryJevObjectProps) {
   const groupRef = useRef<THREE.Group>(null);

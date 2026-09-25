@@ -20,7 +20,7 @@ interface StoryReceptionistObjectProps {
 
 export function StoryReceptionistObject({
   progress,
-  range = [0.24, 0.34],
+  range = [0.20, 0.25],
   anchorX = -0.85,
 }: StoryReceptionistObjectProps) {
   const groupRef = useRef<THREE.Group>(null);

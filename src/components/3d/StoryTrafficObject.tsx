@@ -17,7 +17,7 @@ interface StoryTrafficObjectProps {
 
 export function StoryTrafficObject({
   progress,
-  range = [0.33, 0.42],
+  range = [0.25, 0.30],
   anchorX = -0.85,
 }: StoryTrafficObjectProps) {
   const groupRef = useRef<THREE.Group>(null);

@@ -17,8 +17,8 @@ export function StoryContactObject({ progress }: StoryContactObjectProps) {
   const ring3Ref = useRef<THREE.Mesh>(null);
   const coreRef = useRef<THREE.Mesh>(null);
 
-  // Section 08: Range [0.90, 1.00]
-  const startP = 0.88;
+  // Section 08: Range [0.91, 1.00]
+  const startP = 0.89;
   const peakStart = 0.93;
 
   useFrame((state, delta) => {

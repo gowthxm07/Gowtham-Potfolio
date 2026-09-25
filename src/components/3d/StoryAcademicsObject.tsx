@@ -14,10 +14,10 @@ export function StoryAcademicsObject({ progress }: StoryAcademicsObjectProps) {
   const groupRef = useRef<THREE.Group>(null);
   const spineRef = useRef<THREE.Mesh>(null);
 
-  const startP = 0.38;
-  const peakStart = 0.44;
-  const peakEnd = 0.50;
-  const endP = 0.56;
+  const startP = 0.47;
+  const peakStart = 0.51;
+  const peakEnd = 0.57;
+  const endP = 0.61;
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;

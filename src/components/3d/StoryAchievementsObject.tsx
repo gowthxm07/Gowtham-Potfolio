@@ -15,11 +15,11 @@ export function StoryAchievementsObject({ progress }: StoryAchievementsObjectPro
   const gemRef = useRef<THREE.Mesh>(null);
   const ringRef = useRef<THREE.Mesh>(null);
 
-  // Section 06: Range [0.68, 0.80]
-  const startP = 0.66;
-  const peakStart = 0.71;
-  const peakEnd = 0.77;
-  const endP = 0.82;
+  // Section 06: Range [0.72, 0.82]
+  const startP = 0.70;
+  const peakStart = 0.74;
+  const peakEnd = 0.80;
+  const endP = 0.84;
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;

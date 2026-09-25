@@ -34,17 +34,17 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
 
   // Automatically sync active project tab with scroll progress when in projects section
   useEffect(() => {
-    if (progress >= 0.24 && progress < 0.2733) {
+    if (progress >= 0.20 && progress < 0.25) {
       setActiveProjectIdx(0);
-    } else if (progress >= 0.2733 && progress < 0.3067) {
+    } else if (progress >= 0.25 && progress < 0.30) {
       setActiveProjectIdx(1);
-    } else if (progress >= 0.3067 && progress < 0.34) {
+    } else if (progress >= 0.30 && progress < 0.35) {
       setActiveProjectIdx(2);
-    } else if (progress >= 0.34 && progress < 0.3733) {
+    } else if (progress >= 0.35 && progress < 0.40) {
       setActiveProjectIdx(3);
-    } else if (progress >= 0.3733 && progress < 0.4067) {
+    } else if (progress >= 0.40 && progress < 0.45) {
       setActiveProjectIdx(4);
-    } else if (progress >= 0.4067 && progress <= 0.44) {
+    } else if (progress >= 0.45 && progress <= 0.50) {
       setActiveProjectIdx(5);
     }
   }, [progress]);
@@ -76,14 +76,14 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
   };
 
   // 8 Continuous Section Interpolation Ranges
-  const introStyle = getSectionStyle(-0.05, 0.0, 0.09, 0.13);
-  const identityStyle = getSectionStyle(0.11, 0.15, 0.22, 0.25);
-  const projectsStyle = getSectionStyle(0.24, 0.26, 0.42, 0.45);
-  const academicsStyle = getSectionStyle(0.43, 0.46, 0.52, 0.56);
-  const skillsStyle = getSectionStyle(0.53, 0.57, 0.65, 0.69);
-  const achievementsStyle = getSectionStyle(0.67, 0.71, 0.78, 0.82);
-  const resumeStyle = getSectionStyle(0.79, 0.83, 0.88, 0.92);
-  const contactStyle = getSectionStyle(0.89, 0.93, 1.0, 1.05);
+  const introStyle = getSectionStyle(-0.05, 0.0, 0.08, 0.11);
+  const identityStyle = getSectionStyle(0.09, 0.12, 0.18, 0.21);
+  const projectsStyle = getSectionStyle(0.19, 0.22, 0.48, 0.51);
+  const academicsStyle = getSectionStyle(0.49, 0.52, 0.58, 0.61);
+  const skillsStyle = getSectionStyle(0.59, 0.62, 0.70, 0.73);
+  const achievementsStyle = getSectionStyle(0.71, 0.74, 0.80, 0.83);
+  const resumeStyle = getSectionStyle(0.81, 0.84, 0.89, 0.92);
+  const contactStyle = getSectionStyle(0.90, 0.93, 1.0, 1.05);
 
   const selectedProject = projectsData[activeProjectIdx] || projectsData[0];
   const competitiveAch = achievementsData.find((a) => a.category === "Competitive Programming");

@@ -28,7 +28,7 @@ interface StoryLaborLinkObjectProps {
 
 export function StoryLaborLinkObject({
   progress,
-  range = [0.39, 0.44],
+  range = [0.35, 0.40],
   anchorX = -0.85,
 }: StoryLaborLinkObjectProps) {
   const groupRef = useRef<THREE.Group>(null);

@@ -15,11 +15,11 @@ export function StorySkillsConstellation({ progress }: StorySkillsConstellationP
   const coreRef = useRef<THREE.Mesh>(null);
   const ringGroupRef = useRef<THREE.Group>(null);
 
-  // Section 05: Range [0.54, 0.68]
-  const startP = 0.52;
-  const peakStart = 0.57;
-  const peakEnd = 0.65;
-  const endP = 0.70;
+  // Section 05: Range [0.60, 0.72]
+  const startP = 0.58;
+  const peakStart = 0.62;
+  const peakEnd = 0.69;
+  const endP = 0.74;
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;

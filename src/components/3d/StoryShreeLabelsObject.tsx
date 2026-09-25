@@ -23,7 +23,7 @@ interface StoryShreeLabelsObjectProps {
 
 export function StoryShreeLabelsObject({
   progress,
-  range = [0.40, 0.44],
+  range = [0.40, 0.45],
   anchorX = -0.85,
 }: StoryShreeLabelsObjectProps) {
   const groupRef = useRef<THREE.Group>(null);

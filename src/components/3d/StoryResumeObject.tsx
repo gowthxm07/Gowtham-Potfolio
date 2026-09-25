@@ -14,10 +14,10 @@ export function StoryResumeObject({ progress }: StoryResumeObjectProps) {
   const groupRef = useRef<THREE.Group>(null);
   const scanLineRef = useRef<THREE.Mesh>(null);
 
-  // Section 07: Range [0.80, 0.90]
-  const startP = 0.78;
+  // Section 07: Range [0.82, 0.91]
+  const startP = 0.80;
   const peakStart = 0.83;
-  const peakEnd = 0.88;
+  const peakEnd = 0.89;
   const endP = 0.92;
 
   useFrame((state, delta) => {

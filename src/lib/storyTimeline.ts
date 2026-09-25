@@ -21,7 +21,7 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     badge: "INITIALIZE // CORE",
     title: "Gowtham Hari S",
     subtitle: "AI, Systems & Software Engineering Portfolio",
-    range: [0.0, 0.12],
+    range: [0.0, 0.10],
     camera: {
       startPos: [0, 1.4, 7.2],
       endPos: [0, 1.1, 5.8],
@@ -36,7 +36,7 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     badge: "02 // IDENTITY",
     title: "Identity & Profile",
     subtitle: "B.Tech Computer Science • Systems & AI Engineer",
-    range: [0.12, 0.24],
+    range: [0.10, 0.20],
     camera: {
       startPos: [-0.6, 1.0, 5.4],
       endPos: [-0.85, 0.9, 3.6],
@@ -51,7 +51,7 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     badge: "03 // FEATURED WORK",
     title: "Engineering Systems",
     subtitle: "AI Voice Middleware, Computer Vision, Labor Marketplace, Corporate Systems & Smart Home Decision Engine",
-    range: [0.24, 0.44],
+    range: [0.20, 0.50],
     camera: {
       startPos: [0.74, 0.95, 4.4],
       endPos: [0.82, 0.90, 3.9],
@@ -66,7 +66,7 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     badge: "04 // ACADEMIC JOURNEY",
     title: "Education & Progression",
     subtitle: "Amrita Vishwa Vidhyapeetham • GPA 8.12",
-    range: [0.44, 0.54],
+    range: [0.50, 0.60],
     camera: {
       startPos: [-0.65, 1.0, 4.8],
       endPos: [-0.8, 0.9, 3.4],
@@ -81,7 +81,7 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     badge: "05 // SKILLS MATRIX",
     title: "Technology & Tools",
     subtitle: "Full-Stack, AI/ML, Testing & Engineering Constellation",
-    range: [0.54, 0.68],
+    range: [0.60, 0.72],
     camera: {
       startPos: [0.75, 1.0, 4.8],
       endPos: [0.85, 0.9, 3.4],
@@ -96,7 +96,7 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     badge: "06 // ACHIEVEMENTS",
     title: "Competitive Standing",
     subtitle: "LeetCode Knight [1868] & Hackathon Accolades",
-    range: [0.68, 0.8],
+    range: [0.72, 0.82],
     camera: {
       startPos: [-0.6, 1.0, 4.6],
       endPos: [-0.8, 0.9, 3.2],
@@ -111,7 +111,7 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     badge: "07 // OFFICIAL RESUME",
     title: "Official Resume",
     subtitle: "Verified Technical Credentials & Direct PDF Access",
-    range: [0.8, 0.9],
+    range: [0.82, 0.91],
     camera: {
       startPos: [0.65, 0.95, 4.4],
       endPos: [0.75, 0.9, 3.2],
@@ -126,7 +126,7 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     badge: "08 // CONNECT WITH ME",
     title: "Connect With Me",
     subtitle: "Initiate Communication & Technical Collaboration",
-    range: [0.9, 1.0],
+    range: [0.91, 1.0],
     camera: {
       startPos: [0, 1.2, 5.0],
       endPos: [0, 1.0, 4.2],
