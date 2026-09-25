@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { projectsData } from "@/data/projects";
 import { profileData } from "@/data/profile";
 import { achievementsData } from "@/data/achievements";
@@ -31,6 +31,15 @@ interface StoryOverlayProps {
 export function StoryOverlay({ progress }: StoryOverlayProps) {
   const [activeProjectIdx, setActiveProjectIdx] = useState(0);
   const [activeSkillCategory, setActiveSkillCategory] = useState("AI / ML / GenAI");
+
+  // Automatically sync active project tab with scroll progress when in projects section
+  useEffect(() => {
+    if (progress >= 0.24 && progress < 0.33) {
+      setActiveProjectIdx(0);
+    } else if (progress >= 0.33 && progress <= 0.42) {
+      setActiveProjectIdx(1);
+    }
+  }, [progress]);
 
   // Helper to calculate opacity and subtle Y offset for each story section
   const getSectionStyle = (start: number, peakStart: number, peakEnd: number, end: number) => {
@@ -200,7 +209,9 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
           <div className="flex items-center justify-between mb-2">
             <div className="text-[11px] font-mono text-emerald-400 tracking-widest uppercase flex items-center gap-2">
               <Code2 className="w-3.5 h-3.5" />
-              03 // FEATURED WORK
+              {selectedProject.id === "ai-smart-receptionist"
+                ? "01 // AI & REAL-TIME SYSTEMS"
+                : "02 // COMPUTER VISION & EDGE"}
             </div>
             {/* Project Switcher Tabs */}
             <div className="flex gap-1.5 bg-surface-card p-1 rounded-lg border border-surface-border">
@@ -224,12 +235,35 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
             {selectedProject.title}
           </h2>
 
-          <p className="text-xs md:text-sm text-slate-300 mb-4 leading-relaxed font-sans">
-            {selectedProject.shortDescription}
+          <p className="text-xs md:text-sm text-slate-300 mb-3.5 leading-relaxed font-sans">
+            {selectedProject.id === "ai-smart-receptionist"
+              ? "Full-stack AI receptionist platform designed around real-time conversational interaction, multi-tenant data isolation and low-latency AI responses."
+              : selectedProject.shortDescription}
           </p>
 
+          {/* Architecture Pipeline Indicator for AI Receptionist */}
+          {selectedProject.id === "ai-smart-receptionist" && (
+            <div className="mb-3.5 p-2 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
+              <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                SYSTEM ARCHITECTURE PIPELINE
+              </div>
+              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">PHONE</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">VOICE</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">AI CORE</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">DATABASE</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">APPOINTMENT</span>
+              </div>
+            </div>
+          )}
+
           {/* Spatial Concept Tag */}
-          <div className="p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-800/40 text-[11px] font-mono text-emerald-300 mb-4">
+          <div className="p-2.5 rounded-lg bg-surface-card border border-surface-border text-[11px] font-mono text-emerald-300 mb-3.5">
             <span className="text-slate-400 block text-[9px] uppercase tracking-wider mb-0.5">
               3D Spatial Anchor:
             </span>
@@ -237,7 +271,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
           </div>
 
           {/* Key Metrics / Highlights */}
-          <div className="grid grid-cols-2 gap-2 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3.5">
             {selectedProject.metrics.slice(0, 2).map((m: string, i: number) => (
               <div key={i} className="p-2 rounded bg-surface-card border border-surface-border text-[11px] text-slate-300 font-sans">
                 <span className="text-emerald-400 font-mono block text-[9px] uppercase">

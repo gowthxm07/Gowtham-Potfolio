@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
 import { StoryEnvironment } from "./StoryEnvironment";
 import { StoryIdentityObject } from "./StoryIdentityObject";
+import { StoryReceptionistObject } from "./StoryReceptionistObject";
 import { StoryPrototypeObject } from "./StoryPrototypeObject";
 import { StoryAcademicsObject } from "./StoryAcademicsObject";
 import { StorySkillsConstellation } from "./StorySkillsConstellation";
@@ -44,17 +45,17 @@ export function Scene({ progress, isMobile = false, dpr = 1.5 }: SceneProps) {
           {/* 02. Identity & Verified Portrait Monolith */}
           <StoryIdentityObject progress={progress} />
 
-          {/* 03. Featured Engineering Systems (AI Voice Core & Traffic CV Radar) */}
-          <StoryPrototypeObject
+          {/* 03. Featured Engineering Systems: AI Smart Receptionist Experience */}
+          <StoryReceptionistObject
             progress={progress}
-            type="receptionist"
-            range={[0.24, 0.33]}
+            range={[0.24, 0.34]}
             anchorX={-0.85}
           />
+          {/* Section 03 Second Prototype: Traffic Computer Vision Spatial Radar */}
           <StoryPrototypeObject
             progress={progress}
             type="traffic"
-            range={[0.32, 0.41]}
+            range={[0.33, 0.41]}
             anchorX={-0.85}
           />
 
