@@ -34,14 +34,16 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
 
   // Automatically sync active project tab with scroll progress when in projects section
   useEffect(() => {
-    if (progress >= 0.24 && progress < 0.29) {
+    if (progress >= 0.24 && progress < 0.28) {
       setActiveProjectIdx(0);
-    } else if (progress >= 0.29 && progress < 0.34) {
+    } else if (progress >= 0.28 && progress < 0.32) {
       setActiveProjectIdx(1);
-    } else if (progress >= 0.34 && progress < 0.39) {
+    } else if (progress >= 0.32 && progress < 0.36) {
       setActiveProjectIdx(2);
-    } else if (progress >= 0.39 && progress <= 0.44) {
+    } else if (progress >= 0.36 && progress < 0.40) {
       setActiveProjectIdx(3);
+    } else if (progress >= 0.40 && progress <= 0.44) {
+      setActiveProjectIdx(4);
     }
   }, [progress]);
 
@@ -73,9 +75,9 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
 
   // 8 Continuous Section Interpolation Ranges
   const introStyle = getSectionStyle(-0.05, 0.0, 0.09, 0.13);
-  const identityStyle = getSectionStyle(0.11, 0.15, 0.22, 0.26);
-  const projectsStyle = getSectionStyle(0.24, 0.27, 0.41, 0.45);
-  const academicsStyle = getSectionStyle(0.42, 0.46, 0.52, 0.56);
+  const identityStyle = getSectionStyle(0.11, 0.15, 0.22, 0.25);
+  const projectsStyle = getSectionStyle(0.24, 0.26, 0.42, 0.45);
+  const academicsStyle = getSectionStyle(0.43, 0.46, 0.52, 0.56);
   const skillsStyle = getSectionStyle(0.53, 0.57, 0.65, 0.69);
   const achievementsStyle = getSectionStyle(0.67, 0.71, 0.78, 0.82);
   const resumeStyle = getSectionStyle(0.79, 0.83, 0.88, 0.92);
@@ -211,7 +213,11 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
       >
         <div className="bg-surface/85 border border-surface-border backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-lg shadow-2xl">
           <div className="flex items-center justify-between mb-2">
-            <div className="text-[11px] font-mono text-emerald-400 tracking-widest uppercase flex items-center gap-2">
+            <div
+              className={`text-[11px] font-mono tracking-widest uppercase flex items-center gap-2 ${
+                selectedProject.id === "shree-labels-corporate" ? "text-blue-400" : "text-emerald-400"
+              }`}
+            >
               <Code2 className="w-3.5 h-3.5" />
               {selectedProject.id === "ai-smart-receptionist"
                 ? "01 // AI & REAL-TIME SYSTEMS"
@@ -219,17 +225,21 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
                 ? "02 // COMPUTER VISION & EDGE"
                 : selectedProject.id === "edge-video-cartoonifier"
                 ? "03 // PRIVACY-PRESERVING EDGE VIDEO CARTOONIFIER"
-                : "04 // TWO-SIDED INDUSTRIAL LABOR MARKETPLACE"}
+                : selectedProject.id === "laborlink"
+                ? "04 // TWO-SIDED INDUSTRIAL LABOR MARKETPLACE"
+                : "05 // CORPORATE MANUFACTURING & PRINTING"}
             </div>
             {/* Project Switcher Tabs */}
             <div className="flex gap-1.5 bg-surface-card p-1 rounded-lg border border-surface-border">
-              {projectsData.map((p, idx) => (
+              {projectsData.slice(0, 5).map((p, idx) => (
                 <button
                   key={p.id}
                   onClick={() => setActiveProjectIdx(idx)}
                   className={`text-[10px] font-mono px-2 py-0.5 rounded transition-colors ${
                     activeProjectIdx === idx
-                      ? "bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40"
+                      ? idx === 4
+                        ? "bg-blue-500/20 text-blue-300 font-bold border border-blue-500/40"
+                        : "bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40"
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
@@ -341,8 +351,39 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
             </div>
           )}
 
+          {/* Architecture Pipeline Indicator for Shree Labels */}
+          {selectedProject.id === "shree-labels-corporate" && (
+            <div className="mb-3.5 p-2 rounded-lg bg-blue-950/20 border border-blue-800/40">
+              <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+                MANUFACTURING & SPECIMEN PIPELINE
+              </div>
+              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
+                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">BRAND</span>
+                <span className="text-blue-400">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">MATERIAL</span>
+                <span className="text-blue-400">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">PRINT</span>
+                <span className="text-blue-400">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">FINISH</span>
+                <span className="text-blue-400">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">SUSTAINABILITY</span>
+                <span className="text-blue-400">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">CERTIFICATION</span>
+                <span className="text-blue-400">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">TRUST</span>
+                <span className="text-blue-400">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/60 font-semibold">QUOTE</span>
+              </div>
+            </div>
+          )}
+
           {/* Spatial Concept Tag */}
-          <div className="p-2.5 rounded-lg bg-surface-card border border-surface-border text-[11px] font-mono text-emerald-300 mb-3.5">
+          <div
+            className={`p-2.5 rounded-lg bg-surface-card border border-surface-border text-[11px] font-mono mb-3.5 ${
+              selectedProject.id === "shree-labels-corporate" ? "text-blue-300" : "text-emerald-300"
+            }`}
+          >
             <span className="text-slate-400 block text-[9px] uppercase tracking-wider mb-0.5">
               3D Spatial Anchor:
             </span>
@@ -353,7 +394,11 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3.5">
             {selectedProject.metrics.slice(0, 4).map((m: string, i: number) => (
               <div key={i} className="p-2 rounded bg-surface-card border border-surface-border text-[11px] text-slate-300 font-sans">
-                <span className="text-emerald-400 font-mono block text-[9px] uppercase">
+                <span
+                  className={`font-mono block text-[9px] uppercase ${
+                    selectedProject.id === "shree-labels-corporate" ? "text-blue-400" : "text-emerald-400"
+                  }`}
+                >
                   Telemetry 0{i + 1}
                 </span>
                 {m}
@@ -373,15 +418,32 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
             ))}
           </div>
 
-          <a
-            href={selectedProject.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 transition-colors"
-          >
-            <ExternalLink className="w-3.5 h-3.5" />
-            Inspect Repository
-          </a>
+          <div className="flex items-center gap-3">
+            <a
+              href={selectedProject.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono transition-colors ${
+                selectedProject.id === "shree-labels-corporate"
+                  ? "bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/40 text-blue-300"
+                  : "bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300"
+              }`}
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              Inspect Repository
+            </a>
+            {selectedProject.liveUrl && (
+              <a
+                href={selectedProject.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/40 text-blue-300 transition-colors"
+              >
+                <Globe className="w-3.5 h-3.5" />
+                Live Production
+              </a>
+            )}
+          </div>
         </div>
       </section>
 
