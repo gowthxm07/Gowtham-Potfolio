@@ -43,9 +43,11 @@ export function Scene({ progress, isMobile = false, dpr = 1.5 }: SceneProps) {
           far: 60,
         }}
       >
-        <Suspense fallback={null}>
-          <StoryEnvironment />
+        <color attach="background" args={["#030705"]} />
+        <StoryEnvironment />
+        <StoryCameraController progress={progress} isMobile={isMobile} />
 
+        <Suspense fallback={null}>
           {/* 02. Identity & Verified Portrait Monolith */}
           <StoryIdentityObject progress={progress} />
 
@@ -101,9 +103,6 @@ export function Scene({ progress, isMobile = false, dpr = 1.5 }: SceneProps) {
 
           {/* 08. Direct Communication & Signal Array */}
           <StoryContactObject progress={progress} />
-
-          {/* Continuous Camera Controller along Spline */}
-          <StoryCameraController progress={progress} isMobile={isMobile} />
         </Suspense>
       </Canvas>
     </div>

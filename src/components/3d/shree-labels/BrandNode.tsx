@@ -48,7 +48,6 @@ export function BrandNode({ subProgress }: BrandNodeProps) {
           anchorX="center"
           anchorY="middle"
           letterSpacing={0.08}
-          font="/fonts/Inter-Bold.woff"
         >
           {"SHREE LABELS"}
         </Text>
