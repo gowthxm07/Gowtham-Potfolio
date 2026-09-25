@@ -107,16 +107,16 @@ export function SimulationEngineNode({ subProgress }: SimulationEngineNodeProps)
           anchorX="left"
           anchorY="middle"
         >
-          {"✓ REPOSITORY COMMIT:"}
+          {"✓ 18-DEVICE STATE VALIDATION:"}
         </Text>
         <Text
-          position={[0.26, 0, 0]}
+          position={[0.34, 0, 0]}
           fontSize={0.019}
           color="#f8fafc"
           anchorX="left"
           anchorY="middle"
         >
-          {"18 Devices In-Memory State Synchronized"}
+          {"18 Virtual Devices In-Memory Synchronized"}
         </Text>
       </group>
 

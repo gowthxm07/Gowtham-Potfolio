@@ -166,7 +166,7 @@ export const projectsData: Project[] = [
     shortDescription:
       "A virtual smart-home digital twin connected to a structured decision engine using TypeSafe Jev System One API, deterministic policy execution, redundant action elimination, and provider-neutral evaluation.",
     fullDescription:
-      "Engineered an in-memory virtual smart-home digital twin and probabilistic automation engine (HomeMind). Models 18 virtual smart devices across 5 simulated rooms (Living Room, Bedroom, Kitchen, Entrance, Study) spanning light, climate, security, curtain, entertainment, and power categories. Evaluates natural language user intents through TypeSafe Jev System One API (/v1/systemone) using Noul (binary probability) and Choice (categorical distribution) primitives. Integrates deterministic policy dispatch, in-memory capability and boundary validation, policy-level redundant action elimination (skippedRedundantActions), and a provider-neutral benchmark suite comparing Jev with local Ollama models across 36 controlled test scenarios with SHA-256 state fingerprinting.",
+      "Engineered an in-memory virtual smart-home digital twin and probabilistic automation engine (HomeMind). Models 18 virtual smart devices across 5 simulated rooms (Living Room, Bedroom, Kitchen, Entrance, Study) spanning light, climate, security, curtain, entertainment, and power categories. Evaluates natural language user intents through TypeSafe Jev System One API (/v1/systemone) using Noul (binary probability) and Choice (categorical distribution) primitives. Integrates deterministic policy dispatch, in-memory capability and boundary validation, policy-level redundant action elimination (avoids redundant state mutations and unnecessary actions when the target state already matches the current state), and a provider-neutral DecisionEngine abstraction supporting TypeSafe Jev and local Ollama across 36 controlled test scenarios with SHA-256 state fingerprinting.",
     technologies: [
       "Next.js",
       "TypeScript",
@@ -187,7 +187,7 @@ export const projectsData: Project[] = [
       "Virtual twin: 18 devices across 5 rooms (100% in-memory simulation)",
       "Decision core: TypeSafe Jev System One (/v1/systemone)",
       "Structured inference: Noul (binary) & Choice (categorical) primitives",
-      "Automated testing: 19 Vitest test suites / 181 tests passed (100%)",
+      "Automated testing: 19 Vitest test suites / 181 tests passed",
     ],
     role: "Full-Stack AI & Systems Engineer",
   },

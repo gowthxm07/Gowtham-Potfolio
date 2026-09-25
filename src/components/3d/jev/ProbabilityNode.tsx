@@ -41,20 +41,30 @@ export function ProbabilityNode({ subProgress }: ProbabilityNodeProps) {
       {/* Header */}
       <Text
         position={[-0.45, 0.25, 0.01]}
-        fontSize={0.026}
+        fontSize={0.024}
         color="#c084fc"
         anchorX="left"
         anchorY="middle"
         letterSpacing={0.06}
       >
-        {"STRUCTURED PROBABILITY OUTPUT"}
+        {"STRUCTURED PROBABILITY TRACE"}
+      </Text>
+      <Text
+        position={[-0.45, 0.205, 0.01]}
+        fontSize={0.015}
+        color="#94a3b8"
+        anchorX="left"
+        anchorY="middle"
+        letterSpacing={0.03}
+      >
+        {"ILLUSTRATIVE TRACE // NOT EMPIRICAL BENCHMARK"}
       </Text>
 
       {/* 1. NOUL Primitive (Binary Distribution) */}
-      <group position={[-0.45, 0.15, 0.01]}>
+      <group position={[-0.45, 0.12, 0.01]}>
         <Text
           position={[0, 0, 0]}
-          fontSize={0.02}
+          fontSize={0.019}
           color="#e9d5ff"
           anchorX="left"
           anchorY="middle"
@@ -64,37 +74,37 @@ export function ProbabilityNode({ subProgress }: ProbabilityNodeProps) {
         </Text>
 
         {/* TV State */}
-        <group position={[0, -0.05, 0]}>
+        <group position={[0, -0.045, 0]}>
           <Text
             position={[0, 0, 0]}
-            fontSize={0.018}
+            fontSize={0.017}
             color="#94a3b8"
             anchorX="left"
             anchorY="middle"
           >
             {"LR_TV.power:"}
           </Text>
-          {/* Bar: 97.4% OFF */}
+          {/* Neutral Probability Bar */}
           <mesh position={[0.3, 0, 0]}>
-            <planeGeometry args={[0.28, 0.02]} />
+            <planeGeometry args={[0.26, 0.018]} />
             <meshBasicMaterial color="#a855f7" />
           </mesh>
           <Text
-            position={[0.55, 0, 0]}
-            fontSize={0.017}
+            position={[0.52, 0, 0]}
+            fontSize={0.016}
             color="#f8fafc"
             anchorX="left"
             anchorY="middle"
           >
-            {"OFF 97.4%"}
+            {"OFF (DISTRIBUTION)"}
           </Text>
         </group>
 
         {/* Bedroom Light */}
-        <group position={[0, -0.09, 0]}>
+        <group position={[0, -0.085, 0]}>
           <Text
             position={[0, 0, 0]}
-            fontSize={0.018}
+            fontSize={0.017}
             color="#94a3b8"
             anchorX="left"
             anchorY="middle"
@@ -102,25 +112,25 @@ export function ProbabilityNode({ subProgress }: ProbabilityNodeProps) {
             {"BR_Light.power:"}
           </Text>
           <mesh position={[0.3, 0, 0]}>
-            <planeGeometry args={[0.3, 0.02]} />
+            <planeGeometry args={[0.28, 0.018]} />
             <meshBasicMaterial color="#a855f7" />
           </mesh>
           <Text
-            position={[0.55, 0, 0]}
-            fontSize={0.017}
+            position={[0.52, 0, 0]}
+            fontSize={0.016}
             color="#f8fafc"
             anchorX="left"
             anchorY="middle"
           >
-            {"OFF 99.1%"}
+            {"OFF (DISTRIBUTION)"}
           </Text>
         </group>
 
         {/* Entrance Lock */}
-        <group position={[0, -0.13, 0]}>
+        <group position={[0, -0.125, 0]}>
           <Text
             position={[0, 0, 0]}
-            fontSize={0.018}
+            fontSize={0.017}
             color="#94a3b8"
             anchorX="left"
             anchorY="middle"
@@ -128,26 +138,26 @@ export function ProbabilityNode({ subProgress }: ProbabilityNodeProps) {
             {"Ent_Lock.state:"}
           </Text>
           <mesh position={[0.3, 0, 0]}>
-            <planeGeometry args={[0.29, 0.02]} />
+            <planeGeometry args={[0.27, 0.018]} />
             <meshBasicMaterial color="#10b981" />
           </mesh>
           <Text
-            position={[0.55, 0, 0]}
-            fontSize={0.017}
+            position={[0.52, 0, 0]}
+            fontSize={0.016}
             color="#f8fafc"
             anchorX="left"
             anchorY="middle"
           >
-            {"LOCKED 98.8%"}
+            {"LOCKED (DISTRIBUTION)"}
           </Text>
         </group>
       </group>
 
       {/* 2. CHOICE Primitive (Categorical Distribution) */}
-      <group position={[-0.45, -0.1, 0.01]}>
+      <group position={[-0.45, -0.08, 0.01]}>
         <Text
           position={[0, 0, 0]}
-          fontSize={0.02}
+          fontSize={0.019}
           color="#38bdf8"
           anchorX="left"
           anchorY="middle"
@@ -156,10 +166,10 @@ export function ProbabilityNode({ subProgress }: ProbabilityNodeProps) {
           {"CHOICE PRIMITIVE (CATEGORICAL DISTRIBUTION):"}
         </Text>
 
-        <group position={[0, -0.05, 0]}>
+        <group position={[0, -0.045, 0]}>
           <Text
             position={[0, 0, 0]}
-            fontSize={0.018}
+            fontSize={0.017}
             color="#94a3b8"
             anchorX="left"
             anchorY="middle"
@@ -168,19 +178,19 @@ export function ProbabilityNode({ subProgress }: ProbabilityNodeProps) {
           </Text>
           <Text
             position={[0.2, 0, 0]}
-            fontSize={0.018}
+            fontSize={0.017}
             color="#38bdf8"
             anchorX="left"
             anchorY="middle"
           >
-            {"[COOL: 88% • AUTO: 9% • FAN: 2% • HEAT: 1%]"}
+            {"[COOL • AUTO • FAN • HEAT]"}
           </Text>
         </group>
 
-        <group position={[0, -0.09, 0]}>
+        <group position={[0, -0.085, 0]}>
           <Text
             position={[0, 0, 0]}
-            fontSize={0.018}
+            fontSize={0.017}
             color="#94a3b8"
             anchorX="left"
             anchorY="middle"
@@ -189,26 +199,26 @@ export function ProbabilityNode({ subProgress }: ProbabilityNodeProps) {
           </Text>
           <Text
             position={[0.2, 0, 0]}
-            fontSize={0.018}
+            fontSize={0.017}
             color="#10b981"
             anchorX="left"
             anchorY="middle"
           >
-            {"22°C (VERIFIED RANGE: [16°C – 30°C])"}
+            {"22°C (VALIDATED BOUNDARY: 16°C – 30°C)"}
           </Text>
         </group>
       </group>
 
       {/* Execution Flag */}
       <Text
-        position={[0, -0.25, 0.01]}
-        fontSize={0.018}
+        position={[0, -0.24, 0.01]}
+        fontSize={0.016}
         color="#a855f7"
         anchorX="center"
         anchorY="middle"
         letterSpacing={0.04}
       >
-        {"PASSED TO DETERMINISTIC POLICY ENGINE →"}
+        {"PASSED TO POLICY-LEVEL REDUNDANCY CHECK →"}
       </Text>
     </group>
   );

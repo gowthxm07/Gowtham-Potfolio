@@ -95,7 +95,28 @@ export function EvaluationLabNode({ subProgress }: EvaluationLabNodeProps) {
       <group position={[-0.45, -0.06, 0.01]}>
         <Text
           position={[0, 0, 0]}
-          fontSize={0.015}
+          fontSize={0.014}
+          color="#94a3b8"
+          anchorX="left"
+          anchorY="middle"
+        >
+          {"SECURITY (4):"}
+        </Text>
+        <Text
+          position={[0.16, 0, 0]}
+          fontSize={0.014}
+          color="#f8fafc"
+          anchorX="left"
+          anchorY="middle"
+        >
+          {"Perimeter arming and door-locking scenarios"}
+        </Text>
+      </group>
+
+      <group position={[-0.45, -0.09, 0.01]}>
+        <Text
+          position={[0, 0, 0]}
+          fontSize={0.014}
           color="#94a3b8"
           anchorX="left"
           anchorY="middle"
@@ -104,7 +125,7 @@ export function EvaluationLabNode({ subProgress }: EvaluationLabNodeProps) {
         </Text>
         <Text
           position={[0.26, 0, 0]}
-          fontSize={0.015}
+          fontSize={0.014}
           color="#c084fc"
           anchorX="left"
           anchorY="middle"
@@ -114,7 +135,7 @@ export function EvaluationLabNode({ subProgress }: EvaluationLabNodeProps) {
       </group>
 
       {/* Vitest Test Suite Badge */}
-      <group ref={badgeRef} position={[0, -0.13, 0.01]}>
+      <group ref={badgeRef} position={[0, -0.14, 0.01]}>
         <mesh position={[0, 0, 0]}>
           <planeGeometry args={[0.95, 0.05]} />
           <meshBasicMaterial color="#064e3b" transparent opacity={0.9} />
@@ -127,7 +148,7 @@ export function EvaluationLabNode({ subProgress }: EvaluationLabNodeProps) {
           anchorY="middle"
           letterSpacing={0.04}
         >
-          {"VITEST // 19 TEST FILES • 181 TESTS PASSED (100%)"}
+          {"VITEST // 19 TEST FILES • 181 TESTS PASSED"}
         </Text>
       </group>
     </group>

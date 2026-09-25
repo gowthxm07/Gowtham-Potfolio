@@ -127,7 +127,7 @@ export function JevDecisionCore({ subProgress }: JevDecisionCoreProps) {
           anchorY="middle"
           letterSpacing={0.03}
         >
-          {"PROBABILISTIC REASONING • ZERO CLOUD LOCK-IN"}
+          {"PROBABILISTIC REASONING • PROVIDER-NEUTRAL DECISION ENGINE"}
         </Text>
       </group>
     </group>

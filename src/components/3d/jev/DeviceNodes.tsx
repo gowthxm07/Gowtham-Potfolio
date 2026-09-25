@@ -41,12 +41,12 @@ const VIRTUAL_DEVICES: VirtualDevice[] = [
     statusCode: "active",
   },
   {
-    id: "ent_cam",
-    name: "SECURITY CAM",
+    id: "ent_sec",
+    name: "SECURITY SYSTEM",
     room: "ENTRANCE",
     category: "security",
     position: [-1.3, -0.22, 0.3],
-    statusText: "ARMED // ACTIVE",
+    statusText: "ARMED // STAY",
     statusCode: "active",
   },
 

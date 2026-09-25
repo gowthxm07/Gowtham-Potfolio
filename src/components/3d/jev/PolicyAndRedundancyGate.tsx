@@ -68,23 +68,23 @@ export function PolicyAndRedundancyGate({ subProgress }: PolicyAndRedundancyGate
       {/* Stage 2: Redundancy Filter Label */}
       <Text
         position={[0.45, 0.23, 0.01]}
-        fontSize={0.024}
+        fontSize={0.022}
         color="#f59e0b"
         anchorX="center"
         anchorY="middle"
         letterSpacing={0.05}
       >
-        {"STAGE 02 // REDUNDANCY FILTER"}
+        {"STAGE 02 // POLICY-LEVEL REDUNDANCY CHECK"}
       </Text>
       <Text
         position={[0.45, 0.18, 0.01]}
-        fontSize={0.018}
+        fontSize={0.017}
         color="#94a3b8"
         anchorX="center"
         anchorY="middle"
         letterSpacing={0.02}
       >
-        {"If targetState == currentState → Skip Write"}
+        {"Avoids redundant mutations when target == current"}
       </Text>
 
       {/* Dual Physical Output Conduits */}

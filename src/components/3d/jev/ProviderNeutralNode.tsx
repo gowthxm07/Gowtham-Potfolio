@@ -47,17 +47,17 @@ export function ProviderNeutralNode({ subProgress }: ProviderNeutralNodeProps) {
         anchorY="middle"
         letterSpacing={0.06}
       >
-        {"PROVIDER-NEUTRAL ARCHITECTURE"}
+        {"PROVIDER-NEUTRAL DECISION ENGINE"}
       </Text>
       <Text
         position={[0, 0.11, 0.01]}
-        fontSize={0.018}
+        fontSize={0.016}
         color="#94a3b8"
         anchorX="center"
         anchorY="middle"
         letterSpacing={0.02}
       >
-        {"TypeScript Interface: DecisionEngine"}
+        {"DecisionEngine abstraction supporting: TypeSafe Jev & Local Ollama"}
       </Text>
 
       {/* Two Provider Branches */}
@@ -142,13 +142,13 @@ export function ProviderNeutralNode({ subProgress }: ProviderNeutralNodeProps) {
       {/* Neutral Contract Footnote */}
       <Text
         position={[0, -0.14, 0.01]}
-        fontSize={0.016}
+        fontSize={0.015}
         color="#e2e8f0"
         anchorX="center"
         anchorY="middle"
         letterSpacing={0.03}
       >
-        {"EQUAL TEST SCENARIOS • OBJECTIVE COMPARISON ONLY"}
+        {"NO VERIFIED PERFORMANCE BENCHMARK • OBJECTIVE COMPARISON ONLY"}
       </Text>
     </group>
   );
