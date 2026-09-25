@@ -22,33 +22,6 @@ export function VoiceWaveform({ subProgress }: VoiceWaveformProps) {
   useFrame((state, delta) => {
     if (!groupRef.current) return;
 
-    let targetZ = -6.0;
-    let opacity = 0.0;
-
-    if (subProgress >= 0.15 && subProgress < 0.32) {
-      const t = smoothStep((subProgress - 0.15) / (0.32 - 0.15));
-      targetZ = -6.0 + (0.25 - -6.0) * t;
-      opacity = t;
-    } else if (subProgress >= 0.32 && subProgress <= 0.72) {
-      const t = smoothStep((subProgress - 0.32) / (0.72 - 0.32));
-      targetZ = 0.25 + 0.15 * t;
-      opacity = 1.0;
-    } else if (subProgress > 0.72 && subProgress <= 0.92) {
-      const t = smoothStep((subProgress - 0.72) / (0.92 - 0.72));
-      targetZ = 0.4 + (3.5 - 0.4) * t;
-      opacity = Math.max(0, 1.0 - t * 1.3);
-    } else {
-      opacity = 0;
-      targetZ = subProgress < 0.15 ? -8 : 5;
-    }
-
-    groupRef.current.position.z = THREE.MathUtils.damp(
-      groupRef.current.position.z,
-      targetZ,
-      3.8,
-      delta
-    );
-
     // Modulate bars to simulate speech acoustic waveform
     const time = state.clock.elapsedTime * 4.5;
     barMeshRefs.forEach((ref, idx) => {
@@ -65,14 +38,12 @@ export function VoiceWaveform({ subProgress }: VoiceWaveformProps) {
       const packetX = -0.5 + ((time * 0.6) % 1.0) * 1.0;
       pulsePacketRef.current.position.x = packetX;
     }
-
-    groupRef.current.visible = opacity > 0.01;
   });
 
   const isResponsePhase = subProgress >= 0.52;
 
   return (
-    <group ref={groupRef} position={[-0.88, 0.85, -6]}>
+    <group ref={groupRef} position={[-0.55, 0.05, 0]}>
       {/* 01. AUDIO CARRIER BEAM (Connecting Phone to AI Core) */}
       <mesh position={[0, 0, 0]}>
         <boxGeometry args={[1.05, 0.008, 0.004]} />

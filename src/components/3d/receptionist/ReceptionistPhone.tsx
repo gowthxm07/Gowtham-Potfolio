@@ -17,73 +17,19 @@ export function ReceptionistPhone({ subProgress }: ReceptionistPhoneProps) {
   // Phone enters early in the narrative:
   // Enters: 0.0 -> 0.25 (depth -10 -> 0.2)
   // Active/Focus: 0.25 -> 0.70
-  // Exit: 0.70 -> 0.95 (moves forward and passes camera)
   useFrame((state, delta) => {
     if (!groupRef.current) return;
-
-    let targetZ = -10.0;
-    let targetX = -1.45;
-    let targetY = 0.85;
-    let targetScale = 0.4;
-    let opacity = 0.0;
-
-    if (subProgress < 0.28) {
-      // Approach phase from depth
-      const t = smoothStep(subProgress / 0.28);
-      targetZ = -10.0 + (0.3 - -10.0) * t;
-      targetScale = 0.4 + 0.6 * t;
-      opacity = t;
-    } else if (subProgress >= 0.28 && subProgress <= 0.68) {
-      // Active conversation inspection phase
-      const t = smoothStep((subProgress - 0.28) / (0.68 - 0.28));
-      targetZ = 0.3 + 0.25 * t;
-      targetScale = 1.0;
-      opacity = 1.0;
-    } else if (subProgress > 0.68 && subProgress <= 0.96) {
-      // Exit phase: passes camera forward
-      const t = smoothStep((subProgress - 0.68) / (0.96 - 0.68));
-      targetZ = 0.55 + (4.0 - 0.55) * t;
-      targetX = -1.45 - 0.6 * t;
-      targetScale = 1.0 + 0.3 * t;
-      opacity = Math.max(0, 1.0 - t * 1.3);
-    } else {
-      opacity = 0;
-      targetZ = subProgress <= 0.0 ? -12 : 6;
-    }
-
-    groupRef.current.position.z = THREE.MathUtils.damp(
-      groupRef.current.position.z,
-      targetZ,
-      3.8,
-      delta
-    );
-    groupRef.current.position.x = THREE.MathUtils.damp(
-      groupRef.current.position.x,
-      targetX,
-      3.8,
-      delta
-    );
-    groupRef.current.position.y = THREE.MathUtils.damp(
-      groupRef.current.position.y,
-      targetY,
-      3.8,
-      delta
-    );
-
-    const curScale = groupRef.current.scale.x;
-    const nextScale = THREE.MathUtils.damp(curScale, targetScale, 3.8, delta);
-    groupRef.current.scale.set(nextScale, nextScale, nextScale);
 
     // Subtle floating rotation with slight inward angle facing the AI Core
     groupRef.current.rotation.y = THREE.MathUtils.damp(
       groupRef.current.rotation.y,
-      0.28 + Math.sin(state.clock.elapsedTime * 1.2) * 0.03,
+      0.24 + Math.sin(state.clock.elapsedTime * 1.2) * 0.03,
       3.5,
       delta
     );
     groupRef.current.rotation.z = THREE.MathUtils.damp(
       groupRef.current.rotation.z,
-      -0.05,
+      -0.03,
       3.5,
       delta
     );
@@ -97,14 +43,12 @@ export function ReceptionistPhone({ subProgress }: ReceptionistPhoneProps) {
         ringMat.opacity = Math.max(0, 0.8 - ((state.clock.elapsedTime * 1.5) % 1.0) * 0.8);
       }
     }
-
-    groupRef.current.visible = opacity > 0.01;
   });
 
-  const isCallConnected = subProgress >= 0.22;
+  const isCallConnected = subProgress >= 0.15;
 
   return (
-    <group ref={groupRef} position={[-1.45, 0.85, -10]}>
+    <group ref={groupRef} position={[-1.15, 0, 0]}>
       {/* 01. PHONE CHASSIS (Rounded Titanium Edge) */}
       <mesh receiveShadow castShadow position={[0, 0, -0.015]}>
         <boxGeometry args={[0.62, 1.22, 0.03]} />

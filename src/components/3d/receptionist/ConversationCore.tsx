@@ -20,56 +20,6 @@ export function ConversationCore({ subProgress }: ConversationCoreProps) {
   useFrame((state, delta) => {
     if (!groupRef.current) return;
 
-    let targetZ = -12.0;
-    let targetX = -0.2;
-    let targetY = 0.85;
-    let targetScale = 0.4;
-    let opacity = 0.0;
-
-    if (subProgress < 0.26) {
-      const t = smoothStep(subProgress / 0.26);
-      targetZ = -12.0 + (0.4 - -12.0) * t;
-      targetScale = 0.4 + 0.6 * t;
-      opacity = t;
-    } else if (subProgress >= 0.26 && subProgress <= 0.74) {
-      const t = smoothStep((subProgress - 0.26) / (0.74 - 0.26));
-      targetZ = 0.4 + 0.3 * t;
-      targetScale = 1.0;
-      opacity = 1.0;
-    } else if (subProgress > 0.74 && subProgress <= 0.98) {
-      const t = smoothStep((subProgress - 0.74) / (0.98 - 0.74));
-      targetZ = 0.7 + (4.2 - 0.7) * t;
-      targetX = -0.2 + 0.4 * t;
-      targetScale = 1.0 + 0.3 * t;
-      opacity = Math.max(0, 1.0 - t * 1.3);
-    } else {
-      opacity = 0;
-      targetZ = subProgress <= 0.0 ? -14 : 7;
-    }
-
-    groupRef.current.position.z = THREE.MathUtils.damp(
-      groupRef.current.position.z,
-      targetZ,
-      3.8,
-      delta
-    );
-    groupRef.current.position.x = THREE.MathUtils.damp(
-      groupRef.current.position.x,
-      targetX,
-      3.8,
-      delta
-    );
-    groupRef.current.position.y = THREE.MathUtils.damp(
-      groupRef.current.position.y,
-      targetY,
-      3.8,
-      delta
-    );
-
-    const curScale = groupRef.current.scale.x;
-    const nextScale = THREE.MathUtils.damp(curScale, targetScale, 3.8, delta);
-    groupRef.current.scale.set(nextScale, nextScale, nextScale);
-
     // Subtle rotational dynamics
     if (outerRingRef.current) {
       outerRingRef.current.rotation.z += delta * 0.4;
@@ -83,8 +33,6 @@ export function ConversationCore({ subProgress }: ConversationCoreProps) {
       coreRef.current.rotation.y += delta * 0.7;
       coreRef.current.rotation.x += delta * 0.35;
     }
-
-    groupRef.current.visible = opacity > 0.01;
   });
 
   const nodes = [
@@ -95,7 +43,7 @@ export function ConversationCore({ subProgress }: ConversationCoreProps) {
   ];
 
   return (
-    <group ref={groupRef} position={[-0.2, 0.85, -12]}>
+    <group ref={groupRef} position={[0, 0, 0]}>
       {/* 01. OUTER TECHNICAL GIMBAL RING */}
       <mesh ref={outerRingRef}>
         <torusGeometry args={[0.92, 0.024, 16, 64]} />

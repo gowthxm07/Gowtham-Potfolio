@@ -31,8 +31,8 @@ export function StoryJevObject({
 
   const [startP, endP] = range;
   const dur = endP - startP;
-  const approachEnd = startP + dur * 0.24;
-  const dwellEnd = startP + dur * 0.78;
+  const approachEnd = startP + dur * 0.14;
+  const dwellEnd = startP + dur * 0.86;
 
   // Normalized internal sub-progress [0..1] across the HomeMind / Jev narrative
   const rawSubP = (progress - startP) / dur;
@@ -41,74 +41,77 @@ export function StoryJevObject({
   useFrame(({ pointer }, delta) => {
     if (!groupRef.current) return;
 
-    let targetZ = -14.0;
+    // Visibility skip when far out of range
+    if ((progress < startP - 0.02 || progress > endP + 0.02) && !groupRef.current.visible) {
+      return;
+    }
+
+    let targetZ = -2.5;
     let targetX = anchorX;
     let targetY = 0.85;
-    let targetScale = 0.35;
+    let targetScale = 0.88;
     let opacity = 0.0;
 
     if (progress >= startP && progress < approachEnd) {
-      // 01. Approach from deep Z space
+      // 01. Calm approach from restrained depth (-2.0 -> 0.15)
       const t = smoothStep((progress - startP) / (approachEnd - startP));
-      targetZ = -12.0 + (0.5 - -12.0) * t;
+      targetZ = -2.0 + (0.15 - -2.0) * t;
       targetX = anchorX;
       targetY = 0.85;
-      targetScale = 0.4 + 0.65 * t;
+      targetScale = 0.88 + 0.12 * t;
       opacity = t;
     } else if (progress >= approachEnd && progress <= dwellEnd) {
-      // 02. Dominant focal dwell phase
-      const t = smoothStep((progress - approachEnd) / (dwellEnd - approachEnd));
-      targetZ = 0.5 + 0.25 * t;
+      // 02. Dominant, rock-solid focal dwell phase (72% of chapter duration)
+      targetZ = 0.15;
       targetX = anchorX;
       targetY = 0.85;
-      targetScale = 1.05;
+      targetScale = 1.0;
       opacity = 1.0;
     } else if (progress > dwellEnd && progress <= endP) {
-      // 03. Graceful exit forward past camera
+      // 03. Gentle forward dissolve (0.15 -> 0.55) - no shooting past camera
       const t = smoothStep((progress - dwellEnd) / (endP - dwellEnd));
-      targetZ = 0.75 + (5.5 - 0.75) * t;
-      targetX = anchorX - 0.7 * t;
-      targetY = 0.85 + 0.25 * t;
-      targetScale = 1.05 + 0.35 * t;
-      opacity = Math.max(0, 1.0 - t * 1.3);
+      targetZ = 0.15 + (0.55 - 0.15) * t;
+      targetX = anchorX - 0.15 * t;
+      targetY = 0.85 + 0.05 * t;
+      targetScale = 1.0 - 0.08 * t;
+      opacity = Math.max(0, 1.0 - t);
     } else {
       opacity = 0;
-      targetZ = progress < startP ? -16 : 8;
+      targetZ = progress < startP ? -3.0 : 1.2;
     }
 
-    // Subtle restrained mouse parallax
-    const parallaxX = pointer.x * 0.08;
-    const parallaxY = -pointer.y * 0.05;
+    // Subtle restrained mouse parallax (only when active)
+    const parallaxX = opacity > 0.01 ? pointer.x * 0.05 : 0;
+    const parallaxY = opacity > 0.01 ? -pointer.y * 0.03 : 0;
 
     groupRef.current.position.z = THREE.MathUtils.damp(
       groupRef.current.position.z,
       targetZ,
-      3.8,
+      5.0,
       delta
     );
     groupRef.current.position.x = THREE.MathUtils.damp(
       groupRef.current.position.x,
       targetX + parallaxX,
-      3.8,
+      5.0,
       delta
     );
     groupRef.current.position.y = THREE.MathUtils.damp(
       groupRef.current.position.y,
       targetY + parallaxY,
-      3.8,
+      5.0,
       delta
     );
 
     const curScale = groupRef.current.scale.x;
-    const nextScale = THREE.MathUtils.damp(curScale, targetScale, 3.8, delta);
+    const nextScale = THREE.MathUtils.damp(curScale, targetScale, 5.0, delta);
     groupRef.current.scale.set(nextScale, nextScale, nextScale);
 
-    // Visibility toggle to avoid wasting GPU cycles when offscreen
-    groupRef.current.visible = progress >= startP - 0.02 && progress <= endP + 0.02;
+    groupRef.current.visible = opacity > 0.005;
   });
 
   return (
-    <group ref={groupRef} position={[anchorX, 0.85, -14]} visible={false}>
+    <group ref={groupRef} position={[anchorX, 0.85, -2.5]} visible={false}>
       {/* Studio Lighting in Cyan & Violet Aesthetic */}
       <spotLight
         position={[0, 4.2, 2.5]}

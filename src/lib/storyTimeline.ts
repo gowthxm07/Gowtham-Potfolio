@@ -53,10 +53,10 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     subtitle: "AI Voice Middleware, Computer Vision, Labor Marketplace, Corporate Systems & Smart Home Decision Engine",
     range: [0.24, 0.44],
     camera: {
-      startPos: [0.7, 0.95, 4.8],
-      endPos: [0.85, 0.9, 3.2],
-      startTarget: [-0.7, 0.85, 0],
-      endTarget: [-0.7, 0.85, 0],
+      startPos: [0.74, 0.95, 4.4],
+      endPos: [0.82, 0.90, 3.9],
+      startTarget: [-0.78, 0.82, 0],
+      endTarget: [-0.78, 0.82, 0],
       fov: 38,
     },
   },
@@ -176,116 +176,7 @@ export function evaluateCameraAtProgress(progress: number): {
   let targetY = startTarget[1] + (endTarget[1] - startTarget[1]) * localT;
   let targetZ = startTarget[2] + (endTarget[2] - startTarget[2]) * localT;
 
-  // Project-specific subtle camera trajectory for Section 03 (Engineering Systems Sextet)
-  if (currentSection.id === "projects") {
-    // 0.0 -> 0.1667: Chapter 01 - AI Receptionist Pipeline
-    if (localRaw < 0.1667) {
-      const tSub = localRaw / 0.1667;
-      if (tSub < 0.5) {
-        const tA = smoothStep(tSub / 0.5);
-        posX = 0.84 - 0.1 * tA;
-        posY = 0.96 - 0.04 * tA;
-        posZ = 4.7 - 0.8 * tA;
-        targetX = -0.78 + 0.1 * tA;
-      } else {
-        const tB = smoothStep((tSub - 0.5) / 0.5);
-        posX = 0.74 + 0.08 * tB;
-        posY = 0.92 - 0.02 * tB;
-        posZ = 3.9 - 0.5 * tB;
-        targetX = -0.68 - 0.02 * tB;
-      }
-    } else if (localRaw < 0.3333) {
-      // 0.1667 -> 0.3333: Chapter 02 - Real-Time Traffic Computer Vision Experience
-      const tSub = (localRaw - 0.1667) / 0.1667;
-      if (tSub < 0.5) {
-        const tC = smoothStep(tSub / 0.5);
-        posX = 0.84 - 0.06 * tC;
-        posY = 1.02 - 0.06 * tC;
-        posZ = 4.8 - 0.8 * tC;
-        targetX = -0.82 + 0.06 * tC;
-        targetY = 0.72 + 0.02 * tC;
-      } else {
-        const tD = smoothStep((tSub - 0.5) / 0.5);
-        posX = 0.78 - 0.04 * tD;
-        posY = 0.96 - 0.04 * tD;
-        posZ = 4.0 - 0.6 * tD;
-        targetX = -0.76 - 0.04 * tD;
-        targetY = 0.74 - 0.02 * tD;
-      }
-    } else if (localRaw < 0.5000) {
-      // 0.3333 -> 0.5000: Chapter 03 - Privacy-Preserving Edge Video Cartoonifier
-      const tSub = (localRaw - 0.3333) / 0.1667;
-      if (tSub < 0.5) {
-        const tE = smoothStep(tSub / 0.5);
-        posX = 0.82 - 0.06 * tE;
-        posY = 1.0 - 0.04 * tE;
-        posZ = 4.5 - 0.7 * tE;
-        targetX = -0.80 + 0.05 * tE;
-        targetY = 0.76;
-      } else {
-        const tF = smoothStep((tSub - 0.5) / 0.5);
-        posX = 0.76 - 0.04 * tF;
-        posY = 0.96 - 0.04 * tF;
-        posZ = 3.8 - 0.6 * tF;
-        targetX = -0.75 - 0.05 * tF;
-        targetY = 0.78;
-      }
-    } else if (localRaw < 0.6667) {
-      // 0.5000 -> 0.6667: Chapter 04 - LaborLink Two-Sided Industrial Labor Marketplace
-      const tSub = (localRaw - 0.5000) / 0.1667;
-      if (tSub < 0.5) {
-        const tG = smoothStep(tSub / 0.5);
-        posX = 0.80 - 0.08 * tG;
-        posY = 0.98 - 0.04 * tG;
-        posZ = 4.6 - 0.8 * tG;
-        targetX = -0.78 + 0.06 * tG;
-        targetY = 0.76 + 0.02 * tG;
-      } else {
-        const tH = smoothStep((tSub - 0.5) / 0.5);
-        posX = 0.72 + 0.04 * tH;
-        posY = 0.94 - 0.04 * tH;
-        posZ = 3.8 - 0.6 * tH;
-        targetX = -0.72 - 0.04 * tH;
-        targetY = 0.78;
-      }
-    } else if (localRaw < 0.8333) {
-      // 0.6667 -> 0.8333: Chapter 05 - Shree Labels Corporate Manufacturing & Specimen Showcase
-      const tSub = (localRaw - 0.6667) / 0.1667;
-      if (tSub < 0.5) {
-        const tI = smoothStep(tSub / 0.5);
-        posX = 0.82 - 0.06 * tI;
-        posY = 0.98 - 0.04 * tI;
-        posZ = 4.6 - 0.7 * tI;
-        targetX = -0.80 + 0.05 * tI;
-        targetY = 0.78;
-      } else {
-        const tJ = smoothStep((tSub - 0.5) / 0.5);
-        posX = 0.76 + 0.04 * tJ;
-        posY = 0.94 - 0.04 * tJ;
-        posZ = 3.9 - 0.6 * tJ;
-        targetX = -0.75 - 0.04 * tJ;
-        targetY = 0.80;
-      }
-    } else {
-      // 0.8333 -> 1.0000: Chapter 06 - HomeMind Virtual Smart Home Decision Engine
-      const tSub = (localRaw - 0.8333) / 0.1667;
-      if (tSub < 0.5) {
-        const tK = smoothStep(tSub / 0.5);
-        posX = 0.82 - 0.06 * tK;
-        posY = 0.98 - 0.04 * tK;
-        posZ = 4.6 - 0.7 * tK;
-        targetX = -0.80 + 0.05 * tK;
-        targetY = 0.78;
-      } else {
-        const tL = smoothStep((tSub - 0.5) / 0.5);
-        posX = 0.76 + 0.04 * tL;
-        posY = 0.94 - 0.04 * tL;
-        posZ = 3.9 - 0.6 * tL;
-        targetX = -0.75 - 0.04 * tL;
-        targetY = 0.80;
-      }
-    }
-  }
+
 
   return {
     position: [posX, posY, posZ],

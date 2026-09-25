@@ -17,64 +17,13 @@ export function AppointmentStateMachine({ subProgress }: AppointmentStateMachine
   useFrame((_, delta) => {
     if (!groupRef.current) return;
 
-    let targetZ = -9.0;
-    let targetX = 0.82;
-    let targetY = 0.85;
-    let targetScale = 0.35;
-    let opacity = 0.0;
-
-    if (subProgress >= 0.32 && subProgress < 0.50) {
-      const t = smoothStep((subProgress - 0.32) / (0.50 - 0.32));
-      targetZ = -9.0 + (0.35 - -9.0) * t;
-      targetScale = 0.5 + 0.5 * t;
-      opacity = t;
-    } else if (subProgress >= 0.50 && subProgress <= 0.82) {
-      const t = smoothStep((subProgress - 0.50) / (0.82 - 0.50));
-      targetZ = 0.35 + 0.15 * t;
-      targetScale = 1.0;
-      opacity = 1.0;
-    } else if (subProgress > 0.82 && subProgress <= 0.98) {
-      const t = smoothStep((subProgress - 0.82) / (0.98 - 0.82));
-      targetZ = 0.5 + (4.0 - 0.5) * t;
-      targetScale = 1.0 + 0.3 * t;
-      opacity = Math.max(0, 1.0 - t * 1.3);
-    } else {
-      opacity = 0;
-      targetZ = subProgress < 0.32 ? -11 : 6;
-    }
-
-    groupRef.current.position.z = THREE.MathUtils.damp(
-      groupRef.current.position.z,
-      targetZ,
-      3.8,
-      delta
-    );
-    groupRef.current.position.x = THREE.MathUtils.damp(
-      groupRef.current.position.x,
-      targetX,
-      3.8,
-      delta
-    );
-    groupRef.current.position.y = THREE.MathUtils.damp(
-      groupRef.current.position.y,
-      targetY,
-      3.8,
-      delta
-    );
-
-    const curScale = groupRef.current.scale.x;
-    const nextScale = THREE.MathUtils.damp(curScale, targetScale, 3.8, delta);
-    groupRef.current.scale.set(nextScale, nextScale, nextScale);
-
     // Slight inward rotation facing core
     groupRef.current.rotation.y = THREE.MathUtils.damp(
       groupRef.current.rotation.y,
-      -0.22,
+      -0.18,
       3.5,
       delta
     );
-
-    groupRef.current.visible = opacity > 0.01;
   });
 
   const states = [
@@ -85,7 +34,7 @@ export function AppointmentStateMachine({ subProgress }: AppointmentStateMachine
   ];
 
   return (
-    <group ref={groupRef} position={[0.82, 0.85, -9]}>
+    <group ref={groupRef} position={[0.72, 0.12, 0]}>
       {/* 01. TITANIUM RAIL SPINE */}
       <mesh position={[0, 0, -0.01]}>
         <boxGeometry args={[0.024, 1.15, 0.02]} />

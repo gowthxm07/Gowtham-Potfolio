@@ -17,68 +17,17 @@ export function SessionContextNode({ subProgress }: SessionContextNodeProps) {
   useFrame((state, delta) => {
     if (!groupRef.current) return;
 
-    let targetZ = -8.0;
-    let targetX = 0.55;
-    let targetY = 1.38;
-    let targetScale = 0.35;
-    let opacity = 0.0;
-
-    if (subProgress >= 0.32 && subProgress < 0.48) {
-      const t = smoothStep((subProgress - 0.32) / (0.48 - 0.32));
-      targetZ = -8.0 + (0.35 - -8.0) * t;
-      targetScale = 0.5 + 0.5 * t;
-      opacity = t;
-    } else if (subProgress >= 0.48 && subProgress <= 0.78) {
-      const t = smoothStep((subProgress - 0.48) / (0.78 - 0.48));
-      targetZ = 0.35 + 0.15 * t;
-      targetScale = 1.0;
-      opacity = 1.0;
-    } else if (subProgress > 0.78 && subProgress <= 0.95) {
-      const t = smoothStep((subProgress - 0.78) / (0.95 - 0.78));
-      targetZ = 0.5 + (3.8 - 0.5) * t;
-      targetScale = 1.0 + 0.3 * t;
-      opacity = Math.max(0, 1.0 - t * 1.3);
-    } else {
-      opacity = 0;
-      targetZ = subProgress < 0.32 ? -10 : 5;
-    }
-
-    groupRef.current.position.z = THREE.MathUtils.damp(
-      groupRef.current.position.z,
-      targetZ,
-      3.8,
-      delta
-    );
-    groupRef.current.position.x = THREE.MathUtils.damp(
-      groupRef.current.position.x,
-      targetX,
-      3.8,
-      delta
-    );
-    groupRef.current.position.y = THREE.MathUtils.damp(
-      groupRef.current.position.y,
-      targetY,
-      3.8,
-      delta
-    );
-
-    const curScale = groupRef.current.scale.x;
-    const nextScale = THREE.MathUtils.damp(curScale, targetScale, 3.8, delta);
-    groupRef.current.scale.set(nextScale, nextScale, nextScale);
-
     // Subtle gentle float
     groupRef.current.rotation.y = THREE.MathUtils.damp(
       groupRef.current.rotation.y,
-      -0.15 + Math.sin(state.clock.elapsedTime * 1.0) * 0.03,
+      -0.12 + Math.sin(state.clock.elapsedTime * 1.0) * 0.03,
       3.5,
       delta
     );
-
-    groupRef.current.visible = opacity > 0.01;
   });
 
   return (
-    <group ref={groupRef} position={[0.55, 1.38, -8]}>
+    <group ref={groupRef} position={[0.45, 0.45, 0]}>
       {/* 01. ACRYLIC HOUSING FRAME */}
       <mesh position={[0, 0, -0.01]}>
         <boxGeometry args={[0.92, 0.48, 0.02]} />
