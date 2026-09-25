@@ -93,7 +93,7 @@ export function TrafficTelemetry({ subProgress = 0 }: TrafficTelemetryProps) {
           anchorY="middle"
           letterSpacing={0.04}
         >
-          {"640x480 @ 30FPS"}
+          {"640x480 @ 30FPS FEED"}
         </Text>
 
         {/* Separator Line */}
@@ -142,7 +142,7 @@ export function TrafficTelemetry({ subProgress = 0 }: TrafficTelemetryProps) {
           anchorX="left"
           anchorY="middle"
         >
-          {"YOLOv8 ByteTrack (persist=True)"}
+          {"YOLOv8 Object Tracking (persist=True)"}
         </Text>
 
         {/* Active Track IDs */}

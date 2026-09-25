@@ -122,7 +122,7 @@ export function StoryTrafficObject({
       {/* 03. Optical Sensor Rig & 640x480 Viewfinder Scanning Plane */}
       <TrafficCameraSensor subProgress={subProgress} />
 
-      {/* 04. 3D Floating Telemetry HUD (YOLOv8 Nano, ByteTrack, 10-Frame Density, Clearance, Firestore) */}
+      {/* 04. 3D Floating Telemetry HUD (YOLOv8 Nano, YOLOv8 Object Tracking, 10-Frame Density, Clearance, Firestore) */}
       <TrafficTelemetry subProgress={subProgress} />
     </group>
   );

@@ -276,7 +276,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
                 <span className="text-emerald-500">→</span>
                 <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">YOLOV8 NANO</span>
                 <span className="text-emerald-500">→</span>
-                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">BYTETRACK</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">YOLOV8 TRACKING</span>
                 <span className="text-emerald-500">→</span>
                 <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FIRESTORE SYNC</span>
               </div>

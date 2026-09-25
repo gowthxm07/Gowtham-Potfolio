@@ -45,7 +45,7 @@ export const projectsData: Project[] = [
       "Python",
       "OpenCV",
       "YOLOv8 Nano (yolov8n.pt)",
-      "YOLOv8 Tracking (ByteTrack)",
+      "YOLOv8 Object Tracking (persist=True)",
       "Firebase Admin SDK",
       "Cloud Firestore",
       "React.js",
@@ -57,7 +57,7 @@ export const projectsData: Project[] = [
     featured: true,
     visualConcept: "Highway Corridor → Video Ingest (640x480) → YOLOv8 Detection → 3D Bounding Boxes → Cloud Firestore",
     metrics: [
-      "Inference & pipeline: 640x480 @ 30 FPS with YOLOv8 Nano",
+      "Video pipeline: 640x480 resolution (30 FPS source stream)",
       "Multi-class MOT tracking: Car, Bus, Truck, Motorcycle, Bicycle",
       "Dynamic clearance: 1s (Low < 5) | 3s (Med 5-8) | 7s (High >= 9)",
       "Safety telemetry: Bounding box IOU collision detection (> 0.5)",
