@@ -34,16 +34,18 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
 
   // Automatically sync active project tab with scroll progress when in projects section
   useEffect(() => {
-    if (progress >= 0.24 && progress < 0.28) {
+    if (progress >= 0.24 && progress < 0.2733) {
       setActiveProjectIdx(0);
-    } else if (progress >= 0.28 && progress < 0.32) {
+    } else if (progress >= 0.2733 && progress < 0.3067) {
       setActiveProjectIdx(1);
-    } else if (progress >= 0.32 && progress < 0.36) {
+    } else if (progress >= 0.3067 && progress < 0.34) {
       setActiveProjectIdx(2);
-    } else if (progress >= 0.36 && progress < 0.40) {
+    } else if (progress >= 0.34 && progress < 0.3733) {
       setActiveProjectIdx(3);
-    } else if (progress >= 0.40 && progress <= 0.44) {
+    } else if (progress >= 0.3733 && progress < 0.4067) {
       setActiveProjectIdx(4);
+    } else if (progress >= 0.4067 && progress <= 0.44) {
+      setActiveProjectIdx(5);
     }
   }, [progress]);
 
@@ -215,7 +217,11 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
           <div className="flex items-center justify-between mb-2">
             <div
               className={`text-[11px] font-mono tracking-widest uppercase flex items-center gap-2 ${
-                selectedProject.id === "shree-labels-corporate" ? "text-blue-400" : "text-emerald-400"
+                selectedProject.id === "smart-home-automation-jev"
+                  ? "text-purple-400"
+                  : selectedProject.id === "shree-labels-corporate"
+                  ? "text-blue-400"
+                  : "text-emerald-400"
               }`}
             >
               <Code2 className="w-3.5 h-3.5" />
@@ -227,17 +233,21 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
                 ? "03 // PRIVACY-PRESERVING EDGE VIDEO CARTOONIFIER"
                 : selectedProject.id === "laborlink"
                 ? "04 // TWO-SIDED INDUSTRIAL LABOR MARKETPLACE"
-                : "05 // CORPORATE MANUFACTURING & PRINTING"}
+                : selectedProject.id === "shree-labels-corporate"
+                ? "05 // CORPORATE MANUFACTURING & PRINTING"
+                : "06 // SIMULATED SMART HOME DECISION ENGINE"}
             </div>
             {/* Project Switcher Tabs */}
             <div className="flex gap-1.5 bg-surface-card p-1 rounded-lg border border-surface-border">
-              {projectsData.slice(0, 5).map((p, idx) => (
+              {projectsData.slice(0, 6).map((p, idx) => (
                 <button
                   key={p.id}
                   onClick={() => setActiveProjectIdx(idx)}
                   className={`text-[10px] font-mono px-2 py-0.5 rounded transition-colors ${
                     activeProjectIdx === idx
-                      ? idx === 4
+                      ? idx === 5
+                        ? "bg-purple-500/20 text-purple-300 font-bold border border-purple-500/40"
+                        : idx === 4
                         ? "bg-blue-500/20 text-blue-300 font-bold border border-blue-500/40"
                         : "bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40"
                       : "text-slate-400 hover:text-white"
@@ -378,10 +388,41 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
             </div>
           )}
 
+          {/* Architecture Pipeline Indicator for HomeMind / Jev */}
+          {selectedProject.id === "smart-home-automation-jev" && (
+            <div className="mb-3.5 p-2 rounded-lg bg-purple-950/20 border border-purple-800/40">
+              <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+                STRUCTURED DECISION ENGINE PIPELINE
+              </div>
+              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
+                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">HOME STATE</span>
+                <span className="text-purple-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">USER INTENT</span>
+                <span className="text-purple-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">CONTEXT</span>
+                <span className="text-purple-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">JEV SYSTEM ONE</span>
+                <span className="text-purple-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">POLICY DISPATCH</span>
+                <span className="text-purple-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">REDUNDANCY FILTER</span>
+                <span className="text-purple-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">SIM VALIDATION</span>
+                <span className="text-purple-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/60 font-semibold">UPDATED STATE</span>
+              </div>
+            </div>
+          )}
+
           {/* Spatial Concept Tag */}
           <div
             className={`p-2.5 rounded-lg bg-surface-card border border-surface-border text-[11px] font-mono mb-3.5 ${
-              selectedProject.id === "shree-labels-corporate" ? "text-blue-300" : "text-emerald-300"
+              selectedProject.id === "smart-home-automation-jev"
+                ? "text-purple-300"
+                : selectedProject.id === "shree-labels-corporate"
+                ? "text-blue-300"
+                : "text-emerald-300"
             }`}
           >
             <span className="text-slate-400 block text-[9px] uppercase tracking-wider mb-0.5">
@@ -396,7 +437,11 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
               <div key={i} className="p-2 rounded bg-surface-card border border-surface-border text-[11px] text-slate-300 font-sans">
                 <span
                   className={`font-mono block text-[9px] uppercase ${
-                    selectedProject.id === "shree-labels-corporate" ? "text-blue-400" : "text-emerald-400"
+                    selectedProject.id === "smart-home-automation-jev"
+                      ? "text-purple-400"
+                      : selectedProject.id === "shree-labels-corporate"
+                      ? "text-blue-400"
+                      : "text-emerald-400"
                   }`}
                 >
                   Telemetry 0{i + 1}
@@ -424,7 +469,9 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono transition-colors ${
-                selectedProject.id === "shree-labels-corporate"
+                selectedProject.id === "smart-home-automation-jev"
+                  ? "bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/40 text-purple-300"
+                  : selectedProject.id === "shree-labels-corporate"
                   ? "bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/40 text-blue-300"
                   : "bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300"
               }`}

@@ -50,7 +50,7 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     index: "03",
     badge: "03 // FEATURED WORK",
     title: "Engineering Systems",
-    subtitle: "AI Voice Middleware, Computer Vision, Labor Marketplace & Corporate Systems",
+    subtitle: "AI Voice Middleware, Computer Vision, Labor Marketplace, Corporate Systems & Smart Home Decision Engine",
     range: [0.24, 0.44],
     camera: {
       startPos: [0.7, 0.95, 4.8],
@@ -176,11 +176,11 @@ export function evaluateCameraAtProgress(progress: number): {
   let targetY = startTarget[1] + (endTarget[1] - startTarget[1]) * localT;
   let targetZ = startTarget[2] + (endTarget[2] - startTarget[2]) * localT;
 
-  // Project-specific subtle camera trajectory for Section 03 (Engineering Systems Quintet)
+  // Project-specific subtle camera trajectory for Section 03 (Engineering Systems Sextet)
   if (currentSection.id === "projects") {
-    // 0.0 -> 0.20: Chapter 01 - AI Receptionist Pipeline
-    if (localRaw < 0.20) {
-      const tSub = localRaw / 0.20;
+    // 0.0 -> 0.1667: Chapter 01 - AI Receptionist Pipeline
+    if (localRaw < 0.1667) {
+      const tSub = localRaw / 0.1667;
       if (tSub < 0.5) {
         const tA = smoothStep(tSub / 0.5);
         posX = 0.84 - 0.1 * tA;
@@ -194,9 +194,9 @@ export function evaluateCameraAtProgress(progress: number): {
         posZ = 3.9 - 0.5 * tB;
         targetX = -0.68 - 0.02 * tB;
       }
-    } else if (localRaw < 0.40) {
-      // 0.20 -> 0.40: Chapter 02 - Real-Time Traffic Computer Vision Experience
-      const tSub = (localRaw - 0.20) / 0.20;
+    } else if (localRaw < 0.3333) {
+      // 0.1667 -> 0.3333: Chapter 02 - Real-Time Traffic Computer Vision Experience
+      const tSub = (localRaw - 0.1667) / 0.1667;
       if (tSub < 0.5) {
         const tC = smoothStep(tSub / 0.5);
         posX = 0.84 - 0.06 * tC;
@@ -212,9 +212,9 @@ export function evaluateCameraAtProgress(progress: number): {
         targetX = -0.76 - 0.04 * tD;
         targetY = 0.74 - 0.02 * tD;
       }
-    } else if (localRaw < 0.60) {
-      // 0.40 -> 0.60: Chapter 03 - Privacy-Preserving Edge Video Cartoonifier
-      const tSub = (localRaw - 0.40) / 0.20;
+    } else if (localRaw < 0.5000) {
+      // 0.3333 -> 0.5000: Chapter 03 - Privacy-Preserving Edge Video Cartoonifier
+      const tSub = (localRaw - 0.3333) / 0.1667;
       if (tSub < 0.5) {
         const tE = smoothStep(tSub / 0.5);
         posX = 0.82 - 0.06 * tE;
@@ -230,9 +230,9 @@ export function evaluateCameraAtProgress(progress: number): {
         targetX = -0.75 - 0.05 * tF;
         targetY = 0.78;
       }
-    } else if (localRaw < 0.80) {
-      // 0.60 -> 0.80: Chapter 04 - LaborLink Two-Sided Industrial Labor Marketplace
-      const tSub = (localRaw - 0.60) / 0.20;
+    } else if (localRaw < 0.6667) {
+      // 0.5000 -> 0.6667: Chapter 04 - LaborLink Two-Sided Industrial Labor Marketplace
+      const tSub = (localRaw - 0.5000) / 0.1667;
       if (tSub < 0.5) {
         const tG = smoothStep(tSub / 0.5);
         posX = 0.80 - 0.08 * tG;
@@ -248,9 +248,9 @@ export function evaluateCameraAtProgress(progress: number): {
         targetX = -0.72 - 0.04 * tH;
         targetY = 0.78;
       }
-    } else {
-      // 0.80 -> 1.0: Chapter 05 - Shree Labels Corporate Manufacturing & Specimen Showcase
-      const tSub = (localRaw - 0.80) / 0.20;
+    } else if (localRaw < 0.8333) {
+      // 0.6667 -> 0.8333: Chapter 05 - Shree Labels Corporate Manufacturing & Specimen Showcase
+      const tSub = (localRaw - 0.6667) / 0.1667;
       if (tSub < 0.5) {
         const tI = smoothStep(tSub / 0.5);
         posX = 0.82 - 0.06 * tI;
@@ -264,6 +264,24 @@ export function evaluateCameraAtProgress(progress: number): {
         posY = 0.94 - 0.04 * tJ;
         posZ = 3.9 - 0.6 * tJ;
         targetX = -0.75 - 0.04 * tJ;
+        targetY = 0.80;
+      }
+    } else {
+      // 0.8333 -> 1.0000: Chapter 06 - HomeMind Virtual Smart Home Decision Engine
+      const tSub = (localRaw - 0.8333) / 0.1667;
+      if (tSub < 0.5) {
+        const tK = smoothStep(tSub / 0.5);
+        posX = 0.82 - 0.06 * tK;
+        posY = 0.98 - 0.04 * tK;
+        posZ = 4.6 - 0.7 * tK;
+        targetX = -0.80 + 0.05 * tK;
+        targetY = 0.78;
+      } else {
+        const tL = smoothStep((tSub - 0.5) / 0.5);
+        posX = 0.76 + 0.04 * tL;
+        posY = 0.94 - 0.04 * tL;
+        posZ = 3.9 - 0.6 * tL;
+        targetX = -0.75 - 0.04 * tL;
         targetY = 0.80;
       }
     }

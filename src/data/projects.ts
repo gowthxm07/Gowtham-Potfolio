@@ -162,21 +162,33 @@ export const projectsData: Project[] = [
   },
   {
     id: "smart-home-automation-jev",
-    title: "Smart Home Automation Using Jev",
+    title: "HomeMind – Virtual Smart Home Decision Engine",
     shortDescription:
-      "IoT system orchestrating connected home peripherals with rule-based automated decision making.",
+      "A virtual smart-home digital twin connected to a structured decision engine using TypeSafe Jev System One API, deterministic policy execution, redundant action elimination, and provider-neutral evaluation.",
     fullDescription:
-      "Created an automation framework to interconnect domestic sensor feeds, appliance states, and programmatic triggers. Focuses on minimal power consumption, resilient local-network communication, and fast state propagation.",
-    technologies: ["TypeScript", "Node.js", "IoT Protocols", "REST APIs"],
-    githubUrl: "https://github.com/gowthxm07/Smart-Home-Automation-Using-Jev",
-    category: "IoT & Automation",
-    resumeRelevant: false,
-    featured: false,
-    visualConcept: "smart home / connected devices / AI decision making",
-    metrics: [
-      "Low-overhead device orchestration daemon",
-      "Responsive sensor-to-action event loop",
+      "Engineered an in-memory virtual smart-home digital twin and probabilistic automation engine (HomeMind). Models 18 virtual smart devices across 5 simulated rooms (Living Room, Bedroom, Kitchen, Entrance, Study) spanning light, climate, security, curtain, entertainment, and power categories. Evaluates natural language user intents through TypeSafe Jev System One API (/v1/systemone) using Noul (binary probability) and Choice (categorical distribution) primitives. Integrates deterministic policy dispatch, in-memory capability and boundary validation, policy-level redundant action elimination (skippedRedundantActions), and a provider-neutral benchmark suite comparing Jev with local Ollama models across 36 controlled test scenarios with SHA-256 state fingerprinting.",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "TypeSafe Jev (System One)",
+      "Ollama (llama3.2)",
+      "Vitest",
+      "Lucide React",
+      "REST APIs",
     ],
-    role: "Systems & IoT Developer",
+    githubUrl: "https://github.com/gowthxm07/Smart-Home-Automation-Using-Jev",
+    category: "AI / Machine Learning",
+    resumeRelevant: true,
+    featured: true,
+    visualConcept:
+      "HOME STATE → USER INTENT → CONTEXT → JEV SYSTEM ONE → PROBABILISTIC DECISION → DETERMINISTIC POLICY → REDUNDANCY FILTER → SIMULATION VALIDATION → UPDATED HOME STATE → PROVIDER-NEUTRAL EVALUATION",
+    metrics: [
+      "Virtual twin: 18 devices across 5 rooms (100% in-memory simulation)",
+      "Decision core: TypeSafe Jev System One (/v1/systemone)",
+      "Structured inference: Noul (binary) & Choice (categorical) primitives",
+      "Automated testing: 19 Vitest test suites / 181 tests passed (100%)",
+    ],
+    role: "Full-Stack AI & Systems Engineer",
   },
 ];
