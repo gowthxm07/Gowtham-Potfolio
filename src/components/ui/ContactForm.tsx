@@ -5,6 +5,7 @@ import { Send, CheckCircle2, AlertCircle, Mail, Phone, ExternalLink } from "luci
 import { profileData } from "@/data/profile";
 
 export function ContactForm() {
+  const destinationEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || profileData.email;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -57,7 +58,7 @@ export function ContactForm() {
       // Graceful direct mail client dispatch when EmailJS credentials are pending
       setSubmissionMethod("direct");
       setTimeout(() => {
-        const mailtoUrl = `mailto:${profileData.email}?subject=${encodeURIComponent(
+        const mailtoUrl = `mailto:${destinationEmail}?subject=${encodeURIComponent(
           `Portfolio Inquiry from ${formData.name.trim()}`
         )}&body=${encodeURIComponent(
           `Sender: ${formData.name.trim()} (${formData.email.trim()})\n\nMessage:\n${formData.message.trim()}`
@@ -80,12 +81,23 @@ export function ContactForm() {
           template_id: templateId,
           user_id: publicKey,
           template_params: {
+            // EmailJS Template variables (matching {{title}}, {{name}}, {{time}}, {{message}}, {{email}})
+            title: `Portfolio Inquiry from ${formData.name.trim()}`,
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            time: new Date().toLocaleString("en-US", {
+              timeZone: "Asia/Kolkata",
+              dateStyle: "medium",
+              timeStyle: "short",
+            }),
+            message: formData.message.trim(),
+
+            // Standard / fallback EmailJS parameters
             from_name: formData.name.trim(),
             from_email: formData.email.trim(),
             subject: `Portfolio Inquiry from ${formData.name.trim()}`,
-            message: formData.message.trim(),
             to_name: profileData.name,
-            to_email: profileData.email,
+            to_email: destinationEmail,
             reply_to: formData.email.trim(),
           },
         }),
@@ -121,8 +133,8 @@ export function ContactForm() {
           </div>
           <p className="text-xs text-slate-300 font-sans leading-relaxed mb-3">
             {submissionMethod === "emailjs"
-              ? `Thank you for reaching out! Your message has been sent to ${profileData.email}.`
-              : `Your default email client was opened to dispatch directly to ${profileData.email}. Thank you!`}
+              ? `Thank you for reaching out! Your message has been sent to ${destinationEmail}.`
+              : `Your default email client was opened to dispatch directly to ${destinationEmail}. Thank you!`}
           </p>
           <button
             onClick={handleReset}
@@ -206,12 +218,12 @@ export function ContactForm() {
       {/* Verified Professional Channels */}
       <div className="pt-3 border-t border-surface-border flex flex-wrap items-center justify-between gap-2.5 text-xs font-mono text-slate-300">
         <a
-          href={`mailto:${profileData.email}`}
-          aria-label={`Send email to ${profileData.email}`}
+          href={`mailto:${destinationEmail}`}
+          aria-label={`Send email to ${destinationEmail}`}
           className="inline-flex items-center gap-1.5 text-slate-300 hover:text-emerald-400 transition-colors"
         >
           <Mail className="w-3.5 h-3.5 text-emerald-400" />
-          <span>{profileData.email}</span>
+          <span>{destinationEmail}</span>
         </a>
 
         <div className="flex items-center gap-3">
