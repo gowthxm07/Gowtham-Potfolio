@@ -77,7 +77,7 @@ export function MatchResultNode({ subProgress }: MatchResultNodeProps) {
           anchorX="center"
           anchorY="middle"
         >
-          {"SKILLS: 100% • LOCATION: 100% • AMENITY: 100%"}
+          {"SKILLS: MATCHED • LOCATION: VERIFIED • AMENITY: FIT"}
         </Text>
         <Text
           position={[0, -0.04, 0]}

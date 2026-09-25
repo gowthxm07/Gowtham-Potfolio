@@ -184,7 +184,7 @@ export const projectsData: Project[] = [
     visualConcept:
       "HOME STATE → USER INTENT → CONTEXT → JEV SYSTEM ONE → PROBABILISTIC DECISION → DETERMINISTIC POLICY → REDUNDANCY FILTER → SIMULATION VALIDATION → UPDATED HOME STATE → PROVIDER-NEUTRAL EVALUATION",
     metrics: [
-      "Virtual twin: 18 devices across 5 rooms (100% in-memory simulation)",
+      "Virtual twin: 18 devices across 5 rooms (in-memory simulation)",
       "Decision core: TypeSafe Jev System One (/v1/systemone)",
       "Structured inference: Noul (binary) & Choice (categorical) primitives",
       "Automated testing: 19 Vitest test suites / 181 tests passed",

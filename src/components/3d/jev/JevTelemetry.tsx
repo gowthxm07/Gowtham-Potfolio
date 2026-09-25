@@ -96,7 +96,7 @@ export function JevTelemetry({ subProgress }: JevTelemetryProps) {
         anchorY="middle"
         letterSpacing={0.03}
       >
-        {"100% IN-MEMORY SIMULATION (ZERO PHYSICAL HARDWARE)"}
+        {"IN-MEMORY SIMULATION (ZERO PHYSICAL HARDWARE)"}
       </Text>
     </group>
   );

@@ -95,7 +95,7 @@ export function SimulationEngineNode({ subProgress }: SimulationEngineNodeProps)
           anchorX="left"
           anchorY="middle"
         >
-          {"Temp 16–30°C • Brightness 0–100%"}
+          {"Temp 16–30°C • Dimmer Level 0–100"}
         </Text>
       </group>
 
@@ -134,7 +134,7 @@ export function SimulationEngineNode({ subProgress }: SimulationEngineNodeProps)
           anchorY="middle"
           letterSpacing={0.03}
         >
-          {"100% SOFTWARE SIMULATION • ZERO PHYSICAL HARDWARE / RELAYS"}
+          {"SOFTWARE SIMULATION • ZERO PHYSICAL HARDWARE / RELAYS"}
         </Text>
       </group>
 

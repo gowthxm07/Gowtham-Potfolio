@@ -52,7 +52,7 @@ export function MaterialShowcase({ subProgress }: MaterialShowcaseProps) {
         position={[-0.85, 0.28, 0.2]}
         rotation={[0.05, 0.15, -0.04]}
         title="COTTON TAPE"
-        subtitle="100% NATURAL COTTON"
+        subtitle="ORGANIC NATURAL COTTON"
         specDetails="SOFT TEXTURE • SKIN-FRIENDLY • WASH-RESISTANT INKS"
         color="#f8f7f2"
         roughness={0.88}

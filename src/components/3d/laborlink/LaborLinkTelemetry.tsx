@@ -143,7 +143,7 @@ export function LaborLinkTelemetry({ subProgress }: LaborLinkTelemetryProps) {
           anchorX="right"
           anchorY="middle"
         >
-          {"100% SUITE PASS"}
+          {"15 SUITES PASSED"}
         </Text>
       </group>
 
