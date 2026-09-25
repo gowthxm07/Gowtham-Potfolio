@@ -34,10 +34,12 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
 
   // Automatically sync active project tab with scroll progress when in projects section
   useEffect(() => {
-    if (progress >= 0.24 && progress < 0.33) {
+    if (progress >= 0.24 && progress < 0.30) {
       setActiveProjectIdx(0);
-    } else if (progress >= 0.33 && progress <= 0.42) {
+    } else if (progress >= 0.30 && progress < 0.36) {
       setActiveProjectIdx(1);
+    } else if (progress >= 0.36 && progress <= 0.42) {
+      setActiveProjectIdx(2);
     }
   }, [progress]);
 
@@ -211,7 +213,9 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
               <Code2 className="w-3.5 h-3.5" />
               {selectedProject.id === "ai-smart-receptionist"
                 ? "01 // AI & REAL-TIME SYSTEMS"
-                : "02 // COMPUTER VISION & EDGE"}
+                : selectedProject.id === "real-time-traffic-monitoring"
+                ? "02 // COMPUTER VISION & EDGE"
+                : "03 // PRIVACY-PRESERVING EDGE VIDEO CARTOONIFIER"}
             </div>
             {/* Project Switcher Tabs */}
             <div className="flex gap-1.5 bg-surface-card p-1 rounded-lg border border-surface-border">
@@ -279,6 +283,29 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
                 <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">YOLOV8 TRACKING</span>
                 <span className="text-emerald-500">→</span>
                 <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FIRESTORE SYNC</span>
+              </div>
+            </div>
+          )}
+
+          {/* Architecture Pipeline Indicator for Edge Video Cartoonifier */}
+          {selectedProject.id === "edge-video-cartoonifier" && (
+            <div className="mb-3.5 p-2 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
+              <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                DETERMINISTIC COMPUTER VISION PIPELINE
+              </div>
+              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">WEBCAM / MP4</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">OPENCV</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FACE PRIVACY + MOG2</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">DUAL-PATH CARTOON</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">BITWISE FUSION</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">MJPEG STREAM</span>
               </div>
             </div>
           )}

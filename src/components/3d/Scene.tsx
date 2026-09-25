@@ -7,6 +7,7 @@ import { StoryEnvironment } from "./StoryEnvironment";
 import { StoryIdentityObject } from "./StoryIdentityObject";
 import { StoryReceptionistObject } from "./StoryReceptionistObject";
 import { StoryTrafficObject } from "./StoryTrafficObject";
+import { StoryCartoonifierObject } from "./StoryCartoonifierObject";
 import { StoryAcademicsObject } from "./StoryAcademicsObject";
 import { StorySkillsConstellation } from "./StorySkillsConstellation";
 import { StoryAchievementsObject } from "./StoryAchievementsObject";
@@ -45,16 +46,23 @@ export function Scene({ progress, isMobile = false, dpr = 1.5 }: SceneProps) {
           {/* 02. Identity & Verified Portrait Monolith */}
           <StoryIdentityObject progress={progress} />
 
-          {/* 03. Featured Engineering Systems: AI Smart Receptionist Experience */}
+          {/* 03. Featured Engineering Systems: Section 03 Trilogy */}
+          {/* Chapter 01: AI Smart Receptionist Platform */}
           <StoryReceptionistObject
             progress={progress}
-            range={[0.24, 0.34]}
+            range={[0.24, 0.30]}
             anchorX={-0.85}
           />
-          {/* Section 03 Second Featured System: Real-Time Traffic Computer Vision Experience */}
+          {/* Chapter 02: Real-Time Traffic Computer Vision Experience */}
           <StoryTrafficObject
             progress={progress}
-            range={[0.33, 0.42]}
+            range={[0.30, 0.36]}
+            anchorX={-0.85}
+          />
+          {/* Chapter 03: Privacy-Preserving Edge Video Cartoonifier */}
+          <StoryCartoonifierObject
+            progress={progress}
+            range={[0.36, 0.42]}
             anchorX={-0.85}
           />
 

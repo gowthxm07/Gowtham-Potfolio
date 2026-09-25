@@ -65,6 +65,37 @@ export const projectsData: Project[] = [
     role: "Computer Vision & Full-Stack Developer",
   },
   {
+    id: "edge-video-cartoonifier",
+    title: "Privacy-Preserving Edge Video Cartoonifier",
+    shortDescription:
+      "A deterministic OpenCV computer-vision pipeline that transforms live webcam or MP4 video into privacy-anonymized cartoon streams through face blurring, background masking, edge extraction, color quantization, and motion-aware compositing.",
+    fullDescription:
+      "Engineered an on-device deterministic computer vision platform designed for privacy compliance in monitoring and industrial safety environments. Implements Haar Cascade face detection with localized 51×51 Gaussian blurring, MOG2 temporal background subtraction to dim static surroundings (alpha=0.4), dual-path bilateral filtering with 64-color quantization, median noise suppression, and adaptive thresholding fused via cv2.bitwise_and(). Deployed locally on Flask with multi-channel MJPEG streaming and verified downstream AI benchmarking.",
+    technologies: [
+      "Python",
+      "OpenCV 4.x",
+      "NumPy",
+      "Flask",
+      "Flask-CORS",
+      "Haar Cascade",
+      "MOG2",
+      "React 19",
+      "Vite",
+    ],
+    githubUrl: "https://github.com/gowthxm07/Privacy-Preserving-Edge-Video-Cartoonifier",
+    category: "Computer Vision & Edge",
+    resumeRelevant: true,
+    featured: true,
+    visualConcept: "WEBCAM / MP4 → OPENCV → FACE PRIVACY + MOG2 → DUAL-PATH CARTOONIZATION → BITWISE FUSION → MJPEG STREAM",
+    metrics: [
+      "JPEG payload reduction: -65.1% bandwidth saved",
+      "Canny edge complexity: +78.3% speedup",
+      "Downstream CNN classification: 98.3% accuracy retained",
+      "Local CPU execution: Zero cloud video transmission",
+    ],
+    role: "Computer Vision & Full-Stack Developer",
+  },
+  {
     id: "laborlink",
     title: "LaborLink – Small-Scale Industry Job Marketplace",
     shortDescription:
@@ -83,25 +114,6 @@ export const projectsData: Project[] = [
       "Cloudinary-backed media pipeline with Firestore real-time sync",
     ],
     role: "Full-Stack Architect & Developer",
-  },
-  {
-    id: "edge-video-cartoonifier",
-    title: "Privacy-Preserving Edge Video Cartoonifier",
-    shortDescription:
-      "High-speed edge middleware utilizing YOLOv8 and OpenCV to dynamically stylize and anonymize sensitive background video streams.",
-    fullDescription:
-      "Engineered edge-compatible computer vision middleware that isolates human subjects and dynamically applies anonymizing cartoonification filters to background video feeds in real time. Designed for high privacy environments without compromising stream frame rates.",
-    technologies: ["Python", "YOLOv8", "OpenCV", "React.js", "JavaScript"],
-    githubUrl: "https://github.com/gowthxm07/Privacy-Preserving-Edge-Video-Cartoonifier",
-    category: "Computer Vision & Edge",
-    resumeRelevant: true,
-    featured: true,
-    visualConcept: "camera / video processing / privacy / edge computing",
-    metrics: [
-      "78% faster execution speeds achieved via masked bilateral filtering",
-      "Zero-latency edge processing integrated with React analytics",
-    ],
-    role: "Computer Vision Engineer",
   },
   {
     id: "shree-labels-corporate",

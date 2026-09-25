@@ -176,45 +176,59 @@ export function evaluateCameraAtProgress(progress: number): {
   let targetY = startTarget[1] + (endTarget[1] - startTarget[1]) * localT;
   let targetZ = startTarget[2] + (endTarget[2] - startTarget[2]) * localT;
 
-  // Project-specific subtle camera trajectory for Section 03 (AI Receptionist & Traffic CV Systems)
+  // Project-specific subtle camera trajectory for Section 03 (Trilogy of Featured Systems)
   if (currentSection.id === "projects") {
-    // 0.0 -> 0.52: AI Receptionist Pipeline (Phone -> Voice -> AI Core -> Database -> Appointment)
-    if (localRaw < 0.52) {
-      const tSub = localRaw / 0.52;
-      if (tSub < 0.45) {
-        // Stage A: Phone enters from depth -> Camera favors right framing phone on left
-        const tA = smoothStep(tSub / 0.45);
+    // 0.0 -> 0.33: Chapter 01 - AI Receptionist Pipeline
+    if (localRaw < 0.33) {
+      const tSub = localRaw / 0.33;
+      if (tSub < 0.5) {
+        const tA = smoothStep(tSub / 0.5);
         posX = 0.84 - 0.1 * tA;
         posY = 0.96 - 0.04 * tA;
         posZ = 4.7 - 0.8 * tA;
         targetX = -0.78 + 0.1 * tA;
       } else {
-        // Stage B: AI Core & State Machine active -> Camera centers and advances forward
-        const tB = smoothStep((tSub - 0.45) / 0.55);
-        posX = 0.74 + 0.1 * tB;
+        const tB = smoothStep((tSub - 0.5) / 0.5);
+        posX = 0.74 + 0.08 * tB;
         posY = 0.92 - 0.02 * tB;
-        posZ = 3.9 - 0.6 * tB;
+        posZ = 3.9 - 0.5 * tB;
         targetX = -0.68 - 0.02 * tB;
       }
-    } else {
-      // 0.52 -> 1.0: Real-Time Traffic Computer Vision Experience
-      const tSub = (localRaw - 0.52) / 0.48;
-      if (tSub < 0.45) {
-        // Stage C: Highway & optical sensor approach from depth
-        const tC = smoothStep(tSub / 0.45);
+    } else if (localRaw < 0.67) {
+      // 0.33 -> 0.67: Chapter 02 - Real-Time Traffic Computer Vision Experience
+      const tSub = (localRaw - 0.33) / 0.34;
+      if (tSub < 0.5) {
+        const tC = smoothStep(tSub / 0.5);
         posX = 0.84 - 0.06 * tC;
         posY = 1.02 - 0.06 * tC;
         posZ = 4.8 - 0.8 * tC;
         targetX = -0.82 + 0.06 * tC;
         targetY = 0.72 + 0.02 * tC;
       } else {
-        // Stage D: Live multi-class tracking dwell & telemetry focus
-        const tD = smoothStep((tSub - 0.45) / 0.55);
+        const tD = smoothStep((tSub - 0.5) / 0.5);
         posX = 0.78 - 0.04 * tD;
         posY = 0.96 - 0.04 * tD;
         posZ = 4.0 - 0.6 * tD;
         targetX = -0.76 - 0.04 * tD;
         targetY = 0.74 - 0.02 * tD;
+      }
+    } else {
+      // 0.67 -> 1.0: Chapter 03 - Privacy-Preserving Edge Video Cartoonifier
+      const tSub = (localRaw - 0.67) / 0.33;
+      if (tSub < 0.5) {
+        const tE = smoothStep(tSub / 0.5);
+        posX = 0.82 - 0.06 * tE;
+        posY = 1.0 - 0.04 * tE;
+        posZ = 4.5 - 0.7 * tE;
+        targetX = -0.80 + 0.05 * tE;
+        targetY = 0.76;
+      } else {
+        const tF = smoothStep((tSub - 0.5) / 0.5);
+        posX = 0.76 - 0.04 * tF;
+        posY = 0.96 - 0.04 * tF;
+        posZ = 3.8 - 0.6 * tF;
+        targetX = -0.75 - 0.05 * tF;
+        targetY = 0.78;
       }
     }
   }
