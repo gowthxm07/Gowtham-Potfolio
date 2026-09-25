@@ -34,12 +34,14 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
 
   // Automatically sync active project tab with scroll progress when in projects section
   useEffect(() => {
-    if (progress >= 0.24 && progress < 0.30) {
+    if (progress >= 0.24 && progress < 0.29) {
       setActiveProjectIdx(0);
-    } else if (progress >= 0.30 && progress < 0.36) {
+    } else if (progress >= 0.29 && progress < 0.34) {
       setActiveProjectIdx(1);
-    } else if (progress >= 0.36 && progress <= 0.42) {
+    } else if (progress >= 0.34 && progress < 0.39) {
       setActiveProjectIdx(2);
+    } else if (progress >= 0.39 && progress <= 0.44) {
+      setActiveProjectIdx(3);
     }
   }, [progress]);
 
@@ -72,8 +74,8 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
   // 8 Continuous Section Interpolation Ranges
   const introStyle = getSectionStyle(-0.05, 0.0, 0.09, 0.13);
   const identityStyle = getSectionStyle(0.11, 0.15, 0.22, 0.26);
-  const projectsStyle = getSectionStyle(0.24, 0.28, 0.38, 0.42);
-  const academicsStyle = getSectionStyle(0.39, 0.43, 0.51, 0.55);
+  const projectsStyle = getSectionStyle(0.24, 0.27, 0.41, 0.45);
+  const academicsStyle = getSectionStyle(0.42, 0.46, 0.52, 0.56);
   const skillsStyle = getSectionStyle(0.53, 0.57, 0.65, 0.69);
   const achievementsStyle = getSectionStyle(0.67, 0.71, 0.78, 0.82);
   const resumeStyle = getSectionStyle(0.79, 0.83, 0.88, 0.92);
@@ -215,7 +217,9 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
                 ? "01 // AI & REAL-TIME SYSTEMS"
                 : selectedProject.id === "real-time-traffic-monitoring"
                 ? "02 // COMPUTER VISION & EDGE"
-                : "03 // PRIVACY-PRESERVING EDGE VIDEO CARTOONIFIER"}
+                : selectedProject.id === "edge-video-cartoonifier"
+                ? "03 // PRIVACY-PRESERVING EDGE VIDEO CARTOONIFIER"
+                : "04 // TWO-SIDED INDUSTRIAL LABOR MARKETPLACE"}
             </div>
             {/* Project Switcher Tabs */}
             <div className="flex gap-1.5 bg-surface-card p-1 rounded-lg border border-surface-border">
@@ -306,6 +310,33 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
                 <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">BITWISE FUSION</span>
                 <span className="text-emerald-500">→</span>
                 <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">MJPEG STREAM</span>
+              </div>
+            </div>
+          )}
+
+          {/* Architecture Pipeline Indicator for LaborLink */}
+          {selectedProject.id === "laborlink" && (
+            <div className="mb-3.5 p-2 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
+              <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                INDUSTRIAL MATCHING & HIRING PIPELINE
+              </div>
+              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">WORKER / FACTORY</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FIREBASE AUTH</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FIRESTORE</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">MATCH ENGINE</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FAIRNESS FILTER</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">GEMINI REASONING</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">MUTUAL ACCEPTANCE</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">CONTACT UNLOCK</span>
               </div>
             </div>
           )}

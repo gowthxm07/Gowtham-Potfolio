@@ -50,7 +50,7 @@ export const STORY_SECTIONS: StorySectionDef[] = [
     index: "03",
     badge: "03 // FEATURED WORK",
     title: "Engineering Systems",
-    subtitle: "AI Voice Middleware & Computer Vision Telemetry",
+    subtitle: "AI Voice Middleware, Computer Vision & Industrial Marketplace",
     range: [0.25, 0.4],
     camera: {
       startPos: [0.7, 0.95, 4.8],
@@ -176,11 +176,11 @@ export function evaluateCameraAtProgress(progress: number): {
   let targetY = startTarget[1] + (endTarget[1] - startTarget[1]) * localT;
   let targetZ = startTarget[2] + (endTarget[2] - startTarget[2]) * localT;
 
-  // Project-specific subtle camera trajectory for Section 03 (Trilogy of Featured Systems)
+  // Project-specific subtle camera trajectory for Section 03 (Engineering Systems Quad)
   if (currentSection.id === "projects") {
-    // 0.0 -> 0.33: Chapter 01 - AI Receptionist Pipeline
-    if (localRaw < 0.33) {
-      const tSub = localRaw / 0.33;
+    // 0.0 -> 0.25: Chapter 01 - AI Receptionist Pipeline
+    if (localRaw < 0.25) {
+      const tSub = localRaw / 0.25;
       if (tSub < 0.5) {
         const tA = smoothStep(tSub / 0.5);
         posX = 0.84 - 0.1 * tA;
@@ -194,9 +194,9 @@ export function evaluateCameraAtProgress(progress: number): {
         posZ = 3.9 - 0.5 * tB;
         targetX = -0.68 - 0.02 * tB;
       }
-    } else if (localRaw < 0.67) {
-      // 0.33 -> 0.67: Chapter 02 - Real-Time Traffic Computer Vision Experience
-      const tSub = (localRaw - 0.33) / 0.34;
+    } else if (localRaw < 0.5) {
+      // 0.25 -> 0.50: Chapter 02 - Real-Time Traffic Computer Vision Experience
+      const tSub = (localRaw - 0.25) / 0.25;
       if (tSub < 0.5) {
         const tC = smoothStep(tSub / 0.5);
         posX = 0.84 - 0.06 * tC;
@@ -212,9 +212,9 @@ export function evaluateCameraAtProgress(progress: number): {
         targetX = -0.76 - 0.04 * tD;
         targetY = 0.74 - 0.02 * tD;
       }
-    } else {
-      // 0.67 -> 1.0: Chapter 03 - Privacy-Preserving Edge Video Cartoonifier
-      const tSub = (localRaw - 0.67) / 0.33;
+    } else if (localRaw < 0.75) {
+      // 0.50 -> 0.75: Chapter 03 - Privacy-Preserving Edge Video Cartoonifier
+      const tSub = (localRaw - 0.5) / 0.25;
       if (tSub < 0.5) {
         const tE = smoothStep(tSub / 0.5);
         posX = 0.82 - 0.06 * tE;
@@ -228,6 +228,24 @@ export function evaluateCameraAtProgress(progress: number): {
         posY = 0.96 - 0.04 * tF;
         posZ = 3.8 - 0.6 * tF;
         targetX = -0.75 - 0.05 * tF;
+        targetY = 0.78;
+      }
+    } else {
+      // 0.75 -> 1.0: Chapter 04 - LaborLink Two-Sided Industrial Labor Marketplace
+      const tSub = (localRaw - 0.75) / 0.25;
+      if (tSub < 0.5) {
+        const tG = smoothStep(tSub / 0.5);
+        posX = 0.80 - 0.08 * tG;
+        posY = 0.98 - 0.04 * tG;
+        posZ = 4.6 - 0.8 * tG;
+        targetX = -0.78 + 0.06 * tG;
+        targetY = 0.76 + 0.02 * tG;
+      } else {
+        const tH = smoothStep((tSub - 0.5) / 0.5);
+        posX = 0.72 + 0.04 * tH;
+        posY = 0.94 - 0.04 * tH;
+        posZ = 3.8 - 0.6 * tH;
+        targetX = -0.72 - 0.04 * tH;
         targetY = 0.78;
       }
     }

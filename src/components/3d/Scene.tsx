@@ -8,6 +8,7 @@ import { StoryIdentityObject } from "./StoryIdentityObject";
 import { StoryReceptionistObject } from "./StoryReceptionistObject";
 import { StoryTrafficObject } from "./StoryTrafficObject";
 import { StoryCartoonifierObject } from "./StoryCartoonifierObject";
+import { StoryLaborLinkObject } from "./StoryLaborLinkObject";
 import { StoryAcademicsObject } from "./StoryAcademicsObject";
 import { StorySkillsConstellation } from "./StorySkillsConstellation";
 import { StoryAchievementsObject } from "./StoryAchievementsObject";
@@ -46,23 +47,29 @@ export function Scene({ progress, isMobile = false, dpr = 1.5 }: SceneProps) {
           {/* 02. Identity & Verified Portrait Monolith */}
           <StoryIdentityObject progress={progress} />
 
-          {/* 03. Featured Engineering Systems: Section 03 Trilogy */}
+          {/* 03. Featured Engineering Systems: Section 03 Project Quad */}
           {/* Chapter 01: AI Smart Receptionist Platform */}
           <StoryReceptionistObject
             progress={progress}
-            range={[0.24, 0.30]}
+            range={[0.24, 0.29]}
             anchorX={-0.85}
           />
           {/* Chapter 02: Real-Time Traffic Computer Vision Experience */}
           <StoryTrafficObject
             progress={progress}
-            range={[0.30, 0.36]}
+            range={[0.29, 0.34]}
             anchorX={-0.85}
           />
           {/* Chapter 03: Privacy-Preserving Edge Video Cartoonifier */}
           <StoryCartoonifierObject
             progress={progress}
-            range={[0.36, 0.42]}
+            range={[0.34, 0.39]}
+            anchorX={-0.85}
+          />
+          {/* Chapter 04: LaborLink Two-Sided Industrial Labor Marketplace */}
+          <StoryLaborLinkObject
+            progress={progress}
+            range={[0.39, 0.44]}
             anchorX={-0.85}
           />
 
