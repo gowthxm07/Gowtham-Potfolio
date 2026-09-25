@@ -35,6 +35,36 @@ export const projectsData: Project[] = [
     role: "Full-Stack AI Developer",
   },
   {
+    id: "real-time-traffic-monitoring",
+    title: "Real-Time Traffic Monitoring & Density Analytics",
+    shortDescription:
+      "High-speed computer vision pipeline utilizing YOLOv8 and OpenCV to detect, track multi-class vehicular traffic, and stream real-time telemetry to Firebase Firestore.",
+    fullDescription:
+      "Engineered an end-to-end computer vision and traffic intelligence system. Ingests 640x480 video streams with OpenCV, executes real-time vehicle detection via YOLOv8 Nano, tracks multi-class trajectories (cars, buses, trucks, motorcycles, bicycles), calculates 10-frame rolling density metrics and dynamic signal clearance intervals (1s/3s/7s), detects potential collisions via bounding box IOU analysis (> 0.5), and streams live logs to Cloud Firestore for web dashboard telemetry.",
+    technologies: [
+      "Python",
+      "OpenCV",
+      "YOLOv8 Nano (yolov8n.pt)",
+      "YOLOv8 Tracking (ByteTrack)",
+      "Firebase Admin SDK",
+      "Cloud Firestore",
+      "React.js",
+      "Chart.js",
+    ],
+    githubUrl: "https://github.com/gowthxm07/Real-Time-Traffic-Monitoring-and-Analysis",
+    category: "Computer Vision & Edge",
+    resumeRelevant: true,
+    featured: true,
+    visualConcept: "Highway Corridor → Video Ingest (640x480) → YOLOv8 Detection → 3D Bounding Boxes → Cloud Firestore",
+    metrics: [
+      "Inference & pipeline: 640x480 @ 30 FPS with YOLOv8 Nano",
+      "Multi-class MOT tracking: Car, Bus, Truck, Motorcycle, Bicycle",
+      "Dynamic clearance: 1s (Low < 5) | 3s (Med 5-8) | 7s (High >= 9)",
+      "Safety telemetry: Bounding box IOU collision detection (> 0.5)",
+    ],
+    role: "Computer Vision & Full-Stack Developer",
+  },
+  {
     id: "laborlink",
     title: "LaborLink – Small-Scale Industry Job Marketplace",
     shortDescription:
@@ -53,25 +83,6 @@ export const projectsData: Project[] = [
       "Cloudinary-backed media pipeline with Firestore real-time sync",
     ],
     role: "Full-Stack Architect & Developer",
-  },
-  {
-    id: "real-time-traffic-monitoring",
-    title: "Real-Time Traffic Monitoring and Analysis",
-    shortDescription:
-      "Computer vision traffic intelligence platform tracking vehicular flow and streaming telemetry to a live web console.",
-    fullDescription:
-      "Developed a real-time vehicle detection and density analytics engine utilizing YOLO architectures and OpenCV. Telemetry data streams to a reactive web dashboard via Firebase, enabling rapid congestion evaluation and traffic pattern visualization.",
-    technologies: ["Python", "YOLO", "OpenCV", "Firebase", "React.js", "JavaScript"],
-    githubUrl: "https://github.com/gowthxm07/Real-Time-Traffic-Monitoring-and-Analysis",
-    category: "Computer Vision & Edge",
-    resumeRelevant: true,
-    featured: true,
-    visualConcept: "road / vehicles / computer vision / live monitoring",
-    metrics: [
-      "Reduced telemetry transmission latency to under 0.5s",
-      "Real-time object classification and count tracking",
-    ],
-    role: "Computer Vision & Frontend Developer",
   },
   {
     id: "edge-video-cartoonifier",

@@ -6,7 +6,7 @@ import * as THREE from "three";
 import { StoryEnvironment } from "./StoryEnvironment";
 import { StoryIdentityObject } from "./StoryIdentityObject";
 import { StoryReceptionistObject } from "./StoryReceptionistObject";
-import { StoryPrototypeObject } from "./StoryPrototypeObject";
+import { StoryTrafficObject } from "./StoryTrafficObject";
 import { StoryAcademicsObject } from "./StoryAcademicsObject";
 import { StorySkillsConstellation } from "./StorySkillsConstellation";
 import { StoryAchievementsObject } from "./StoryAchievementsObject";
@@ -51,11 +51,10 @@ export function Scene({ progress, isMobile = false, dpr = 1.5 }: SceneProps) {
             range={[0.24, 0.34]}
             anchorX={-0.85}
           />
-          {/* Section 03 Second Prototype: Traffic Computer Vision Spatial Radar */}
-          <StoryPrototypeObject
+          {/* Section 03 Second Featured System: Real-Time Traffic Computer Vision Experience */}
+          <StoryTrafficObject
             progress={progress}
-            type="traffic"
-            range={[0.33, 0.41]}
+            range={[0.33, 0.42]}
             anchorX={-0.85}
           />
 

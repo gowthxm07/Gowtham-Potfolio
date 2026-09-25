@@ -176,11 +176,11 @@ export function evaluateCameraAtProgress(progress: number): {
   let targetY = startTarget[1] + (endTarget[1] - startTarget[1]) * localT;
   let targetZ = startTarget[2] + (endTarget[2] - startTarget[2]) * localT;
 
-  // Project-specific subtle camera trajectory for Section 03 (AI Receptionist Pipeline)
+  // Project-specific subtle camera trajectory for Section 03 (AI Receptionist & Traffic CV Systems)
   if (currentSection.id === "projects") {
-    // 0.0 -> 0.6 is AI Receptionist (Phone -> Voice -> AI Core -> Database -> Appointment)
-    if (localRaw < 0.6) {
-      const tSub = localRaw / 0.6;
+    // 0.0 -> 0.52: AI Receptionist Pipeline (Phone -> Voice -> AI Core -> Database -> Appointment)
+    if (localRaw < 0.52) {
+      const tSub = localRaw / 0.52;
       if (tSub < 0.45) {
         // Stage A: Phone enters from depth -> Camera favors right framing phone on left
         const tA = smoothStep(tSub / 0.45);
@@ -195,6 +195,26 @@ export function evaluateCameraAtProgress(progress: number): {
         posY = 0.92 - 0.02 * tB;
         posZ = 3.9 - 0.6 * tB;
         targetX = -0.68 - 0.02 * tB;
+      }
+    } else {
+      // 0.52 -> 1.0: Real-Time Traffic Computer Vision Experience
+      const tSub = (localRaw - 0.52) / 0.48;
+      if (tSub < 0.45) {
+        // Stage C: Highway & optical sensor approach from depth
+        const tC = smoothStep(tSub / 0.45);
+        posX = 0.84 - 0.06 * tC;
+        posY = 1.02 - 0.06 * tC;
+        posZ = 4.8 - 0.8 * tC;
+        targetX = -0.82 + 0.06 * tC;
+        targetY = 0.72 + 0.02 * tC;
+      } else {
+        // Stage D: Live multi-class tracking dwell & telemetry focus
+        const tD = smoothStep((tSub - 0.45) / 0.55);
+        posX = 0.78 - 0.04 * tD;
+        posY = 0.96 - 0.04 * tD;
+        posZ = 4.0 - 0.6 * tD;
+        targetX = -0.76 - 0.04 * tD;
+        targetY = 0.74 - 0.02 * tD;
       }
     }
   }

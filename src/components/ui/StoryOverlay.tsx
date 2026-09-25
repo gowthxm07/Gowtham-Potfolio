@@ -262,6 +262,27 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
             </div>
           )}
 
+          {/* Architecture Pipeline Indicator for Traffic CV Monitoring */}
+          {selectedProject.id === "real-time-traffic-monitoring" && (
+            <div className="mb-3.5 p-2 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
+              <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                EDGE COMPUTER VISION PIPELINE
+              </div>
+              <div className="flex items-center gap-1 text-[10px] font-mono text-slate-300 flex-wrap">
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">640x480 VIDEO</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">OPENCV</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">YOLOV8 NANO</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">BYTETRACK</span>
+                <span className="text-emerald-500">→</span>
+                <span className="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-semibold">FIRESTORE SYNC</span>
+              </div>
+            </div>
+          )}
+
           {/* Spatial Concept Tag */}
           <div className="p-2.5 rounded-lg bg-surface-card border border-surface-border text-[11px] font-mono text-emerald-300 mb-3.5">
             <span className="text-slate-400 block text-[9px] uppercase tracking-wider mb-0.5">
