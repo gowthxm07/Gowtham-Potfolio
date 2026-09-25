@@ -38,7 +38,31 @@ export function MinimalHUD({
         </div>
 
         {/* Top-Right: Active Section Telemetry & Actions */}
-        <div className="pointer-events-auto flex items-center gap-3">
+        <div className="pointer-events-auto flex items-center gap-2 md:gap-3">
+          {/* Recruiter Quick-Jump Section Navigation */}
+          <nav className="hidden xl:flex items-center gap-1 bg-surface/80 border border-surface-border/70 rounded-md p-0.5 backdrop-blur-md text-[11px] font-mono">
+            {[
+              { label: "Projects", idx: 2 },
+              { label: "Academics", idx: 3 },
+              { label: "Skills", idx: 4 },
+              { label: "Achievements", idx: 5 },
+              { label: "Resume", idx: 6 },
+              { label: "Contact", idx: 7 },
+            ].map((item) => (
+              <button
+                key={item.label}
+                onClick={() => onScrollToSection(item.idx)}
+                className={`px-2 py-1 rounded transition-colors ${
+                  activeSectionIndex === item.idx
+                    ? "bg-emerald-500/20 text-emerald-300 font-semibold"
+                    : "text-slate-400 hover:text-slate-200 hover:bg-white/5"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-md bg-surface/80 border border-surface-border text-[11px] font-mono text-slate-300 backdrop-blur-md">
             <span className="text-emerald-400">{activeSection.index}</span>
             <span className="text-slate-500">//</span>
@@ -50,6 +74,7 @@ export function MinimalHUD({
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-surface/80 hover:bg-slate-800 border border-surface-border text-[11px] font-mono text-emerald-400 transition-colors backdrop-blur-md"
+            title="Download Official Resume PDF"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>Resume</span>
