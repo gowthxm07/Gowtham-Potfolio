@@ -17,9 +17,9 @@ export function StoryContactObject({ progress }: StoryContactObjectProps) {
   const ring3Ref = useRef<THREE.Mesh>(null);
   const coreRef = useRef<THREE.Mesh>(null);
 
-  // Section 08: Range [0.91, 1.00]
-  const startP = 0.89;
-  const peakStart = 0.93;
+  // Section 08: Range [0.91, 1.00] (expanded to 0.040 transition windows)
+  const startP = 0.895;
+  const peakStart = 0.935;
 
   useFrame((state, delta) => {
     if (!groupRef.current) return;

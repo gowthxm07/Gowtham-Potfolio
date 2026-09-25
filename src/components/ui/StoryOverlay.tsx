@@ -34,15 +34,15 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
 
   // Automatically sync active project tab with scroll progress using handoff midpoints
   useEffect(() => {
-    if (progress < 0.2475) {
+    if (progress < 0.2487) {
       setActiveProjectIdx(0);
-    } else if (progress < 0.2975) {
+    } else if (progress < 0.2987) {
       setActiveProjectIdx(1);
-    } else if (progress < 0.3475) {
+    } else if (progress < 0.3487) {
       setActiveProjectIdx(2);
-    } else if (progress < 0.3975) {
+    } else if (progress < 0.3987) {
       setActiveProjectIdx(3);
-    } else if (progress < 0.4475) {
+    } else if (progress < 0.4487) {
       setActiveProjectIdx(4);
     } else {
       setActiveProjectIdx(5);
@@ -77,15 +77,15 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
 
   // Helper to calculate individual project content style with sequential eased dissolve
   const getProjectContentStyle = (idx: number) => {
-    // 6 projects across [0.20, 0.50] with clean sequential dissolve:
-    // Old content fades out (1 -> 0), brief 3D transit pause, new content fades in (0 -> 1)
+    // 6 projects across [0.20, 0.50] with calm, cinematic sequential dissolve:
+    // Old content fades out (1 -> 0) over a 2x longer distance, brief 3D transit breathing space, new content fades in (0 -> 1)
     const ranges = [
-      { start: 0.1900, peakStart: 0.2100, peakEnd: 0.2440, end: 0.2475 },
-      { start: 0.2485, peakStart: 0.2520, peakEnd: 0.2940, end: 0.2975 },
-      { start: 0.2985, peakStart: 0.3020, peakEnd: 0.3440, end: 0.3475 },
-      { start: 0.3485, peakStart: 0.3520, peakEnd: 0.3940, end: 0.3975 },
-      { start: 0.3985, peakStart: 0.4020, peakEnd: 0.4440, end: 0.4475 },
-      { start: 0.4485, peakStart: 0.4520, peakEnd: 0.4900, end: 0.5100 },
+      { start: 0.1850, peakStart: 0.2150, peakEnd: 0.2410, end: 0.2480 },
+      { start: 0.2495, peakStart: 0.2570, peakEnd: 0.2910, end: 0.2980 },
+      { start: 0.2995, peakStart: 0.3070, peakEnd: 0.3410, end: 0.3480 },
+      { start: 0.3495, peakStart: 0.3570, peakEnd: 0.3910, end: 0.3980 },
+      { start: 0.3995, peakStart: 0.4070, peakEnd: 0.4410, end: 0.4480 },
+      { start: 0.4495, peakStart: 0.4570, peakEnd: 0.4850, end: 0.5150 },
     ];
     const r = ranges[idx];
     let opacity = 0;
@@ -114,7 +114,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
 
   const scrollToProject = (idx: number) => {
     setActiveProjectIdx(idx);
-    const centers = [0.225, 0.275, 0.325, 0.375, 0.425, 0.470];
+    const centers = [0.228, 0.274, 0.324, 0.374, 0.424, 0.471];
     const targetProgress = centers[idx];
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     window.scrollTo({
@@ -123,15 +123,15 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
     });
   };
 
-  // 8 Continuous Section Interpolation Ranges
-  const introStyle = getSectionStyle(-0.05, 0.0, 0.08, 0.11);
-  const identityStyle = getSectionStyle(0.09, 0.12, 0.18, 0.21);
-  const projectsStyle = getSectionStyle(0.19, 0.22, 0.48, 0.51);
-  const academicsStyle = getSectionStyle(0.49, 0.52, 0.58, 0.61);
-  const skillsStyle = getSectionStyle(0.59, 0.62, 0.70, 0.73);
-  const achievementsStyle = getSectionStyle(0.71, 0.74, 0.80, 0.83);
-  const resumeStyle = getSectionStyle(0.81, 0.84, 0.89, 0.92);
-  const contactStyle = getSectionStyle(0.90, 0.93, 1.0, 1.05);
+  // 8 Continuous Section Interpolation Ranges (expanded to 0.040 transition windows for cinematic pacing)
+  const introStyle = getSectionStyle(-0.05, 0.0, 0.065, 0.105);
+  const identityStyle = getSectionStyle(0.085, 0.125, 0.170, 0.210);
+  const projectsStyle = getSectionStyle(0.185, 0.225, 0.475, 0.515);
+  const academicsStyle = getSectionStyle(0.485, 0.525, 0.575, 0.615);
+  const skillsStyle = getSectionStyle(0.585, 0.625, 0.695, 0.735);
+  const achievementsStyle = getSectionStyle(0.705, 0.745, 0.795, 0.835);
+  const resumeStyle = getSectionStyle(0.805, 0.845, 0.885, 0.925);
+  const contactStyle = getSectionStyle(0.895, 0.935, 1.0, 1.05);
   const competitiveAch = achievementsData.find((a) => a.category === "Competitive Programming");
   const leadershipAch = achievementsData.find((a) => a.category === "Leadership");
   const hackathonsAch = achievementsData.find((a) => a.category === "Hackathons");
@@ -143,7 +143,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
       {/* ============================================================ */}
       <section
         style={introStyle}
-        className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 transition-all duration-300"
+        className="absolute inset-0 flex flex-col items-center justify-center text-center p-6"
       >
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono tracking-widest bg-emerald-950/60 text-emerald-400 border border-emerald-800/60 mb-6">
@@ -187,7 +187,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
       {/* ============================================================ */}
       <section
         style={identityStyle}
-        className="absolute inset-y-0 left-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pl-16 transition-all duration-300"
+        className="absolute inset-y-0 left-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pl-16"
       >
         <div className="bg-surface/85 border border-surface-border backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-lg shadow-2xl">
           <div className="text-[11px] font-mono text-emerald-400 tracking-widest uppercase mb-2 flex items-center gap-2">
@@ -257,7 +257,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
       {/* ============================================================ */}
       <section
         style={projectsStyle}
-        className="absolute inset-y-0 right-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pr-16 ml-auto transition-all duration-300 pointer-events-auto"
+        className="absolute inset-y-0 right-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pr-16 ml-auto pointer-events-auto"
       >
         <div className="bg-surface/85 border border-surface-border backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-lg shadow-2xl w-full max-h-[88vh] overflow-y-auto">
           {/* Unified Stable Header with Switcher Tabs */}
@@ -566,7 +566,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
       {/* ============================================================ */}
       <section
         style={academicsStyle}
-        className="absolute inset-y-0 left-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pl-16 transition-all duration-300"
+        className="absolute inset-y-0 left-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pl-16"
       >
         <div className="bg-surface/85 border border-surface-border backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-lg shadow-2xl">
           <div className="text-[11px] font-mono text-emerald-400 tracking-widest uppercase mb-2 flex items-center gap-2">
@@ -632,7 +632,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
       {/* ============================================================ */}
       <section
         style={skillsStyle}
-        className="absolute inset-y-0 right-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pr-16 ml-auto transition-all duration-300"
+        className="absolute inset-y-0 right-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pr-16 ml-auto"
       >
         <div className="bg-surface/85 border border-surface-border backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-lg shadow-2xl">
           <div className="text-[11px] font-mono text-emerald-400 tracking-widest uppercase mb-2 flex items-center gap-2">
@@ -728,7 +728,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
       {/* ============================================================ */}
       <section
         style={achievementsStyle}
-        className="absolute inset-y-0 left-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pl-16 transition-all duration-300"
+        className="absolute inset-y-0 left-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pl-16"
       >
         <div className="bg-surface/85 border border-surface-border backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-lg shadow-2xl">
           <div className="text-[11px] font-mono text-emerald-400 tracking-widest uppercase mb-2 flex items-center gap-2">
@@ -806,7 +806,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
       {/* ============================================================ */}
       <section
         style={resumeStyle}
-        className="absolute inset-y-0 right-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pr-16 ml-auto transition-all duration-300"
+        className="absolute inset-y-0 right-0 flex items-center w-full md:w-1/2 lg:w-5/12 p-6 md:pr-16 ml-auto"
       >
         <div className="bg-surface/85 border border-surface-border backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-lg shadow-2xl">
           <div className="text-[11px] font-mono text-emerald-400 tracking-widest uppercase mb-2 flex items-center gap-2">
@@ -874,7 +874,7 @@ export function StoryOverlay({ progress }: StoryOverlayProps) {
       {/* ============================================================ */}
       <section
         style={contactStyle}
-        className="absolute inset-y-0 right-0 flex items-center w-full md:w-1/2 lg:w-6/12 p-6 md:pr-16 ml-auto transition-all duration-300"
+        className="absolute inset-y-0 right-0 flex items-center w-full md:w-1/2 lg:w-6/12 p-6 md:pr-16 ml-auto"
       >
         <div className="bg-surface/85 border border-surface-border backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-xl w-full shadow-2xl">
           <div className="text-[11px] font-mono text-emerald-400 tracking-widest uppercase mb-2 flex items-center gap-2">

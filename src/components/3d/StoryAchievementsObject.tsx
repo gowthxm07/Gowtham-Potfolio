@@ -15,11 +15,11 @@ export function StoryAchievementsObject({ progress }: StoryAchievementsObjectPro
   const gemRef = useRef<THREE.Mesh>(null);
   const ringRef = useRef<THREE.Mesh>(null);
 
-  // Section 06: Range [0.72, 0.82]
-  const startP = 0.70;
-  const peakStart = 0.74;
-  const peakEnd = 0.80;
-  const endP = 0.84;
+  // Section 06: Range [0.72, 0.82] (expanded to 0.040 transition windows)
+  const startP = 0.705;
+  const peakStart = 0.745;
+  const peakEnd = 0.795;
+  const endP = 0.835;
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
@@ -45,7 +45,7 @@ export function StoryAchievementsObject({ progress }: StoryAchievementsObjectPro
       targetZ = 0.75 + (5.0 - 0.75) * t;
       targetX = 0.85 + 0.7 * t;
       targetScale = 1.0 + 0.35 * t;
-      opacity = Math.max(0, 1.0 - t * 1.3);
+      opacity = Math.max(0, 1.0 - t);
     } else {
       opacity = 0;
       targetZ = progress < startP ? -16 : 8;

@@ -55,37 +55,37 @@ export function Scene({ progress, isMobile = false, dpr = 1.5 }: SceneProps) {
           {/* Chapter 01: AI Smart Receptionist Platform */}
           <StoryReceptionistObject
             progress={progress}
-            range={[0.20, 0.252]}
+            range={[0.198, 0.254]}
             anchorX={isMobile ? -0.15 : -0.85}
           />
           {/* Chapter 02: Real-Time Traffic Computer Vision Experience */}
           <StoryTrafficObject
             progress={progress}
-            range={[0.246, 0.302]}
+            range={[0.244, 0.304]}
             anchorX={isMobile ? -0.15 : -0.85}
           />
           {/* Chapter 03: Privacy-Preserving Edge Video Cartoonifier */}
           <StoryCartoonifierObject
             progress={progress}
-            range={[0.296, 0.352]}
+            range={[0.294, 0.354]}
             anchorX={isMobile ? -0.15 : -0.85}
           />
           {/* Chapter 04: LaborLink Two-Sided Industrial Labor Marketplace */}
           <StoryLaborLinkObject
             progress={progress}
-            range={[0.346, 0.402]}
+            range={[0.344, 0.404]}
             anchorX={isMobile ? -0.15 : -0.85}
           />
           {/* Chapter 05: Shree Labels Corporate Manufacturing & Specimen Showcase */}
           <StoryShreeLabelsObject
             progress={progress}
-            range={[0.396, 0.452]}
+            range={[0.394, 0.454]}
             anchorX={isMobile ? -0.15 : -0.85}
           />
           {/* Chapter 06: HomeMind Virtual Smart Home Decision Engine */}
           <StoryJevObject
             progress={progress}
-            range={[0.446, 0.50]}
+            range={[0.444, 0.502]}
             anchorX={isMobile ? -0.15 : -0.85}
           />
 

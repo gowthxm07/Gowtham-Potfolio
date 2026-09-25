@@ -15,11 +15,11 @@ export function StorySkillsConstellation({ progress }: StorySkillsConstellationP
   const coreRef = useRef<THREE.Mesh>(null);
   const ringGroupRef = useRef<THREE.Group>(null);
 
-  // Section 05: Range [0.60, 0.72]
-  const startP = 0.58;
-  const peakStart = 0.62;
-  const peakEnd = 0.69;
-  const endP = 0.74;
+  // Section 05: Range [0.60, 0.72] (expanded to 0.040 transition windows)
+  const startP = 0.585;
+  const peakStart = 0.625;
+  const peakEnd = 0.695;
+  const endP = 0.735;
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
@@ -45,7 +45,7 @@ export function StorySkillsConstellation({ progress }: StorySkillsConstellationP
       targetZ = 0.75 + (5.0 - 0.75) * t;
       targetX = -0.85 - 0.7 * t;
       targetScale = 1.0 + 0.35 * t;
-      opacity = Math.max(0, 1.0 - t * 1.3);
+      opacity = Math.max(0, 1.0 - t);
     } else {
       opacity = 0;
       targetZ = progress < startP ? -16 : 8;

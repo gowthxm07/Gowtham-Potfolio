@@ -51,35 +51,35 @@ export function StoryShreeLabelsObject({
     let targetZ = -10.0;
     let targetX = anchorX;
     let targetY = 0.85;
-    let targetScale = 0.35;
+    let targetScale = 0.30;
     let opacity = 0.0;
 
-    if (progress >= startP && s < 0.20) {
-      // 01. ENTRY / FAR EMERGENCE: Materializes deep in background (-10.0 -> -4.5)
-      const t = smoothStep(s / 0.20);
-      targetZ = -10.0 + (-4.5 - -10.0) * t;
+    if (progress >= startP && s < 0.16) {
+      // 01. ENTRY / FAR EMERGENCE: Stays deep in background fog (-10.0 -> -6.0)
+      const t = smoothStep(s / 0.16);
+      targetZ = -10.0 + (-6.0 - -10.0) * t;
       targetX = anchorX;
       targetY = 0.85;
-      targetScale = 0.35 + (0.65 - 0.35) * t;
-      opacity = t * 0.70;
-    } else if (s >= 0.20 && s < 0.40) {
-      // 02. CINEMATIC APPROACH: Glides forward from mid-depth into hero plane (-4.5 -> 0.15)
-      const t = smoothStep((s - 0.20) / (0.40 - 0.20));
-      targetZ = -4.5 + (0.15 - -4.5) * t;
+      targetScale = 0.30 + (0.50 - 0.30) * t;
+      opacity = t * 0.45;
+    } else if (s >= 0.16 && s < 0.38) {
+      // 02. CINEMATIC APPROACH: Glides forward from mid-depth into hero plane (-6.0 -> 0.15)
+      const t = smoothStep((s - 0.16) / (0.38 - 0.16));
+      targetZ = -6.0 + (0.15 - -6.0) * t;
       targetX = anchorX;
       targetY = 0.85;
-      targetScale = 0.65 + (1.0 - 0.65) * t;
-      opacity = 0.70 + (1.0 - 0.70) * t;
-    } else if (s >= 0.40 && s <= 0.70) {
+      targetScale = 0.50 + (1.0 - 0.50) * t;
+      opacity = 0.45 + (1.0 - 0.45) * t;
+    } else if (s >= 0.38 && s <= 0.68) {
       // 03. HERO / PROMINENT DWELL: Rock-solid focal station at Z=0.15 (30% of chapter)
       targetZ = 0.15;
       targetX = anchorX;
       targetY = 0.85;
       targetScale = 1.0;
       opacity = 1.0;
-    } else if (s > 0.70 && s <= 1.00) {
+    } else if (s > 0.68 && s <= 1.00) {
       // 04. EXIT / PASS CAMERA: Moves forward past camera (0.15 -> 5.2), sweeping out of viewport
-      const t = smoothStep((s - 0.70) / (1.00 - 0.70));
+      const t = smoothStep((s - 0.68) / (1.00 - 0.68));
       targetZ = 0.15 + (5.2 - 0.15) * t;
       targetX = anchorX - 0.45 * t;
       targetY = 0.85 + 0.10 * t;

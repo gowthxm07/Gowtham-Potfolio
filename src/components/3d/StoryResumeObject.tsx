@@ -14,11 +14,11 @@ export function StoryResumeObject({ progress }: StoryResumeObjectProps) {
   const groupRef = useRef<THREE.Group>(null);
   const scanLineRef = useRef<THREE.Mesh>(null);
 
-  // Section 07: Range [0.82, 0.91]
-  const startP = 0.80;
-  const peakStart = 0.83;
-  const peakEnd = 0.89;
-  const endP = 0.92;
+  // Section 07: Range [0.82, 0.91] (expanded to 0.040 transition windows)
+  const startP = 0.805;
+  const peakStart = 0.845;
+  const peakEnd = 0.885;
+  const endP = 0.925;
 
   useFrame((state, delta) => {
     if (!groupRef.current) return;
@@ -44,7 +44,7 @@ export function StoryResumeObject({ progress }: StoryResumeObjectProps) {
       targetZ = 0.65 + (5.0 - 0.65) * t;
       targetX = -0.75 - 0.7 * t;
       targetScale = 1.0 + 0.35 * t;
-      opacity = Math.max(0, 1.0 - t * 1.3);
+      opacity = Math.max(0, 1.0 - t);
     } else {
       opacity = 0;
       targetZ = progress < startP ? -16 : 8;
